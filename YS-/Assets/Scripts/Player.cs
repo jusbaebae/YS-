@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public Vector2 inputVec;
     Rigidbody2D rigid;
     SpriteRenderer spriter;
-    public float speed = 100;
+    public float speed = 10;
     Animator ani;
 
     //public Hands hands;

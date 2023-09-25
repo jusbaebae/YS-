@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager inst;
 
     [Header("# Game Control")]
-    //public PoolManager pool;
+    public PoolManager pool;
     public Player player;
     public bool isLive;
 
@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public float gameTime = 0f;
     public float maxGameTime = 2 * 10f;
     //public LevelUp uiLevelUp;
+
     private void Awake()
     {
         inst = this;
