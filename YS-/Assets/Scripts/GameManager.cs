@@ -35,11 +35,10 @@ public class GameManager : MonoBehaviour
         health = maxHealth;
 
         // 임시 스크립트(1번캐릭터용)
-        /*
-        uiLevelUp.Select(0);
-        */
+        //uiLevelUp.Select(0);
+        
     }
-    /*
+    
     public void GetExp()
     {
         exp++;
@@ -47,10 +46,10 @@ public class GameManager : MonoBehaviour
         {
             level++;
             exp = 0;
-            uiLevelUp.Show();
+            //uiLevelUp.Show();
         }
     }
-    */
+    
     void Update()
     {
         if (!isLive)
