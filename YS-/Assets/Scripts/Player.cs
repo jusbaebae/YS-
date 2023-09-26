@@ -9,12 +9,13 @@ public class Player : MonoBehaviour
     SpriteRenderer spriter;
     public float speed = 10;
     Animator ani;
-
+    public Collider2D col;
     //public Hands hands;
     public Scanner scanner;
     // Start is called before the first frame update
     void Awake()
     {
+        col = GetComponent<Collider2D>();
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
         ani = GetComponent<Animator>();
@@ -46,5 +47,11 @@ public class Player : MonoBehaviour
         {
             spriter.flipX = inputVec.x < 0;
         }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Area"))
+            return;
+        Debug.Log("ÀÎ½Ä");
     }
 }

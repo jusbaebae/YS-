@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager inst;
-
     [Header("# Game Control")]
     public PoolManager pool;
     public Player player;
+    public Map map;
     public bool isLive;
 
     [Header("# Player Info")]
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         inst = this;
-        for(int i = 0; i<50; i++)
+        for (int i = 0; i < 50; i++)
             nextExp[i] = 10 + (30 * i);
     }
     private void Start()
@@ -36,9 +37,7 @@ public class GameManager : MonoBehaviour
 
         // 임시 스크립트(1번캐릭터용)
         //uiLevelUp.Select(0);
-        
     }
-    
     public void GetExp()
     {
         exp++;
@@ -49,7 +48,6 @@ public class GameManager : MonoBehaviour
             //uiLevelUp.Show();
         }
     }
-    
     void Update()
     {
         if (!isLive)
