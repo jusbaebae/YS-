@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 namespace vanilla
 {
@@ -10,6 +11,7 @@ namespace vanilla
         private void Start()
         {
             sprites = GetComponentsInChildren<SpriteRenderer>();
+            CompositeCollider2D comp = GetComponent<CompositeCollider2D>();
             int i = 0;
             float size = 0;
             float offset = 0;
@@ -45,6 +47,7 @@ namespace vanilla
             col.size = new Vector2(size - GameManager.inst.player.col.bounds.size.x, sprites[0].bounds.size.y - GameManager.inst.player.col.bounds.size.y);
             col.offset = new Vector2((size - offset * 2) / 2f, 0 + GameManager.inst.player.col.offset.y);  //중앙값을 바꾼다.
             Bounds bound = col.bounds;
+            col.usedByComposite = true;
             //전달용 크기들
             minX = bound.center.x - (bound.size.x / 2f);
             maxX = bound.center.x + (bound.size.x / 2f);

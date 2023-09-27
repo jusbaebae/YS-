@@ -15,21 +15,21 @@ namespace vanilla
             if (!collision.CompareTag("Ground"))
                 return;
             Debug.Log("¼½½º");
-            if (map.minX > GameManager.inst.player.transform.position.x)
+            if (map.minX > gameObject.transform.position.x)
             {
-                GameManager.inst.player.transform.position = new Vector2(map.minX, GameManager.inst.player.transform.position.y);
+                gameObject.transform.position = new Vector2(map.minX, gameObject.transform.position.y);
             }
-            if (map.maxX < GameManager.inst.player.transform.position.x)
+            if (map.maxX < gameObject.transform.position.x)
             {
-                GameManager.inst.player.transform.position = new Vector2(map.maxX, GameManager.inst.player.transform.position.y);
+                gameObject.transform.position = new Vector2(map.maxX, gameObject.transform.position.y);
             }
-            if (map.minY > GameManager.inst.player.transform.position.y)
+            if (map.minY > gameObject.transform.position.y)
             {
-                GameManager.inst.player.transform.position = new Vector2(GameManager.inst.player.transform.position.x, map.minY);
+                gameObject.transform.position = new Vector2(gameObject.transform.position.x, map.minY);
             }
-            if (map.maxY < GameManager.inst.player.transform.position.y)
+            if (map.maxY < gameObject.transform.position.y)
             {
-                GameManager.inst.player.transform.position = new Vector2(GameManager.inst.player.transform.position.x, map.maxY);
+                gameObject.transform.position = new Vector2(gameObject.transform.position.x, map.maxY);
             }
         }
     }
