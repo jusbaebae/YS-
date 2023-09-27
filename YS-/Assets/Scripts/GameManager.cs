@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     [Header("# Game Control")]
     public PoolManager pool;
     public Player player;
-    public Map map;
     public bool isLive;
 
     [Header("# Player Info")]
