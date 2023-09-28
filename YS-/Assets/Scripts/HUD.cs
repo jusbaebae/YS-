@@ -22,7 +22,7 @@ public class HUD : MonoBehaviour
         switch (type) {
             case InfoType.Exp: //경험치UI
                 float curExp = GameManager.inst.exp;
-                float maxExp = GameManager.inst.nextExp[GameManager.inst.level];
+                float maxExp = GameManager.inst.nextExp[Mathf.Min(GameManager.inst.level, GameManager.inst.nextExp.Length - 1)];
                 myslider.value = curExp / maxExp;
                 break;
             case InfoType.Level: //레벨UI

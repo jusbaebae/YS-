@@ -11,7 +11,8 @@ public class ItemData : ScriptableObject
     public ItemType itemType; //아이템 종류
     public int itemId; //아이템 코드값
     public string itemName; //이름
-    public string itemDesc; //?
+    [TextArea]
+    public string itemDesc; //아이템 설명
     public Sprite itemIcon; //이미지
 
     [Header("# Level Data")]

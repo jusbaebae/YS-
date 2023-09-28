@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     [Header("# Game Object")]
     public float gameTime = 0f;
     public float maxGameTime = 2 * 10f;
-    //public LevelUp uiLevelUp;
+    public LevelUp uiLevelUp;
 
     private void Awake()
     {
@@ -36,16 +36,17 @@ public class GameManager : MonoBehaviour
         health = maxHealth;
 
         // 임시 스크립트(1번캐릭터용)
-        //uiLevelUp.Select(0);
+        uiLevelUp.Select(0);
     }
     public void GetExp()
     {
         exp++;
+
         if (nextExp[Mathf.Min(level, nextExp.Length - 1)] == exp)
         {
             level++;
             exp = 0;
-            //uiLevelUp.Show();
+            uiLevelUp.Show();
         }
     }
     void Update()
@@ -61,19 +62,18 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //uiLevelUp.Show();
+            uiLevelUp.Show();
         }
     }
 
-    public void Stop()
+    public void Stop() // 레벨업시 시간정지물(스또뿌)
     {
         isLive = false;
         Time.timeScale = 0;
     }
-    public void Resume()
+    public void Resume() //레벨업이 끝나면 시간정지해제
     {
         isLive = true;
         Time.timeScale = 1;
-
     }
 }

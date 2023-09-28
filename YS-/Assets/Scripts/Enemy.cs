@@ -30,6 +30,9 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager.inst.isLive)
+            return;
+
         //몬스터 뒤지면 의미없으니 탈출
         if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
@@ -43,6 +46,9 @@ public class Enemy : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!GameManager.inst.isLive)
+            return;
+
         if (!isLive)
             return;
         //몬스터가 플레이어를 바라보며 따라오게 설정

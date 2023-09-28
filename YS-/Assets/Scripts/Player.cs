@@ -23,10 +23,9 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        /*
         if (!GameManager.inst.isLive)
             return;
-        */
+
         // 위치 이동
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
@@ -38,10 +37,8 @@ public class Player : MonoBehaviour
     }
     void LateUpdate()
     {
-        /*
         if (!GameManager.inst.isLive)
                 return;
-        */
         ani.SetFloat("Speed", inputVec.magnitude);
         if(inputVec.x != 0)
         {
