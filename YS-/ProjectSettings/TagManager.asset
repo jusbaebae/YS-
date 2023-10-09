@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Area
   - Ground
+  - Enemy
+  - Bullet
+  - XArea
+  - YArea
   layers:
   - Default
   - TransparentFX
@@ -14,8 +18,8 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
-  - 
+  - Ground
+  - Bullet
   - 
   - 
   - 

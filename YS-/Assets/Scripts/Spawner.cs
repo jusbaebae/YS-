@@ -17,9 +17,6 @@ public class Spawner : MonoBehaviour
     }
     void Update()
     {
-        if (!GameManager.inst.isLive)
-            return;
-
         //타이머설정
         timer += Time.deltaTime;
         level = Mathf.Min(Mathf.FloorToInt(GameManager.inst.gameTime / 10f), spawnData.Length - 1); //소환 레벨 설정

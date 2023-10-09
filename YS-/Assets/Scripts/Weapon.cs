@@ -10,20 +10,21 @@ public class Weapon : MonoBehaviour
     public float damage; 
     public int count;
     public float speed;
-
-    float timer;
     Player player;
 
     void Awake()
     {
-        player = GameManager.inst.player;
+        player = GetComponentInParent<Player>();
+    }
+
+    float timer;
+    void Start()
+    {
+        Init(); //무기생성
     }
 
     void Update()
     {
-        if (!GameManager.inst.isLive)
-            return;
-
         switch (id) {
             case 0:
                 transform.Rotate(Vector3.back * speed * Time.deltaTime);
@@ -51,42 +52,22 @@ public class Weapon : MonoBehaviour
         this.damage = damage;
         this.count += count;
 
-        if (id == 0) {
-            Batch();
+        if (id == 0)
+        {
+            //Batch();
         }
-
-        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
-    public void Init(ItemData data) 
+    public void Init() 
     {
-        //기본 세팅
-        name = "Weapon " + data.itemId;
-        transform.parent = player.transform;
-        transform.localPosition = Vector3.zero;
-
-        // 프로퍼티 세팅
-        id = data.itemId;
-        damage = data.baseDamage;
-        count = data.baseCount;
-
-        for(int i = 0; i < GameManager.inst.pool.prefabs.Length; i++){
-            if (data.projectile == GameManager.inst.pool.prefabs[i]) {
-                prefabId = i;
-                break;
-            }
-        } //무기 이미지설정
-
         switch(id) {
             case 0:
                 speed = 150;
-                Batch();
+                //Batch();
                 break;
             default:
                 speed = 0.3f;
                 break;
         }
-
-        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
     void Batch() //무기배치
