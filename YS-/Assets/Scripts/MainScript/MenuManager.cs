@@ -53,7 +53,6 @@ public class MenuManager : MonoBehaviour
         {
             color.a -= Time.deltaTime / 1f;
             screen.color = color;
-            Debug.Log("ss");
             yield return new WaitForSeconds(0.001f);
         }
         StartCoroutine(ArrowEffect());
