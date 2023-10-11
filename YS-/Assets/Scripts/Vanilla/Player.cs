@@ -3,6 +3,8 @@ using UnityEngine;
 namespace vanilla
 {
     using UnityEngine.InputSystem;
+    using UnityEngine.InputSystem.Processors;
+
     public class Player : MonoBehaviour
     {
         public Vector2 inputVec;
@@ -48,6 +50,22 @@ namespace vanilla
             if (inputVec.x != 0)
             {
                 spriter.flipX = inputVec.x < 0;
+            }
+        }
+
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if (!GameManager.inst.isLive)
+                return;
+
+            GameManager.inst.health -= Time.deltaTime * 10f;
+            Debug.Log(GameManager.inst.health);
+            if(GameManager.inst.health < 0)
+            {
+                for (int i=2; i < transform.childCount; i++)
+                    transform.GetChild(i).gameObject.SetActive(false);
+                ani.SetTrigger("Dead");
+                GameManager.inst.GameOver();
             }
         }
     }
