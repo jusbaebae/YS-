@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class CharList : MonoBehaviour
 {
+
+    public static CharList Instance;
     //캐릭터 박스 프리팹
     [SerializeField] private GameObject charBoxPrefab;
 
@@ -19,16 +21,20 @@ public class CharList : MonoBehaviour
     public CharData charData;
     private Data[] data;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
         charData = GameObject.Find("Data").GetComponent<CharData>();
         data = charData.GetCharDatas();
-        init();
+        Init();
     }
 
 
-    void init()
+    void Init()
     {
         for (int i = 0; i < data.Length; i++)
         {
@@ -36,17 +42,27 @@ public class CharList : MonoBehaviour
             charBox.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = data[i].getPortraitSprite();
             charBox.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().SetText(data[i].name);
 
+            charBox.transform.GetComponent<Button>().onClick.AddListener(delegate { Selection(); });
             charBox.transform.SetParent(content.transform, false);
         }
 
     }
 
-    void selection()
+    public void Selection()
     {
+        print("클릭");
         GameObject character = EventSystem.current.currentSelectedGameObject;
-        Sprite charImage = character.transform.GetChild(0).gameObject.GetComponent<Image>().sprite;
+        Sprite charImage = character.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite;
 
-        info_img.GetComponent<Image>().sprite = charImage;
+        if (character != null)
+        {
+            info_img.transform.GetComponent<SpriteRenderer>().sprite=charImage;
+            print(charImage.name);
+        }
+        else
+        {
+            
+        }
     }
 
 }
