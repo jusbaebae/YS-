@@ -3511,6 +3511,7 @@ MonoBehaviour:
   - {fileID: 836411858416082846, guid: e56441bd442d45241bd4f36933dc7922, type: 3}
   - {fileID: 836411858416082846, guid: 1aa30b771672e044cae25ad195bb617d, type: 3}
   - {fileID: 836411858416082846, guid: efb8c28f9c2e82b42950b84f9775fd78, type: 3}
+  - {fileID: 9067766998987762659, guid: 33503d1db68ed8742932283f4c97f186, type: 3}
 --- !u!1 &851958746
 GameObject:
   m_ObjectHideFlags: 0
@@ -7486,7 +7487,7 @@ GameObject:
   - component: {fileID: 1996113463}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

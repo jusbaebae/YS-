@@ -1,64 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Gear : MonoBehaviour
+namespace vanilla
 {
-    //장비의 타입과 수치설정
-    public ItemData.ItemType type;
-    public float rate;
-
-    public void Init(ItemData data)
+    public class Gear : MonoBehaviour
     {
-        //기본
-        name = "Gear " + data.itemId;
-        transform.parent = GameManager.inst.player.transform; //부모설정
-        transform.localPosition = Vector3.zero; //위치초기화
+        public ItemData.ItemType type;
+        public float rate;
 
-        //프로퍼티
-        type = data.itemType;
-        rate = data.damages[0];
-        ApplyGear();
-    }
-    
-    public void LevelUp(float rate)
-    {
-        this.rate = rate;
-        ApplyGear();
-    }
-
-    void ApplyGear()
-    {
-        switch (type)
+        public void Init(ItemData data)
         {
-            case ItemData.ItemType.Glove:
-                RateUp();
-                break;
-            case ItemData.ItemType.Shoe:
-                SpeedUp();
-                break;
+            //Basic Set
+            name = "Gear" + (data.itemId - 2);
+            transform.parent = GameManager.inst.player.transform;
+            transform.localPosition = Vector3.zero;
+            //Property Set
+            type = data.itemType;
+            rate = data.damages[0];
+            ApplyGear();
         }
-    }
+        public void Levelup(float rate)
+        {
+            this.rate = rate;
+            ApplyGear();
+        }
 
-    void RateUp()
-    {
-        Weapon[] weapons = transform.parent.GetComponentsInChildren<Weapon>();
-
-        foreach(Weapon weapon in weapons) {
-            switch(weapon.id) {
-                //무기타입에 따라 무기속도 올리기
-                case 0:
-                    weapon.speed = 150 + (150 * rate);
+        void ApplyGear()
+        {
+            switch (type)
+            {
+                case ItemData.ItemType.Glove:
+                    RateUp();
                     break;
-                default:
-                    weapon.speed = 0.5f * (1f - rate);
+                case ItemData.ItemType.Shoe:
+                    SpeedUp();
+                    break;
+                case ItemData.ItemType.Heal:
                     break;
             }
         }
-    }
-    void SpeedUp()
-    {
-        float speed = 3;
-        GameManager.inst.player.speed = speed + speed * rate;
+        void RateUp()
+        {
+            Weapon[] weapons = transform.parent.GetComponentsInChildren<Weapon>();
+            foreach (Weapon weapon in weapons)
+            {
+                switch (weapon.id)
+                {
+                    case 0:
+                        weapon.speed = 150 + (150 * rate);
+                        break;
+                    case 5:
+                        weapon.speed = 6f - rate * 3;
+                        break;
+                    case 6:
+                        weapon.speed = 1f * (1f - rate);
+                        break;
+                    default:
+                        weapon.speed = 0.5f * (1f - rate);
+                        break;
+                }
+            }
+        }
+        void SpeedUp()
+        {
+            float speed = 5f;
+            GameManager.inst.player.speed = speed + speed * rate;
+        }
     }
 }

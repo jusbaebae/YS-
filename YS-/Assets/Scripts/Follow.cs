@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Follow : MonoBehaviour
+namespace vanilla
 {
-    RectTransform rect;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Follow : MonoBehaviour
     {
-        rect = GetComponent<RectTransform>();
-    }
-
-    void FixedUpdate()
-    {
-        rect.position = Camera.main.WorldToScreenPoint(GameManager.inst.player.transform.position);
+        RectTransform rect;
+        private void Awake()
+        {
+            rect = GetComponent<RectTransform>();
+        }
+        private void FixedUpdate()
+        {
+            rect.position = Camera.main.WorldToScreenPoint(GameManager.inst.player.transform.position);
+        }
     }
 }
+

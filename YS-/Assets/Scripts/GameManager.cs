@@ -1,78 +1,116 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Cinemachine.DocumentationSortingAttribute;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+namespace vanilla
 {
-    public static GameManager inst;
-    [Header("# Game Control")]
-    public PoolManager pool;
-    public Player player;
-    public bool isLive;
-
-    [Header("# Player Info")]
-    public int health = 0;
-    public int maxHealth = 100;
-    public int level;
-    public int kill;
-    public int exp = 0;
-    public int[] nextExp = new int[50];
-
-    [Header("# Game Object")]
-    public float gameTime = 0f;
-    public float maxGameTime = 2 * 10f;
-    //public LevelUp uiLevelUp;
-
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        inst = this;
-        for (int i = 0; i < 50; i++)
-            nextExp[i] = 10 + (30 * i);
-    }
-    private void Start()
-    {
-        health = maxHealth;
+        public static GameManager inst;
 
-        // 임시 스크립트(1번캐릭터용)
-        //uiLevelUp.Select(0);
-    }
-    public void GetExp()
-    {
-        exp++;
-        if (nextExp[Mathf.Min(level, nextExp.Length - 1)] == exp)
+        [Header("# Game Control")]
+        public PoolManager pool;
+        public Player player;
+        public bool isLive;
+        public Map map;
+
+        [Header("# Player Info")]
+        public float health = 0;
+        public float maxHealth = 100;
+        public int level;
+        public int kill;
+        public int exp = 0;
+        public int[] nextExp = new int[50];
+
+        [Header("# Game Object")]
+        public float gameTime = 0f;
+        public float maxGameTime = 2 * 10f;
+        public LevelUp uiLevelUp;
+        public Result uiResult;
+        public GameObject enemyCleaner;
+
+        private void Awake()
         {
-            level++;
-            exp = 0;
-            //uiLevelUp.Show();
+            inst = this;
+            for (int i = 0; i < 50; i++)
+                nextExp[i] = 10 + (30 * i);
         }
-    }
-    void Update()
-    {
-        if (!isLive)
-            return;
-        gameTime += Time.deltaTime;
-
-        if (gameTime > maxGameTime)
+        public void GameStart()
         {
-            gameTime = maxGameTime;
+            health = maxHealth;
+            Resume();
+            uiLevelUp.Select(0);    // 임시 스크립트(1번캐릭터용)
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        public void GameOver()
         {
-            //uiLevelUp.Show();
+            StartCoroutine(GameOverRoutine());
         }
-    }
+        IEnumerator GameOverRoutine()
+        {
+            isLive = false;
+            yield return new WaitForSeconds(0.5f);
+            uiResult.gameObject.SetActive(true);
+            uiResult.Lose();
+            Stop();
+        }
+        public void GameVictory()
+        {
+            StartCoroutine(GameVictoryRoutine());
+        }
+        IEnumerator GameVictoryRoutine()
+        {
+            isLive = false;
+            enemyCleaner.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            uiResult.gameObject.SetActive(true);
+            uiResult.Win();
+            Stop();
+        }
+        public void GameRetry()
+        {
+            SceneManager.LoadScene(0);
+        }
+        public void GetExp()
+        {
+            if (!isLive)
+                return;
+            exp++;
+            if (nextExp[Mathf.Min(level, nextExp.Length - 1)] == exp)
+            {
+                level++;
+                exp = 0;
+                uiLevelUp.Show();
+            }
+        }
+        void Update()
+        {
+            if (!isLive)
+                return;
+            gameTime += Time.deltaTime;
 
-    public void Stop()
-    {
-        isLive = false;
-        Time.timeScale = 0;
-    }
-    public void Resume()
-    {
-        isLive = true;
-        Time.timeScale = 1;
+            if (gameTime > maxGameTime)
+            {
+                gameTime = maxGameTime;
+                GameVictory();
+            }
 
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                uiLevelUp.Show();
+            }
+        }
+
+        public void Stop()
+        {
+            isLive = false;
+            Time.timeScale = 0;
+        }
+        public void Resume()
+        {
+            isLive = true;
+            Time.timeScale = 1;
+
+        }
     }
 }
