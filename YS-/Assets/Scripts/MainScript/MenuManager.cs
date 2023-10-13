@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    [SerializeField] private GameObject StartUI;
+    [SerializeField] private GameObject CharUI;
+
     [SerializeField] private GameObject arrow;
     [SerializeField] private Button startBtn;
     [SerializeField] private Button exitBtn;
@@ -16,6 +20,9 @@ public class MenuManager : MonoBehaviour
     private bool isEffect;
     void Start()
     {
+        StartUI.SetActive(true);
+        CharUI.SetActive(false);
+
         arrow.transform.localPosition = new Vector3(-200, -200, 0);
         state = true;
         isEffect = false;
@@ -28,12 +35,31 @@ public class MenuManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.UpArrow)) {
             arrow.transform.localPosition = new Vector3(-200, -200, 0);
+
         }
         if(Input.GetKeyDown(KeyCode.DownArrow)) {
             arrow.transform.localPosition = new Vector3(-200, -350, 0);
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Finish();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            StartGame();
         }
     }
 
+    private void Finish()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void StartGame()
+    {
+        StartUI.SetActive(false);
+        CharUI.SetActive(true);
+    }
 
     IEnumerator ArrowEffect()
     {

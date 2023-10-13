@@ -2,39 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using UnityEditor.Animations;
 using UnityEngine;
 
-[Serializable]
-public class Data
+public enum Character
 {
-    [SerializeField] private Sprite portrait;
-    [SerializeField] private Sprite info_img;
+    farmer1, farmer2
+}
 
-    public String name;
+[System.Serializable]
+public class CharData : MonoBehaviour
+{
+    public Sprite info_img;
+    public AnimatorController info_anim;
+
+    public Character character;
     public float hp;
     public float attack;
     public int speed;
 
-    public Sprite getPortraitSprite()
-    {
-        return portrait;
-    }
-    
-    public Sprite getInfo_imgSprite()
-    {
-        return info_img;
-    }
+
 }
-
-
-
-public class CharData : MonoBehaviour
-{
-    [SerializeField] private Data[] data;
-   
-    public Data[] GetCharDatas() { return data; }
-    
-}
-
-
-

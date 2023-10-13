@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 3741686478828817182}
   - component: {fileID: 495253962717149016}
   - component: {fileID: 3732353141611919284}
+  - component: {fileID: -5119748068684222955}
   m_Layer: 5
   m_Name: CharBox
   m_TagString: Untagged
@@ -361,3 +362,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-5119748068684222955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6906186332077035933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1462bedce4c2beb4696b8e7432c2dae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info_img: {fileID: 0}
+  character: 0
+  hp: 0
+  attack: 0
+  speed: 0
