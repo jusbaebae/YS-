@@ -18,6 +18,9 @@ public class MenuManager : MonoBehaviour
 
     private bool state;
     private bool isEffect;
+    private bool isStart;
+    private bool isFinish;
+
     void Start()
     {
         StartUI.SetActive(true);
@@ -27,6 +30,9 @@ public class MenuManager : MonoBehaviour
         state = true;
         isEffect = false;
 
+        isStart = true;
+        isFinish = false;
+
         StartCoroutine(FadeOut());
     }
 
@@ -34,20 +40,32 @@ public class MenuManager : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.UpArrow)) {
-            arrow.transform.localPosition = new Vector3(-200, -200, 0);
-
+            SetArrow(-200, -200);
         }
         if(Input.GetKeyDown(KeyCode.DownArrow)) {
-            arrow.transform.localPosition = new Vector3(-200, -350, 0);
-            if (Input.GetKeyDown(KeyCode.Return))
+            SetArrow(-200, -350);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (isStart)
+            {
+                StartGame();
+            }
+
+            if (isFinish)
             {
                 Finish();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            StartGame();
-        }
+    }
+
+    private void SetArrow(float x, float y)
+    {
+        arrow.transform.localPosition = new Vector3(x, y, 0);
+
+        isStart = y == -200 ? true : false;
+        isFinish = y == -350 ? true : false;
     }
 
     private void Finish()
@@ -59,7 +77,10 @@ public class MenuManager : MonoBehaviour
     {
         StartUI.SetActive(false);
         CharUI.SetActive(true);
+        StopCoroutine(ArrowEffect());
     }
+
+
 
     IEnumerator ArrowEffect()
     {

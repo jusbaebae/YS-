@@ -32,15 +32,16 @@ public class SeletChar : MonoBehaviour
 
     public void Seletion()
     {
-        GameObject pick = EventSystem.current.currentSelectedGameObject;
-        charData = pick.GetComponent<CharData>();
+        charData = EventSystem.current.currentSelectedGameObject.GetComponent<CharData>();
         DataManger.instance.currentCharData = charData;
+        
+
 
         info_anim.GetComponent<SpriteRenderer>().sprite = charData.info_img;
         info_anim.GetComponent<Animator>().runtimeAnimatorController = new AnimatorOverrideController(charData.info_anim);
         SetState(charData);
     }
-
+    
     public void SetState(CharData chardata)
     {
         info_hp.SetText("" + charData.hp);

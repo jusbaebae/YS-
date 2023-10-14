@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public enum Character
@@ -14,7 +9,7 @@ public enum Character
 public class CharData : MonoBehaviour
 {
     public Sprite info_img;
-    public AnimatorController info_anim;
+    public RuntimeAnimatorController info_anim;
 
     public Character character;
     public float hp;
