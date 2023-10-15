@@ -61,7 +61,10 @@ namespace vanilla
             rigid.simulated = true;
             spriter.sortingOrder = 2;
             anim.SetBool("Dead", false);
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
         }
 
         public void Init(SpawnData data)
@@ -92,7 +95,11 @@ namespace vanilla
                 spriter.sortingOrder = 1;
                 anim.SetBool("Dead", true);
                 GameManager.inst.kill++;
+<<<<<<< HEAD
                 GameManager.inst.GetExp();
+=======
+                //GameManager.inst.GetExp();
+>>>>>>> main
             }
         }
 
@@ -106,6 +113,13 @@ namespace vanilla
         void Dead()
         {
             gameObject.SetActive(false);
+<<<<<<< HEAD
+=======
+            //몹죽으면 경험치떨구기
+            GameObject exp = GameManager.inst.pool.Get(5); //임시로 5번에 할당하였으나 나중에 조정바람
+            exp.transform.position = transform.position;
+            exp.GetComponent<Magnet>();
+>>>>>>> main
         }
     }
 }

@@ -37,8 +37,11 @@ namespace vanilla
                 case ItemData.ItemType.Range:
                 case ItemData.ItemType.Bounce:
                 case ItemData.ItemType.Throw:
+<<<<<<< HEAD
                 case ItemData.ItemType.Bomb:
                 case ItemData.ItemType.Boomerang:
+=======
+>>>>>>> main
                     textDesc.text = string.Format(data.itemDesc, data.damages[level], data.counts[level]);
                     break;
                 case ItemData.ItemType.Glove:
@@ -59,8 +62,11 @@ namespace vanilla
                 case ItemData.ItemType.Range:
                 case ItemData.ItemType.Throw:
                 case ItemData.ItemType.Bounce:
+<<<<<<< HEAD
                 case ItemData.ItemType.Bomb:
                 case ItemData.ItemType.Boomerang:
+=======
+>>>>>>> main
                     if (level == 0)
                     {
                         GameObject newWeapon = new GameObject();

@@ -19,7 +19,10 @@ MonoBehaviour:
   itemIcon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   baseDamage: 4.5
   baseCount: 1
+<<<<<<< HEAD
   baseSpeed: 150
+=======
+>>>>>>> main
   damages:
   - 0.5
   - 1
