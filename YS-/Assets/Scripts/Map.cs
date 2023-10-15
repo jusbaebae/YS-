@@ -8,10 +8,11 @@ namespace vanilla
     {
         SpriteRenderer[] sprites;
         public float maxX, maxY, minX, minY;
-        private void Start()
+        public Vector2 center;
+        public Vector2 mapSize;
+        private void Awake()
         {
             sprites = GetComponentsInChildren<SpriteRenderer>();
-            CompositeCollider2D comp = GetComponent<CompositeCollider2D>();
             int i = 0;
             float size = 0;
             float offset = 0;
@@ -44,8 +45,11 @@ namespace vanilla
                 i++;
             }
             BoxCollider2D col = gameObject.AddComponent<BoxCollider2D>();
-            col.size = new Vector2(size - GameManager.inst.player.col.bounds.size.x, sprites[0].bounds.size.y - GameManager.inst.player.col.bounds.size.y);
-            col.offset = new Vector2((size - offset * 2) / 2f, 0 + GameManager.inst.player.col.offset.y);  //Áß¾Ó°ªÀ» ¹Ù²Û´Ù.
+            BoxCollider2D pcol = GameManager.inst.player.col2;
+            center = new Vector2((size - offset * 2) * 0.5f, pcol.offset.y);
+            mapSize = new Vector2(size * 0.5f, sprites[0].bounds.size.y * 0.5f);
+            col.size = new Vector2(size - pcol.bounds.size.x * 1.4f, sprites[0].bounds.size.y - pcol.bounds.size.y * 2f);
+            col.offset = center;  //Áß¾Ó°ªÀ» ¹Ù²Û´Ù.
             Bounds bound = col.bounds;
             col.usedByComposite = true;
             //Àü´Þ¿ë Å©±âµé

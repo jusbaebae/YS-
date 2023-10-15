@@ -1,57 +1,72 @@
 using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.InputSystem;
-
-public class Player : MonoBehaviour
+namespace vanilla
 {
-    public Vector2 inputVec;
-    Rigidbody2D rigid;
-    SpriteRenderer spriter;
-    public float speed = 10;
-    Animator ani;
-    public Collider2D col;
-    //public Hands hands;
-    public Scanner scanner;
-    // Start is called before the first frame update
-    void Awake()
-    {
-        col = GetComponent<Collider2D>();
-        rigid = GetComponent<Rigidbody2D>();
-        spriter = GetComponent<SpriteRenderer>();
-        ani = GetComponent<Animator>();
-        scanner = GetComponent<Scanner>();
-    }
-    private void FixedUpdate()
-    {
-        /*
-        if (!GameManager.inst.isLive)
-            return;
-        */
-        // 위치 이동
-        Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
-        rigid.MovePosition(rigid.position + nextVec);
+    using UnityEngine.InputSystem;
+    using UnityEngine.InputSystem.Processors;
 
-    }
-    void OnMove(InputValue value)
+    public class Player : MonoBehaviour
     {
-        inputVec = value.Get<Vector2>();
-    }
-    void LateUpdate()
-    {
-        /*
-        if (!GameManager.inst.isLive)
-                return;
-        */
-        ani.SetFloat("Speed", inputVec.magnitude);
-        if(inputVec.x != 0)
+        public Vector2 inputVec;
+        Rigidbody2D rigid;
+        SpriteRenderer spriter;
+        public float speed = 100;
+        Animator ani;
+
+        public Hands hands;
+        public Scanner scanner;
+        public CapsuleCollider2D col;
+        public BoxCollider2D col2;
+        // Start is called before the first frame update
+        void Awake()
         {
-            spriter.flipX = inputVec.x < 0;
+            col = GetComponent<CapsuleCollider2D>();  
+            col2 = GetComponent<BoxCollider2D>();
+            rigid = GetComponent<Rigidbody2D>();
+            spriter = GetComponent<SpriteRenderer>();
+            ani = GetComponent<Animator>();
+            scanner = GetComponent<Scanner>();
+            hands = GetComponentInChildren<Hands>(true);
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Area"))
-            return;
-        Debug.Log("인식");
+        private void FixedUpdate()
+        {
+            if (!GameManager.inst.isLive)
+                return;
+            // 위치 이동
+            Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
+            rigid.MovePosition(rigid.position + nextVec);
+
+        }
+        void OnMove(InputValue value)
+        {
+            inputVec = value.Get<Vector2>();
+        }
+
+        void LateUpdate()
+        {
+            if (!GameManager.inst.isLive)
+                return;
+            ani.SetFloat("Speed", inputVec.magnitude);
+            if (inputVec.x != 0)
+            {
+                spriter.flipX = inputVec.x < 0;
+            }
+        }
+
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if (!GameManager.inst.isLive)
+                return;
+
+            GameManager.inst.health -= Time.deltaTime * 10f;
+            Debug.Log(GameManager.inst.health);
+            if(GameManager.inst.health < 0)
+            {
+                for (int i=2; i < transform.childCount; i++)
+                    transform.GetChild(i).gameObject.SetActive(false);
+                ani.SetTrigger("Dead");
+                GameManager.inst.GameOver();
+            }
+        }
     }
 }

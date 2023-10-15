@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 namespace vanilla
 {
@@ -14,22 +16,46 @@ namespace vanilla
         {
             if (!collision.CompareTag("Ground"))
                 return;
-            Debug.Log("섹스");
-            if (map.minX > gameObject.transform.position.x)
+            float halfWidth = gameObject.GetComponent<BoxCollider2D>().bounds.size.x * 0.4f;
+            float halfHeight = gameObject.GetComponent<BoxCollider2D>().bounds.size.y * 0.4f;
+
+            Vector2 currentPosition = gameObject.transform.position;
+
+            // 최소 X, 최소 Y
+            if (currentPosition.x <= map.minX - halfWidth && currentPosition.y <= map.minY - halfHeight)
             {
-                gameObject.transform.position = new Vector2(map.minX, gameObject.transform.position.y);
+                gameObject.transform.position = new Vector2(map.minX - halfWidth, map.minY - halfHeight);
             }
-            if (map.maxX < gameObject.transform.position.x)
+            // 최소 X, 최대 Y
+            else if (currentPosition.x <= map.minX - halfWidth && currentPosition.y >= map.maxY + halfHeight)
             {
-                gameObject.transform.position = new Vector2(map.maxX, gameObject.transform.position.y);
+                gameObject.transform.position = new Vector2(map.minX - halfWidth, map.maxY + halfHeight);
             }
-            if (map.minY > gameObject.transform.position.y)
+            // 최대 X, 최소 Y
+            else if (currentPosition.x >= map.maxX + halfWidth && currentPosition.y <= map.minY - halfHeight)
             {
-                gameObject.transform.position = new Vector2(gameObject.transform.position.x, map.minY);
+                gameObject.transform.position = new Vector2(map.maxX + halfWidth, map.minY - halfHeight);
             }
-            if (map.maxY < gameObject.transform.position.y)
+            // 최대 X, 최대 Y
+            else if (currentPosition.x >= map.maxX + halfWidth && currentPosition.y >= map.maxY + halfHeight)
             {
-                gameObject.transform.position = new Vector2(gameObject.transform.position.x, map.maxY);
+                gameObject.transform.position = new Vector2(map.maxX + halfWidth, map.maxY + halfHeight);
+            }
+            else if (map.minX - halfWidth >= currentPosition.x)
+            {
+                gameObject.transform.position = new Vector2(map.minX - halfWidth * 1.25f, currentPosition.y) ;
+            }
+            else if (map.maxX + halfWidth <= currentPosition.x)
+            {
+                gameObject.transform.position = new Vector2(map.maxX + halfWidth, currentPosition.y);
+            }
+            else if (map.minY - halfHeight >= currentPosition.y)
+            {
+                gameObject.transform.position = new Vector2(currentPosition.x, map.minY - halfHeight);
+            }
+            else if (map.maxY + halfHeight <= currentPosition.y)
+            {
+                gameObject.transform.position = new Vector2(currentPosition.x, map.maxY + halfHeight * 1.25f);
             }
         }
     }
