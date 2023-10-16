@@ -47,6 +47,18 @@ namespace vanilla
                 switch (weapon.id)
                 {
                     case 0:
+<<<<<<< HEAD
+                        weapon.speed = weapon.baseSpeed + (weapon.baseSpeed * rate);
+                        break;
+                    case 1:
+                        weapon.speed = 0.5f * (1f - rate);
+                        break;
+                    case 5:
+                        weapon.speed = weapon.baseSpeed - rate * 3;
+                        break;
+                    default:
+                        weapon.speed = weapon.baseSpeed - (weapon.baseSpeed * rate);
+=======
                         weapon.speed = 150 + (150 * rate);
                         break;
                     case 5:
@@ -57,6 +69,7 @@ namespace vanilla
                         break;
                     default:
                         weapon.speed = 0.5f * (1f - rate);
+>>>>>>> main
                         break;
                 }
             }
