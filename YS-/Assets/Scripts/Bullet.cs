@@ -93,6 +93,7 @@ namespace vanilla
             Vector3 dir = targetPos - transform.position;
             dir = dir.normalized;
             rb.velocity = dir * 15f;
+            rb = GetComponent<Rigidbody2D>();
         }
 
         public void Init(float damage, int per, Vector3 dir, bool bounce)

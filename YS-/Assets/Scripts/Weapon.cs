@@ -12,7 +12,6 @@ namespace vanilla
         public int count;
         public float speed;
         public float baseSpeed;
-
         float timer;
         int[,] thr = new int[5, 5]
         {
@@ -117,6 +116,9 @@ namespace vanilla
                     break;
                     damage = data.baseDamage;
                     count = data.baseCount;
+            Debug.Log(id);
+            damage = data.baseDamage;
+            count = data.baseCount;
 
                     for (int i = 0; i < GameManager.inst.pool.prefabs.Length; i++)
                     {
@@ -153,6 +155,31 @@ namespace vanilla
                     }
                     player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½å°©ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
             }
+            switch (id)
+            {
+                case 0:
+                    speed = 150;
+                    Batch();
+                    break;
+                case 1:
+                    speed = 0.3f;
+                    break;
+                case 5:
+                    speed = 6f;
+                    break;
+                case 6:
+                    speed = 3f;
+                    break;
+                default:
+                    break;
+            }
+            if (data.itemType == ItemData.ItemType.Melee || data.itemType == ItemData.ItemType.Range)
+            {
+                Hands hands = player.hands;
+                hands.gameObject.SetActive(true);
+                hands.sprites[(int)data.itemType].sprite = data.hand;
+            }
+            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
         }
         public void LevelUp(float damage, int count)
         {
@@ -182,6 +209,7 @@ namespace vanilla
                 bullet.Rotate(rotVec);
                 bullet.Translate(bullet.up * 1.5f, Space.World);
                 bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false, false, false, false); // -1 ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false); // -1 Àº ¹«Á¦ÇÑ
             }
         }
         void Throw(int i)

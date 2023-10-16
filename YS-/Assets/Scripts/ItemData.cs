@@ -7,7 +7,6 @@ namespace vanilla
     public class ItemData : ScriptableObject
     {
         public enum ItemType { Melee, Range, Throw, Bounce, Bomb, Glove, Shoe, Heal, Boomerang}
-
         [Header("# Main Info")]
         public ItemType itemType;
         public int itemId;
