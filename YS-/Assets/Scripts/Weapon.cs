@@ -80,7 +80,6 @@ namespace vanilla
 
             // Property Set
             id = data.itemId;
-            Debug.Log(id);
             damage = data.baseDamage;
             count = data.baseCount;
 
