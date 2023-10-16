@@ -11,6 +11,8 @@ namespace vanilla
         public bool bomb;
         public bool boomerang;
         bool isRotate;
+
+        Vector3 dir;
         Animator anim;
         Rigidbody2D rb;
 
@@ -40,6 +42,8 @@ namespace vanilla
             this.bomb = bomb;
             this.boomerang = boomerang;
             this.isRotate = isRotate;
+            this.dir = dir;
+
             if (per > -1)
             {
                 rb.velocity = dir * 15f;
@@ -53,6 +57,10 @@ namespace vanilla
         {
             rb.AddForce(Vector3.up * 7f, ForceMode2D.Impulse);
             rb.AddForce(Vector3.right * i, ForceMode2D.Impulse);
+            if(GameManager.inst.player.inputVec.x != 0)
+                rb.AddForce(Vector3.right * 3f * GameManager.inst.player.inputVec.x, ForceMode2D.Impulse);
+            if(GameManager.inst.player.inputVec.y > 0)
+                rb.AddForce(Vector3.up * 3f * GameManager.inst.player.inputVec.y, ForceMode2D.Impulse);
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -81,35 +89,22 @@ namespace vanilla
             else
             {
                 boomerang = false;
-                StartCoroutine(BackToPlayer());
+                StartCoroutine(BackToPlayer(dir));
             }
         }
-        IEnumerator BackToPlayer()
+        IEnumerator BackToPlayer(Vector3 dir)
         {
-            yield return new WaitForSeconds(0.5f);
-            rb.velocity = Vector3.zero;
+            for (int i = 0; i<15; i++)
+            {
+                yield return new WaitForSeconds(0.03f);
+                rb.velocity = dir * (15f - i);
+            }
             yield return new WaitForSeconds(0.5f);
             Vector3 targetPos = GameManager.inst.player.transform.position;
-            Vector3 dir = targetPos - transform.position;
-            dir = dir.normalized;
-            rb.velocity = dir * 15f;
-            rb = GetComponent<Rigidbody2D>();
-        }
+            Vector3 dirs = targetPos - transform.position;
+            dirs = dirs.normalized;
 
-        public void Init(float damage, int per, Vector3 dir, bool bounce)
-        {
-            this.damage = damage;
-            this.per = per;
-            this.bounce = bounce;
-            if (per > -1)
-            {
-                rb.velocity = dir * 15f;
-            }
-            if (bounce)
-            {
-                StartCoroutine(DisableBullet());
-            }
-
+            rb.velocity = dirs * 15f; 
         }
         IEnumerator DisableBullet()
         {
@@ -117,7 +112,7 @@ namespace vanilla
             if (bomb)
             {
                 anim.SetTrigger("GasEnd");
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.6f);
             }
             gameObject.SetActive(false);
         }

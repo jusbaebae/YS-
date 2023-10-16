@@ -12,6 +12,7 @@ namespace vanilla
         public int count;
         public float speed;
         public float baseSpeed;
+
         float timer;
         int[,] thr = new int[5, 5]
         {
@@ -114,57 +115,6 @@ namespace vanilla
                 case 0:
                     Batch();
                     break;
-
-                    for (int i = 0; i < GameManager.inst.pool.prefabs.Length; i++)
-                    {
-                        if (data.projecttile == GameManager.inst.pool.prefabs[i])
-                        {
-                            prefabId = i;
-                            break;
-                        }
-                    }
-
-                    switch (id)
-                    {
-                        case 0:
-                            speed = 150;
-                            Batch();
-                            break;
-                        case 1:
-                            speed = 0.3f;
-                            break;
-                        case 5:
-                            speed = 6f;
-                            break;
-                        case 6:
-                            speed = 3f;
-                            break;
-                        default:
-                            break;
-                    }
-                    if (data.itemType == ItemData.ItemType.Melee || data.itemType == ItemData.ItemType.Range)
-                    {
-                        Hands hands = player.hands;
-                        hands.gameObject.SetActive(true);
-                        hands.sprites[(int)data.itemType].sprite = data.hand;
-                    }
-                    player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½å°©ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½
-            }
-            switch (id)
-            {
-                case 0:
-                    speed = 150;
-                    Batch();
-                    break;
-                case 1:
-                    speed = 0.3f;
-                    break;
-                case 5:
-                    speed = 6f;
-                    break;
-                case 6:
-                    speed = 3f;
-                    break;
                 default:
                     break;
             }
@@ -174,7 +124,7 @@ namespace vanilla
                 hands.gameObject.SetActive(true);
                 hands.sprites[(int)data.itemType].sprite = data.hand;
             }
-            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   //¸¸µç ¹«±â¿¡ Àå°©¼Óµµ Àû¿ë
         }
         public void LevelUp(float damage, int count)
         {
@@ -203,13 +153,15 @@ namespace vanilla
                 Vector3 rotVec = Vector3.forward * 360 * i / count;
                 bullet.Rotate(rotVec);
                 bullet.Translate(bullet.up * 1.5f, Space.World);
-                bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false, false, false, false); // -1 ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false, false, false, false); // -1 Àº ¹«Á¦ÇÑ
             }
         }
+
         void Throw(int i)
         {
             Vector3 dir = transform.position + Vector3.up * 30000000;
             dir = dir.normalized;
+
             Transform bullet = GameManager.inst.pool.Get(prefabId).transform;
             bullet.position = transform.position;
             bullet.GetComponent<Bullet>().Init(damage, -1, dir, false, false, false, true);
@@ -229,7 +181,6 @@ namespace vanilla
             bullet.position = transform.position;
             bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
             bullet.GetComponent<Bullet>().Init(damage, count, dir, false, false, false, false);
-            Debug.Log("Fire");
         }
         void BFire()
         {
@@ -280,8 +231,6 @@ namespace vanilla
             float journeyLength = Vector3.Distance(bullet.transform.position, targetPos);
             float startTime = Time.time;
             float moveSpeed = 0.2f;
-            Vector3 dir = targetPos - transform.position;
-            dir = dir.normalized;
             //float rotationSpeed = 90.0f;
 
             while (isMoving)
@@ -301,8 +250,6 @@ namespace vanilla
 
                 yield return null;
             }
-            bullet.GetComponent<Bullet>().Init(damage, count, dir, true);
-            Debug.Log("Bullet");
         }
     }
 }
