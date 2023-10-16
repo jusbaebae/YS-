@@ -115,44 +115,44 @@ namespace vanilla
                 case 0:
                     Batch();
                     break;
-            Debug.Log(id);
-            damage = data.baseDamage;
-            count = data.baseCount;
+                    damage = data.baseDamage;
+                    count = data.baseCount;
 
-            for (int i = 0; i < GameManager.inst.pool.prefabs.Length; i++)
-            {
-                if (data.projecttile == GameManager.inst.pool.prefabs[i])
-                {
-                    prefabId = i;
-                    break;
-                }
-            }
+                    for (int i = 0; i < GameManager.inst.pool.prefabs.Length; i++)
+                    {
+                        if (data.projecttile == GameManager.inst.pool.prefabs[i])
+                        {
+                            prefabId = i;
+                            break;
+                        }
+                    }
 
-            switch (id)
-            {
-                case 0:
-                    speed = 150;
-                    Batch();
-                    break;
-                case 1:
-                    speed = 0.3f;
-                    break;
-                case 5:
-                    speed = 6f;
-                    break;
-                case 6:
-                    speed = 3f;
-                    break;
-                default:
-                    break;
+                    switch (id)
+                    {
+                        case 0:
+                            speed = 150;
+                            Batch();
+                            break;
+                        case 1:
+                            speed = 0.3f;
+                            break;
+                        case 5:
+                            speed = 6f;
+                            break;
+                        case 6:
+                            speed = 3f;
+                            break;
+                        default:
+                            break;
+                    }
+                    if (data.itemType == ItemData.ItemType.Melee || data.itemType == ItemData.ItemType.Range)
+                    {
+                        Hands hands = player.hands;
+                        hands.gameObject.SetActive(true);
+                        hands.sprites[(int)data.itemType].sprite = data.hand;
+                    }
+                    player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   //���� ���⿡ �尩�ӵ� ����
             }
-            if (data.itemType == ItemData.ItemType.Melee || data.itemType == ItemData.ItemType.Range)
-            {
-                Hands hands = player.hands;
-                hands.gameObject.SetActive(true);
-                hands.sprites[(int)data.itemType].sprite = data.hand;
-            }
-            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   //���� ���⿡ �尩�ӵ� ����
         }
         public void LevelUp(float damage, int count)
         {
@@ -182,7 +182,6 @@ namespace vanilla
                 bullet.Rotate(rotVec);
                 bullet.Translate(bullet.up * 1.5f, Space.World);
                 bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false, false, false, false); // -1 �� ������
-                //bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false); // -1 �� ������
             }
         }
         void Throw(int i)
@@ -254,13 +253,15 @@ namespace vanilla
             bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
             bullet.GetComponent<Bullet>().Init(damage, count, dir, false, false, true, true);
         }
-        
+
         IEnumerator MoveToDestination(Transform bullet, Vector3 targetPos)
         {
             bool isMoving = true;
             float journeyLength = Vector3.Distance(bullet.transform.position, targetPos);
             float startTime = Time.time;
             float moveSpeed = 0.2f;
+            Vector3 dir = targetPos - transform.position;
+            dir = dir.normalized;
             //float rotationSpeed = 90.0f;
 
             while (isMoving)

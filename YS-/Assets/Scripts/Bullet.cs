@@ -8,7 +8,6 @@ namespace vanilla
         public float damage;
         public int per;
         public bool bounce;
-<<<<<<< HEAD
         public bool bomb;
         public bool boomerang;
         bool isRotate;
@@ -93,15 +92,7 @@ namespace vanilla
             Vector3 targetPos = GameManager.inst.player.transform.position;
             Vector3 dir = targetPos - transform.position;
             dir = dir.normalized;
-
-            rb.velocity = dir * 15f; 
-=======
-
-        Rigidbody2D rb;
-
-        private void Awake()
-        {
-            rb = GetComponent<Rigidbody2D>();
+            rb.velocity = dir * 15f;
         }
 
         public void Init(float damage, int per, Vector3 dir, bool bounce)
@@ -118,12 +109,10 @@ namespace vanilla
                 StartCoroutine(DisableBullet());
             }
 
->>>>>>> main
         }
         IEnumerator DisableBullet()
         {
             yield return new WaitForSeconds(3f + 3f * per);
-<<<<<<< HEAD
             if (bomb)
             {
                 anim.SetTrigger("GasEnd");
@@ -131,40 +120,6 @@ namespace vanilla
             }
             gameObject.SetActive(false);
         }
-=======
-            gameObject.SetActive(false);
-        }
-        public void Throwing(int i)
-        {
-            rb.AddForce(Vector3.up * 7f, ForceMode2D.Impulse);
-            rb.AddForce(Vector3.right * i, ForceMode2D.Impulse);
-        }
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (bounce)
-            {
-                if (collision.CompareTag("XArea"))
-                {
-                    rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
-                }
-                else if (collision.CompareTag("YArea"))
-                {
-                    rb.velocity = new Vector2(rb.velocity.x, -rb.velocity.y);
-                }
-            }
-            if (!collision.CompareTag("Enemy") || per == -1)
-                return;
-
-            per--;
-
-            if (per == -1)
-            {
-                rb.velocity = Vector2.zero;
-                gameObject.SetActive(false);
-            }
-        }
-
->>>>>>> main
         private void OnTriggerExit2D(Collider2D col)
         {
             if (!col.CompareTag("Area"))
