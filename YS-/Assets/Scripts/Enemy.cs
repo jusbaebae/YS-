@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 namespace vanilla
 {
@@ -10,6 +11,8 @@ namespace vanilla
         float health;
         float maxhealth;
         bool isLive;
+        float hittime;
+        float timer;
 
         Rigidbody2D target;
         Animator anim;
@@ -29,6 +32,7 @@ namespace vanilla
             rigid = GetComponent<Rigidbody2D>();
             spriter = GetComponent<SpriteRenderer>();
             wait = new WaitForFixedUpdate();
+            hittime = 0.5f;
         }
 
         // Update is called once per frame
@@ -61,10 +65,6 @@ namespace vanilla
             rigid.simulated = true;
             spriter.sortingOrder = 2;
             anim.SetBool("Dead", false);
-<<<<<<< HEAD
-
-=======
->>>>>>> main
         }
 
         public void Init(SpawnData data)
@@ -77,7 +77,7 @@ namespace vanilla
 
         void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.CompareTag("Bullet") || !isLive)
+            if (!collision.CompareTag("Bullet") || !isLive || collision.GetComponent<Bullet>().bomb)
                 return;
 
             health -= collision.GetComponent<Bullet>().damage;
@@ -85,7 +85,36 @@ namespace vanilla
             if (health > 0)
             {
                 anim.SetTrigger("Hit");
-                StartCoroutine(KnockBack());
+                if (!collision.GetComponent<Bullet>().bomb)
+                    StartCoroutine(KnockBack(collision.transform));
+            }
+            else
+            {
+                isLive = false;
+                coll.enabled = false;
+                rigid.simulated = false;
+                spriter.sortingOrder = 1;
+                anim.SetBool("Dead", true);
+                //GameManager.inst.GetExp();
+                GameManager.inst.kill++;
+            }
+        }
+
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            if (!collision.CompareTag("Bullet") || !isLive || !collision.GetComponent<Bullet>().bomb)
+                return;
+            timer += Time.deltaTime;
+            if (!(timer > hittime))
+                return;
+
+            Debug.Log("in");
+            timer = 0f;
+            health -= collision.GetComponent<Bullet>().damage;
+            if (health > 0)
+            {
+                anim.SetTrigger("Hit");
+                StartCoroutine(Slow());
             }
             else
             {
@@ -95,31 +124,30 @@ namespace vanilla
                 spriter.sortingOrder = 1;
                 anim.SetBool("Dead", true);
                 GameManager.inst.kill++;
-<<<<<<< HEAD
                 GameManager.inst.GetExp();
-=======
-                //GameManager.inst.GetExp();
->>>>>>> main
             }
         }
+        IEnumerator Slow()
+        {
+            speed *= 0.5f;
+            yield return new WaitForSeconds(0.5f);
+            speed *= 2.0f;
 
-        IEnumerator KnockBack()
+        }
+        IEnumerator KnockBack(Transform bullet)
         {
             yield return wait;
-            Vector3 playerPos = GameManager.inst.player.transform.position;
-            Vector3 dirVec = transform.position - playerPos;
+            Vector3 bulletPos = bullet.transform.position;
+            Vector3 dirVec = transform.position - bulletPos;
             rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
         }
         void Dead()
         {
             gameObject.SetActive(false);
-<<<<<<< HEAD
-=======
             //몹죽으면 경험치떨구기
-            GameObject exp = GameManager.inst.pool.Get(5); //임시로 5번에 할당하였으나 나중에 조정바람
-            exp.transform.position = transform.position;
-            exp.GetComponent<Magnet>();
->>>>>>> main
+            int i = GameManager.inst.pool.prefabs.Length;
+            //GameObject exp = GameManager.inst.pool.Get(i);
+            //exp.transform.position = transform.position;
         }
     }
 }

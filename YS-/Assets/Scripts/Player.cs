@@ -59,7 +59,6 @@ namespace vanilla
                 return;
 
             GameManager.inst.health -= Time.deltaTime * 10f;
-            Debug.Log(GameManager.inst.health);
             if(GameManager.inst.health < 0)
             {
                 for (int i=2; i < transform.childCount; i++)

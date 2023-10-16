@@ -11,10 +11,7 @@ namespace vanilla
         public float damage;
         public int count;
         public float speed;
-<<<<<<< HEAD
         public float baseSpeed;
-=======
->>>>>>> main
 
         float timer;
         int[,] thr = new int[5, 5]
@@ -71,7 +68,6 @@ namespace vanilla
                         BFire();
                     }
                     break;
-<<<<<<< HEAD
                 case 7:
                     timer += Time.deltaTime;
                     if (timer > speed)
@@ -88,8 +84,6 @@ namespace vanilla
                         Boomerang();
                     }
                     break;
-=======
->>>>>>> main
                 default:
                     break;
             }
@@ -103,7 +97,6 @@ namespace vanilla
 
             // Property Set
             id = data.itemId;
-<<<<<<< HEAD
             damage = data.baseDamage;
             count = data.baseCount;
             baseSpeed = data.baseSpeed;
@@ -122,36 +115,6 @@ namespace vanilla
                 case 0:
                     Batch();
                     break;
-=======
-            Debug.Log(id);
-            damage = data.baseDamage;
-            count = data.baseCount;
-
-            for (int i = 0; i < GameManager.inst.pool.prefabs.Length; i++)
-            {
-                if (data.projecttile == GameManager.inst.pool.prefabs[i])
-                {
-                    prefabId = i;
-                    break;
-                }
-            }
-
-            switch (id)
-            {
-                case 0:
-                    speed = 150;
-                    Batch();
-                    break;
-                case 1:
-                    speed = 0.3f;
-                    break;
-                case 5:
-                    speed = 6f;
-                    break;
-                case 6:
-                    speed = 3f;
-                    break;
->>>>>>> main
                 default:
                     break;
             }
@@ -161,11 +124,7 @@ namespace vanilla
                 hands.gameObject.SetActive(true);
                 hands.sprites[(int)data.itemType].sprite = data.hand;
             }
-<<<<<<< HEAD
             player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   //만든 무기에 장갑속도 적용
-=======
-            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
->>>>>>> main
         }
         public void LevelUp(float damage, int count)
         {
@@ -194,16 +153,10 @@ namespace vanilla
                 Vector3 rotVec = Vector3.forward * 360 * i / count;
                 bullet.Rotate(rotVec);
                 bullet.Translate(bullet.up * 1.5f, Space.World);
-<<<<<<< HEAD
                 bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false, false, false, false); // -1 은 무제한
             }
         }
-        
-=======
-                bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false); // -1 은 무제한
-            }
-        }
->>>>>>> main
+
         void Throw(int i)
         {
             Vector3 dir = transform.position + Vector3.up * 30000000;
@@ -211,11 +164,7 @@ namespace vanilla
 
             Transform bullet = GameManager.inst.pool.Get(prefabId).transform;
             bullet.position = transform.position;
-<<<<<<< HEAD
             bullet.GetComponent<Bullet>().Init(damage, -1, dir, false, false, false, true);
-=======
-            bullet.GetComponent<Bullet>().Init(damage, -1, dir, false);
->>>>>>> main
             bullet.GetComponent<Bullet>().Throwing(i);
             Debug.Log("Throwing");
         }
@@ -231,12 +180,7 @@ namespace vanilla
             Transform bullet = GameManager.inst.pool.Get(prefabId).transform;
             bullet.position = transform.position;
             bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-<<<<<<< HEAD
             bullet.GetComponent<Bullet>().Init(damage, count, dir, false, false, false, false);
-=======
-            bullet.GetComponent<Bullet>().Init(damage, count, dir, false);
-            Debug.Log("Fire");
->>>>>>> main
         }
         void BFire()
         {
@@ -250,7 +194,6 @@ namespace vanilla
             Transform bullet = GameManager.inst.pool.Get(prefabId).transform;
             bullet.position = transform.position;
             bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-<<<<<<< HEAD
             bullet.GetComponent<Bullet>().Init(damage, count, dir, true, false, false, false);
         }
         void Bomb()
@@ -281,7 +224,7 @@ namespace vanilla
             bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
             bullet.GetComponent<Bullet>().Init(damage, count, dir, false, false, true, true);
         }
-        
+
         IEnumerator MoveToDestination(Transform bullet, Vector3 targetPos)
         {
             bool isMoving = true;
@@ -307,10 +250,6 @@ namespace vanilla
 
                 yield return null;
             }
-=======
-            bullet.GetComponent<Bullet>().Init(damage, count, dir, true);
-            Debug.Log("Bullet");
->>>>>>> main
         }
     }
 }
