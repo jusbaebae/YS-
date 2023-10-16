@@ -114,11 +114,6 @@ namespace vanilla
                 case 0:
                     Batch();
                     break;
-                    damage = data.baseDamage;
-                    count = data.baseCount;
-            Debug.Log(id);
-            damage = data.baseDamage;
-            count = data.baseCount;
 
                     for (int i = 0; i < GameManager.inst.pool.prefabs.Length; i++)
                     {
@@ -209,7 +204,6 @@ namespace vanilla
                 bullet.Rotate(rotVec);
                 bullet.Translate(bullet.up * 1.5f, Space.World);
                 bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false, false, false, false); // -1 ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-                bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false); // -1 Àº ¹«Á¦ÇÑ
             }
         }
         void Throw(int i)
@@ -219,7 +213,6 @@ namespace vanilla
             Transform bullet = GameManager.inst.pool.Get(prefabId).transform;
             bullet.position = transform.position;
             bullet.GetComponent<Bullet>().Init(damage, -1, dir, false, false, false, true);
-            bullet.GetComponent<Bullet>().Init(damage, -1, dir, false);
             bullet.GetComponent<Bullet>().Throwing(i);
             Debug.Log("Throwing");
         }
@@ -236,7 +229,6 @@ namespace vanilla
             bullet.position = transform.position;
             bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
             bullet.GetComponent<Bullet>().Init(damage, count, dir, false, false, false, false);
-            bullet.GetComponent<Bullet>().Init(damage, count, dir, false);
             Debug.Log("Fire");
         }
         void BFire()

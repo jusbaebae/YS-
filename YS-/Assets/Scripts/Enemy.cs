@@ -92,6 +92,7 @@ namespace vanilla
                 anim.SetBool("Dead", true);
                 //GameManager.inst.GetExp();
                 GameManager.inst.kill++;
+
             }
         }
 

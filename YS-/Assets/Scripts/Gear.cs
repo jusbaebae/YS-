@@ -54,6 +54,7 @@ namespace vanilla
                         break;
                     case 5:
                         weapon.speed = weapon.baseSpeed - rate * 3;
+                        weapon.speed = 150 + (150 * rate);
                         break;
                     case 6:
                         weapon.speed = 1f * (1f - rate);
