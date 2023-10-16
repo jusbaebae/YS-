@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace vanilla
 {
-    public class Spawner : MonoBehaviour
+    public class BossSpawner : MonoBehaviour
     {
         public Transform[] spawnPoint;
         int level;
         float timer;
-        public SpawnData[] spawnData;
+        public BossSpawnData[] bossSpawnData;
         void Awake()
         {
             spawnPoint = GetComponentsInChildren<Transform>();
@@ -18,9 +18,8 @@ namespace vanilla
             if (!GameManager.inst.isLive)
                 return;
             timer += Time.deltaTime;
-            level = Mathf.Min(Mathf.FloorToInt(GameManager.inst.gameTime / 10f), spawnData.Length -1);
-
-            if (timer > spawnData[level].spawnTime)
+            level = Mathf.Min(Mathf.FloorToInt(GameManager.inst.gameTime / 10f), bossSpawnData.Length - 1);
+            if (timer > bossSpawnData[level].spawnTime)
             {
                 Spawn();
                 timer = 0f;
@@ -29,13 +28,13 @@ namespace vanilla
 
         void Spawn()
         {
-            GameObject enemy = GameManager.inst.pool.Get(0);
+            GameObject enemy = GameManager.inst.pool.Get(GameManager.inst.pool.prefabs.Length-2);
             enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
-            enemy.GetComponent<Enemy>().Init(spawnData[level]);
+            enemy.GetComponent<BossEnemy>().Init(bossSpawnData[level]);
         }
     }
     [System.Serializable]
-    public class SpawnData
+    public class BossSpawnData
     {
         public int spriteType;
         public float spawnTime;
@@ -43,3 +42,4 @@ namespace vanilla
         public float speed;
     }
 }
+

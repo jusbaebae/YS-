@@ -43,6 +43,7 @@ namespace vanilla
                     break;
                 case ItemData.ItemType.Glove:
                 case ItemData.ItemType.Shoe:
+                case ItemData.ItemType.Magnet:
                     textDesc.text = string.Format(data.itemDesc, data.damages[level]);
                     break;
                 default:
@@ -79,6 +80,7 @@ namespace vanilla
                     break;
                 case ItemData.ItemType.Glove:
                 case ItemData.ItemType.Shoe:
+                case ItemData.ItemType.Magnet:
                     if (level == 0)
                     {
                         GameObject newGear = new GameObject();

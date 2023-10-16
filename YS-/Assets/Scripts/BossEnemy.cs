@@ -5,7 +5,7 @@ using System.Threading;
 using UnityEngine;
 namespace vanilla
 {
-    public class Enemy : MonoBehaviour
+    public class BossEnemy : MonoBehaviour
     {
         float speed;
         float health;
@@ -19,7 +19,7 @@ namespace vanilla
         Rigidbody2D rigid;
         SpriteRenderer spriter;
         WaitForFixedUpdate wait;
-        CapsuleCollider2D coll;
+        PolygonCollider2D coll;
         BoxCollider2D bcol;
 
         public RuntimeAnimatorController[] animCon;
@@ -27,7 +27,7 @@ namespace vanilla
         void Awake()
         {
             anim = GetComponent<Animator>();
-            coll = GetComponent<CapsuleCollider2D>();
+            coll = GetComponent<PolygonCollider2D>();
             bcol = GetComponent<BoxCollider2D>();
             rigid = GetComponent<Rigidbody2D>();
             spriter = GetComponent<SpriteRenderer>();
@@ -53,7 +53,7 @@ namespace vanilla
         {
             if (!GameManager.inst.isLive || !isLive)
                 return;
-            spriter.flipX = target.position.x < rigid.position.x;
+            spriter.flipX = target.position.x > rigid.position.x;
         }
 
         private void OnEnable()
@@ -67,7 +67,7 @@ namespace vanilla
             anim.SetBool("Dead", false);
         }
 
-        public void Init(SpawnData data)
+        public void Init(BossSpawnData data)
         {
             anim.runtimeAnimatorController = animCon[data.spriteType];
             speed = data.speed;
@@ -108,7 +108,6 @@ namespace vanilla
             if (!(timer > hittime))
                 return;
 
-            Debug.Log("in");
             timer = 0f;
             health -= collision.GetComponent<Bullet>().damage;
             if (health > 0)
@@ -148,7 +147,6 @@ namespace vanilla
             int i = GameManager.inst.pool.prefabs.Length;
             GameObject exp = GameManager.inst.pool.Get(i-1);
             exp.transform.position = transform.position;
-            GameManager.inst.player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
         }
     }
 }
