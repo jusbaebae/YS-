@@ -89,7 +89,10 @@ namespace vanilla
             else
             {
                 boomerang = false;
-                StartCoroutine(BackToPlayer(dir));
+                if (gameObject.activeSelf)
+                {
+                    StartCoroutine(BackToPlayer(dir));
+                }
             }
         }
         IEnumerator BackToPlayer(Vector3 dir)

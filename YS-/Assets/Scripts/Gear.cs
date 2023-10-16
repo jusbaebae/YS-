@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 namespace vanilla
 {
     public class Gear : MonoBehaviour
@@ -37,6 +39,9 @@ namespace vanilla
                     break;
                 case ItemData.ItemType.Heal:
                     break;
+                case ItemData.ItemType.Magnet:
+                    MagnetUp();
+                    break;
             }
         }
         void RateUp()
@@ -65,6 +70,15 @@ namespace vanilla
         {
             float speed = 5f;
             GameManager.inst.player.speed = speed + speed * rate;
+        }
+
+        void MagnetUp()
+        {
+            Magnet[] magnets = GameManager.inst.pool.gameObject.GetComponentsInChildren<Magnet>();
+            foreach (Magnet magnet in magnets)
+            {
+                magnet.magnetDistance += magnet.magnetDistance * rate;
+            }
         }
     }
 }
