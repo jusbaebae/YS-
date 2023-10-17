@@ -25,7 +25,6 @@ namespace vanilla
             textName = texts[1];
             textDesc = texts[2];
             textName.text = data.itemName;
-
         }
 
         private void OnEnable()
@@ -39,12 +38,12 @@ namespace vanilla
                 case ItemData.ItemType.Throw:
                 case ItemData.ItemType.Bomb:
                 case ItemData.ItemType.Boomerang:
-                    textDesc.text = string.Format(data.itemDesc, data.damages[level], data.counts[level]);
+                    textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100, data.counts[level]);
                     break;
                 case ItemData.ItemType.Glove:
                 case ItemData.ItemType.Shoe:
                 case ItemData.ItemType.Magnet:
-                    textDesc.text = string.Format(data.itemDesc, data.damages[level]);
+                    textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100);
                     break;
                 default:
                     textDesc.text = string.Format(data.itemDesc);

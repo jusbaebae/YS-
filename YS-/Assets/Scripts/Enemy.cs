@@ -132,7 +132,6 @@ namespace vanilla
             speed *= 0.5f;
             yield return new WaitForSeconds(0.5f);
             speed *= 2.0f;
-
         }
         IEnumerator KnockBack(Transform bullet)
         {

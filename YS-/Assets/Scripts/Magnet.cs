@@ -6,8 +6,9 @@ namespace vanilla
 {
     public class Magnet : MonoBehaviour
     {
+        
         public float moveSpeed; //속도
-        public float magnetDistance; //범위
+        public float magnetDistance; // 범위
 
         public Transform player;
 

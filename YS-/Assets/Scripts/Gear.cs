@@ -37,11 +37,12 @@ namespace vanilla
                 case ItemData.ItemType.Shoe:
                     SpeedUp();
                     break;
-                case ItemData.ItemType.Heal:
-                    break;
                 case ItemData.ItemType.Magnet:
                     MagnetUp();
                     break;
+                case ItemData.ItemType.Heal:
+                    break;
+                
             }
         }
         void RateUp()
@@ -77,6 +78,7 @@ namespace vanilla
             Magnet[] magnets = GameManager.inst.pool.gameObject.GetComponentsInChildren<Magnet>();
             foreach (Magnet magnet in magnets)
             {
+                magnet.magnetDistance = 2;
                 magnet.magnetDistance += magnet.magnetDistance * rate;
             }
         }

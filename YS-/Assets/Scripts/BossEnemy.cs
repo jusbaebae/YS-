@@ -95,7 +95,6 @@ namespace vanilla
                 rigid.simulated = false;
                 spriter.sortingOrder = 1;
                 anim.SetBool("Dead", true);
-                //GameManager.inst.GetExp();
                 GameManager.inst.kill++;
             }
         }
