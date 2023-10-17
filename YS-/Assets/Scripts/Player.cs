@@ -27,6 +27,8 @@ namespace vanilla
             ani = GetComponent<Animator>();
             scanner = GetComponent<Scanner>();
             hands = GetComponentInChildren<Hands>(true);
+
+            ani.runtimeAnimatorController = new AnimatorOverrideController(DataManager.instance.currentCharData.play_anim);
         }
         private void FixedUpdate()
         {

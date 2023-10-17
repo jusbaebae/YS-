@@ -146,8 +146,8 @@ namespace vanilla
             gameObject.SetActive(false);
             //¸÷Á×À¸¸é °æÇèÄ¡¶³±¸±â
             int i = GameManager.inst.pool.prefabs.Length;
-            //GameObject exp = GameManager.inst.pool.Get(i);
-            //exp.transform.position = transform.position;
+            GameObject exp = GameManager.inst.pool.Get(i - 1);
+            exp.transform.position = transform.position;
         }
     }
 }

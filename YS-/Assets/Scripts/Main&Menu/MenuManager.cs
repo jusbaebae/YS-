@@ -32,6 +32,15 @@ public class MenuManager : MonoBehaviour
                 UnlockUI.SetActive(false);
             }
         }
+
+        if (CharUI.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CharUI.SetActive(false);
+                StartUI.SetActive(true);
+            }
+        }
     }
 
 
@@ -48,7 +57,11 @@ public class MenuManager : MonoBehaviour
 
     public void Finish()
     {
-        throw new NotImplementedException();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quiot();
+#endif
     }
 
 

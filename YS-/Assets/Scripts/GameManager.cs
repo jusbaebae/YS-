@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -69,7 +70,7 @@ namespace vanilla
         }
         public void GameRetry()
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
         public void GetExp()
         {
@@ -99,6 +100,11 @@ namespace vanilla
             {
                 uiLevelUp.Show();
             }
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                GameRetry();
+            }
         }
 
         public void Stop()
@@ -110,7 +116,10 @@ namespace vanilla
         {
             isLive = true;
             Time.timeScale = 1;
-
+        }
+        void LateUpdate()
+        {
+            Observer.instance.SetKill(kill);
         }
     }
 }
