@@ -8,7 +8,7 @@ using vanilla;
 public class AchiveManager : MonoBehaviour
 {
     public GameObject[] itemsIcon;
-    public 
+    public ItemData[] items;
     enum Achive
     {
        k100,
@@ -55,6 +55,7 @@ public class AchiveManager : MonoBehaviour
             if (isUnlock)
             {
                 itemsIcon[index].transform.GetComponent<Image>().color = new Color(255, 255, 255);
+                Observer.instance.data.Add(items[index]);
             }
         }
     }
@@ -67,13 +68,13 @@ public class AchiveManager : MonoBehaviour
         switch(achive)
         {
             case Achive.k100:
-                isAchive = Observer.instance.GetKill() >= 100;
+                isAchive = Observer.instance.kill >= 100;
                 break;
             case Achive.k300:
-                isAchive = Observer.instance.GetKill() >= 300;
+                isAchive = Observer.instance.kill >= 300;
                 break;
             case Achive.k500:
-                isAchive = Observer.instance.GetKill() >= 500;
+                isAchive = Observer.instance.kill >= 500;
                 break;
         }
 

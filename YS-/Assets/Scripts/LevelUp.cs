@@ -10,6 +10,10 @@ namespace vanilla
         private void Awake()
         {
             rect = GetComponent<RectTransform>();
+  
+        }
+        private void Start()
+        {
             items = GetComponentsInChildren<Item>(true);
         }
         public void Show()

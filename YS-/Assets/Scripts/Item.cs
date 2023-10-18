@@ -18,14 +18,7 @@ namespace vanilla
 
         private void Awake()
         {
-            icon = GetComponentsInChildren<Image>()[1];
-            icon.sprite = data.itemIcon;
-            Text[] texts = GetComponentsInChildren<Text>();
-            textlevel = texts[0];
-            textName = texts[1];
-            textDesc = texts[2];
-            textName.text = data.itemName;
-
+            Init();
         }
 
         private void OnEnable()
@@ -44,6 +37,9 @@ namespace vanilla
                 case ItemData.ItemType.Glove:
                 case ItemData.ItemType.Shoe:
                 case ItemData.ItemType.Test:
+                case ItemData.ItemType.Test2:
+                case ItemData.ItemType.Test3:
+                case ItemData.ItemType.Test4:
                     textDesc.text = string.Format(data.itemDesc, data.damages[level]);
                     break;
                 default:
@@ -63,6 +59,9 @@ namespace vanilla
                 case ItemData.ItemType.Bomb:
                 case ItemData.ItemType.Boomerang:
                 case ItemData.ItemType.Test:
+                case ItemData.ItemType.Test2:
+                case ItemData.ItemType.Test3:
+                case ItemData.ItemType.Test4:
                     if (level == 0)
                     {
                         GameObject newWeapon = new GameObject();
@@ -103,5 +102,18 @@ namespace vanilla
             if (level == data.damages.Length)
                 GetComponent<Button>().interactable = false;
         }
+
+        public void Init()
+        {
+            icon = GetComponentsInChildren<Image>()[1];
+            icon.sprite = data.itemIcon;
+            Text[] texts = GetComponentsInChildren<Text>();
+            textlevel = texts[0];
+            textName = texts[1];
+            textDesc = texts[2];
+            textName.text = data.itemName;
+        }
+
+
     }
 }

@@ -119,7 +119,7 @@ namespace vanilla
         }
         void LateUpdate()
         {
-            Observer.instance.SetKill(kill);
+            Observer.instance.kill = kill;
         }
     }
 }

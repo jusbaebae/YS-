@@ -6,10 +6,13 @@ using vanilla;
 public class Observer : MonoBehaviour
 {
     public int kill;
+    public List<ItemData> data;
     public static Observer instance;
 
     private void Awake()
     {
+        data = new List<ItemData>();
+
         if (instance != this && instance != null)
         {
             Destroy(gameObject);
@@ -20,15 +23,5 @@ public class Observer : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-    }
-    public int GetKill()
-    {
-        return kill;
-    }
-
-    public void SetKill(int kill)
-    {
-        this.kill = 0;
-        this.kill = kill;
     }
 }
