@@ -7,7 +7,8 @@ using vanilla;
 
 public class AchiveManager : MonoBehaviour
 {
-    public GameObject[] items;
+    public GameObject[] itemsIcon;
+    public 
     enum Achive
     {
        k100,
@@ -48,12 +49,12 @@ public class AchiveManager : MonoBehaviour
 
     void UnlockItem()
     {
-       for(int index= 0; index<items.Length; index++) { 
+       for(int index= 0; index<itemsIcon.Length; index++) { 
             string achiveName = achives[index].ToString();
             bool isUnlock = PlayerPrefs.GetInt(achiveName) == 1;
             if (isUnlock)
             {
-                items[index].transform.GetComponent<Image>().color = new Color(255, 255, 255);
+                itemsIcon[index].transform.GetComponent<Image>().color = new Color(255, 255, 255);
             }
         }
     }

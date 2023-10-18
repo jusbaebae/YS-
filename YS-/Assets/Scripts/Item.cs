@@ -43,6 +43,7 @@ namespace vanilla
                     break;
                 case ItemData.ItemType.Glove:
                 case ItemData.ItemType.Shoe:
+                case ItemData.ItemType.Test:
                     textDesc.text = string.Format(data.itemDesc, data.damages[level]);
                     break;
                 default:
@@ -61,6 +62,7 @@ namespace vanilla
                 case ItemData.ItemType.Bounce:
                 case ItemData.ItemType.Bomb:
                 case ItemData.ItemType.Boomerang:
+                case ItemData.ItemType.Test:
                     if (level == 0)
                     {
                         GameObject newWeapon = new GameObject();
