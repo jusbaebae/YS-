@@ -108,7 +108,6 @@ namespace vanilla
             if (!(timer > hittime))
                 return;
 
-            Debug.Log("in");
             timer = 0f;
             health -= collision.GetComponent<Bullet>().damage;
             if (health > 0)
@@ -124,7 +123,6 @@ namespace vanilla
                 spriter.sortingOrder = 1;
                 anim.SetBool("Dead", true);
                 GameManager.inst.kill++;
-                GameManager.inst.GetExp();
             }
         }
         IEnumerator Slow()
@@ -132,6 +130,7 @@ namespace vanilla
             speed *= 0.5f;
             yield return new WaitForSeconds(0.5f);
             speed *= 2.0f;
+
         }
         IEnumerator KnockBack(Transform bullet)
         {
@@ -144,10 +143,13 @@ namespace vanilla
         {
             gameObject.SetActive(false);
             //¸÷Á×À¸¸é °æÇèÄ¡¶³±¸±â
+            if (GameManager.inst.noExp)
+                return;
             int i = GameManager.inst.pool.prefabs.Length;
-            GameObject exp = GameManager.inst.pool.Get(i-1);
-            exp.transform.position = transform.position;
+            GameObject dropItem = GameManager.inst.pool.Get(i-1);
+            dropItem.transform.position = transform.position;
             GameManager.inst.player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+
         }
     }
 }

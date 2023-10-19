@@ -13,6 +13,7 @@ namespace vanilla
         public PoolManager pool;
         public Player player;
         public bool isLive;
+        public bool noExp;
         public Map map;
 
         [Header("# Player Info")]
@@ -71,12 +72,12 @@ namespace vanilla
         {
             SceneManager.LoadScene(0);
         }
-        public void GetExp()
+        public void GetExp(int n)
         {
             if (!isLive)
                 return;
-            exp++;
-            if (nextExp[Mathf.Min(level, nextExp.Length - 1)] == exp)
+            exp += n;
+            if (nextExp[Mathf.Min(level, nextExp.Length - 1)] <= exp)
             {
                 level++;
                 exp = 0;

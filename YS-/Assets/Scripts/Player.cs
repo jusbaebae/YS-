@@ -10,7 +10,8 @@ namespace vanilla
         public Vector2 inputVec;
         Rigidbody2D rigid;
         SpriteRenderer spriter;
-        public float speed = 100;
+        public float speed = 5;
+        public float luck;
         Animator ani;
 
         public Hands hands;
@@ -27,6 +28,7 @@ namespace vanilla
             ani = GetComponent<Animator>();
             scanner = GetComponent<Scanner>();
             hands = GetComponentInChildren<Hands>(true);
+            luck = 1;
         }
         private void FixedUpdate()
         {

@@ -6,9 +6,9 @@ namespace vanilla
 {
     public class Magnet : MonoBehaviour
     {
-        
+        [SerializeField] public ItemType type;
         public float moveSpeed; //속도
-        public float magnetDistance; // 범위
+        public float magnetDistance; //범위
 
         public Transform player;
 
@@ -35,9 +35,17 @@ namespace vanilla
         {
             if (col.gameObject.tag.Equals("Player"))
             {
-                GameManager.inst.GetExp();
+                if (type == ItemType.Exp)
+                    GameManager.inst.GetExp(1);
+                else if (type == ItemType.Item)
+                    gameObject.GetComponent<DropItem>().ApplyItem();
                 gameObject.SetActive(false);
             }
+        }
+        public enum ItemType
+        {
+            Exp,
+            Item
         }
     }
 }

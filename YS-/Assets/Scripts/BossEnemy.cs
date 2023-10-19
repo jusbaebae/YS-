@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
+
 namespace vanilla
 {
     public class BossEnemy : MonoBehaviour
@@ -95,6 +97,7 @@ namespace vanilla
                 rigid.simulated = false;
                 spriter.sortingOrder = 1;
                 anim.SetBool("Dead", true);
+                //GameManager.inst.GetExp();
                 GameManager.inst.kill++;
             }
         }
@@ -122,7 +125,6 @@ namespace vanilla
                 spriter.sortingOrder = 1;
                 anim.SetBool("Dead", true);
                 GameManager.inst.kill++;
-                GameManager.inst.GetExp();
             }
         }
         IEnumerator Slow()
@@ -142,10 +144,10 @@ namespace vanilla
         void Dead()
         {
             gameObject.SetActive(false);
-            //¸÷Á×À¸¸é °æÇèÄ¡¶³±¸±â
-            int i = GameManager.inst.pool.prefabs.Length;
-            GameObject exp = GameManager.inst.pool.Get(i-1);
-            exp.transform.position = transform.position;
+
+            GameManager.inst.level++;
+            GameManager.inst.exp = 0;
+            GameManager.inst.uiLevelUp.Show();
         }
     }
 }
