@@ -10,6 +10,7 @@ namespace vanilla
         public static GameManager inst;
 
         [Header("# Game Control")]
+        public DropItemPool Dpool;
         public PoolManager pool;
         public Player player;
         public bool isLive;
