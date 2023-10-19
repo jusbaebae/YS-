@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+
 namespace vanilla
 {
     public class Weapon : MonoBehaviour
@@ -12,6 +15,7 @@ namespace vanilla
         public int count;
         public float speed;
         public float baseSpeed;
+        Vector3[] dir;
 
         float timer;
         int[,] thr = new int[5, 5]
@@ -27,6 +31,7 @@ namespace vanilla
         private void Awake()
         {
             player = GameManager.inst.player;
+            dir = new Vector3[10];
         }
         void Update()
         {
@@ -82,6 +87,7 @@ namespace vanilla
                     {
                         timer = 0f;
                         Boomerang();
+                        
                     }
                     break;
                 default:
@@ -125,6 +131,47 @@ namespace vanilla
                 hands.sprites[(int)data.itemType].sprite = data.hand;
             }
             player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   //만든 무기에 장갑속도 적용
+        }
+        void Targeting()
+        {
+            int i = 0;
+            foreach(Transform pos in player.scanner.nearestTarget)
+            {
+                if(pos != null)
+                {
+                    Vector3 targetPos = pos.position;
+                    dir[i] = targetPos - transform.position;
+                    dir[i] = dir[i].normalized;
+                    i++;
+                }
+            }
+        }
+        void ShotEnemy(int cnt, bool bounce, bool bomb, bool boomerang, bool rotate)
+        {
+            Transform[] bullets = new Transform[count];
+            for (int index = 0; index < count; index++)
+                bullets[index] = GameManager.inst.pool.Get(prefabId).transform;
+
+            int i = 0;
+
+            foreach (Transform bullet in bullets)
+            {
+                bullet.position = transform.position;
+                if (dir[i] == null || dir[i] == Vector3.zero)
+                {
+                    Vector3 randvec = transform.position + new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f));
+                    Vector3 randdir = randvec - transform.position;
+                    randdir = randdir.normalized;
+                    bullet.rotation = Quaternion.FromToRotation(Vector3.up, randdir);
+                    bullet.GetComponent<Bullet>().Init(damage, cnt, randdir, bounce, bomb, boomerang, rotate);
+                }
+                else
+                {
+                    bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir[i]);
+                    bullet.GetComponent<Bullet>().Init(damage, cnt, dir[i], bounce, bomb, boomerang, rotate);
+                    i++;
+                }
+            }
         }
         public void LevelUp(float damage, int count)
         {
@@ -170,10 +217,10 @@ namespace vanilla
         }
         void Fire()
         {
-            if (!player.scanner.nearestTarget)
+            if (!player.scanner.nearestTarget[0])
                 return;
 
-            Vector3 targetPos = player.scanner.nearestTarget.position;
+            Vector3 targetPos = player.scanner.nearestTarget[0].position;
             Vector3 dir = targetPos - transform.position;
             dir = dir.normalized;
 
@@ -184,23 +231,17 @@ namespace vanilla
         }
         void BFire()
         {
-            if (!player.scanner.nearestTarget)
+            if (!player.scanner.nearestTarget[0])
                 return;
 
-            Vector3 targetPos = player.scanner.nearestTarget.position;
-            Vector3 dir = targetPos - transform.position;
-            dir = dir.normalized;
-
-            Transform bullet = GameManager.inst.pool.Get(prefabId).transform;
-            bullet.position = transform.position;
-            bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-            bullet.GetComponent<Bullet>().Init(damage, count, dir, true, false, false, false);
+            Targeting();
+            ShotEnemy(count, true, false, false, false);
         }
         void Bomb()
         {
-            if (!player.scanner.nearestTarget)
+            if (!player.scanner.nearestTarget[0])
                 return;
-            Vector3 targetPos = player.scanner.nearestTarget.position;
+            Vector3 targetPos = player.scanner.nearestTarget[0].position;
             Vector3 dir = targetPos - transform.position;
             dir = dir.normalized;
 
@@ -212,18 +253,13 @@ namespace vanilla
         }
         void Boomerang()
         {
-            if (!player.scanner.nearestTarget)
+            if (!player.scanner.nearestTarget[0])
                 return;
 
-            Vector3 targetPos = player.scanner.nearestTarget.position;
-            Vector3 dir = targetPos - transform.position;
-            dir = dir.normalized;
-
-            Transform bullet = GameManager.inst.pool.Get(prefabId).transform;
-            bullet.position = transform.position;
-            bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-            bullet.GetComponent<Bullet>().Init(damage, count, dir, false, false, true, true);
+            Targeting();
+            ShotEnemy(9999, false, false, true, true);
         }
+
 
         IEnumerator MoveToDestination(Transform bullet, Vector3 targetPos)
         {
