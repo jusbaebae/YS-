@@ -11,11 +11,14 @@ namespace vanilla
         public int level;
         public Weapon weapon;
         public Gear gear;
+        public int weaponchoice;
+        public int gearchoice;
 
         Image icon;
         Text textlevel;
         Text textName, textDesc;
-
+        LevelUp lev;
+        public SlotArea slot;
         private void Awake()
         {
             icon = GetComponentsInChildren<Image>()[1];
@@ -25,7 +28,8 @@ namespace vanilla
             textName = texts[1];
             textDesc = texts[2];
             textName.text = data.itemName;
-
+            lev = GetComponentInParent<LevelUp>();
+            igiya();
         }
 
         private void OnEnable()
@@ -67,6 +71,13 @@ namespace vanilla
                         GameObject newWeapon = new GameObject();
                         weapon = newWeapon.AddComponent<Weapon>();
                         weapon.Init(data);
+                        if (lev.weaponmax < 3)
+                        {
+                            slot = FindAnyObjectByType<SlotArea>();
+                            slot.AddItemToSlotWeapon(data);
+                            lev.weaponmax++;
+                            weaponchoice++;
+                        }
                     }
                     else
                     {
@@ -86,6 +97,13 @@ namespace vanilla
                         GameObject newGear = new GameObject();
                         gear = newGear.AddComponent<Gear>();
                         gear.Init(data);
+                        if (lev.gearmax < 3)
+                        {
+                            slot = FindAnyObjectByType<SlotArea>();
+                            slot.AddItemToSlotGear(data);
+                            lev.gearmax++;
+                            gearchoice++;
+                        }
                     }
                     else
                     {
@@ -102,6 +120,29 @@ namespace vanilla
             }
             if (level == data.damages.Length)
                 GetComponent<Button>().interactable = false;
+        }
+        void igiya()//무기랑 장신구 구분하는 코드
+        {
+            switch (data.itemType)
+            {
+                case ItemData.ItemType.Melee:
+                case ItemData.ItemType.Range:
+                case ItemData.ItemType.Bounce:
+                case ItemData.ItemType.Throw:
+                case ItemData.ItemType.Bomb:
+                case ItemData.ItemType.Boomerang:
+                    lev.weaponcount++;
+                    weaponchoice++;
+                    break;
+                case ItemData.ItemType.Glove:
+                case ItemData.ItemType.Shoe:
+                case ItemData.ItemType.Magnet:
+                    lev.gearcount++;
+                    gearchoice++;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
