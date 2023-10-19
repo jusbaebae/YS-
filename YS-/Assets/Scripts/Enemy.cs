@@ -149,7 +149,6 @@ namespace vanilla
             GameObject dropItem = GameManager.inst.pool.Get(i-1);
             dropItem.transform.position = transform.position;
             GameManager.inst.player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
-
         }
     }
 }

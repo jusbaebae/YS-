@@ -6,8 +6,7 @@ namespace vanilla
     [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Object/ItemData")]
     public class ItemData : ScriptableObject
     {
-        public enum ItemType { Melee, Range, Throw, Bounce, Bomb, Glove, Shoe, Heal, Boomerang, Magnet}
-
+        public enum ItemType { Melee, Range, Throw, Bounce, Bomb, Glove, Shoe, Heal, Boomerang, Magnet, Test, Test2, Test3, Test4 }
         [Header("# Main Info")]
         public ItemType itemType;
         public int itemId;

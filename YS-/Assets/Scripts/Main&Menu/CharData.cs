@@ -2,19 +2,17 @@ using UnityEngine;
 
 public enum Character
 {
-    farmer1, farmer2
+    Default
 }
 
 [System.Serializable]
 public class CharData : MonoBehaviour
 {
-    public Sprite info_img;
     public RuntimeAnimatorController info_anim;
+    public RuntimeAnimatorController play_anim;
 
     public Character character;
     public float hp;
     public float attack;
     public int speed;
-
-
 }
