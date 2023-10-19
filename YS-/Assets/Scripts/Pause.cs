@@ -11,7 +11,7 @@ public class Pause : MonoBehaviour
 
     private void Start()
     {
-        pauseUI.SetActive(false);
+        //pauseUI.SetActive(false);
     }
 
     private void Update()
