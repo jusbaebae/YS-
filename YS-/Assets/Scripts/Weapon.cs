@@ -213,7 +213,6 @@ namespace vanilla
             bullet.position = transform.position;
             bullet.GetComponent<Bullet>().Init(damage, -1, dir, false, false, false, true);
             bullet.GetComponent<Bullet>().Throwing(i);
-            Debug.Log("Throwing");
         }
         void Fire()
         {

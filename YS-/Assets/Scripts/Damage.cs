@@ -8,7 +8,7 @@ using vanilla;
 public class Damage : MonoBehaviour
 {
     //폰트 효과
-    public float moveSpeed = 0.8f;
+    public float moveSpeed = 1.5f;
     public float alphaSpeed = 0.8f;
     public float destroyTime = 1.2f;
 
