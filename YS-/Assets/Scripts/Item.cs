@@ -84,6 +84,7 @@ namespace vanilla
                         {
                             slot = FindAnyObjectByType<SlotArea>();
                             slot.AddItemToSlotWeapon(data);
+                            slot.levelToSlot(data, level+1);
                             lev.weaponmax++;
                             weaponchoice++;
                         }
@@ -95,6 +96,7 @@ namespace vanilla
                         nextDamage += data.baseDamage * data.damages[level];
                         nextCount += data.counts[level];
                         weapon.LevelUp(nextDamage, nextCount);
+                        slot.levelToSlot(data, level + 1);
                     }
                     level++;
                     break;
@@ -110,6 +112,7 @@ namespace vanilla
                         {
                             slot = FindAnyObjectByType<SlotArea>();
                             slot.AddItemToSlotGear(data);
+                            slot.levelToSlot(data, level+1);
                             lev.gearmax++;
                             gearchoice++;
                         }
@@ -118,6 +121,7 @@ namespace vanilla
                     {
                         float nextrate = data.damages[level];
                         gear.Levelup(nextrate);
+                        slot.levelToSlot(data, level + 1);
                     }
                     level++;
                     break;

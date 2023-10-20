@@ -120,7 +120,8 @@ namespace vanilla
         }
         void LateUpdate()
         {
-            Observer.instance.kill = kill;
+            //테스트를 위해서 잠시 주석처리
+            //Observer.instance.kill = kill;
         }
     }
 }

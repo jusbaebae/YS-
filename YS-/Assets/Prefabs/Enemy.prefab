@@ -237,6 +237,7 @@ MonoBehaviour:
   animCon:
   - {fileID: 9100000, guid: 7e43e329d3b5e284ab3de4e9fbf5ffba, type: 2}
   - {fileID: 22100000, guid: cbe2e6c5ea78aa54a8754e89326846d0, type: 2}
+  dmgtxtpref: {fileID: 1649483000520180026, guid: aa42f4856be77d7439b3eca5aceb5645, type: 3}
 --- !u!50 &6353492644637801541
 Rigidbody2D:
   serializedVersion: 4
