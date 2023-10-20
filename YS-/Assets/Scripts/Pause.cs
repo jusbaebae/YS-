@@ -5,13 +5,11 @@ using UnityEngine.SceneManagement;
 using vanilla;
 
 public class Pause : MonoBehaviour
-{
-    public GameObject pauseUI;
-    public bool state = false;
+{    public bool state = false;
 
     private void Start()
     {
-        //pauseUI.SetActive(false);
+        
     }
 
     private void Update()
@@ -20,13 +18,14 @@ public class Pause : MonoBehaviour
         {
             if (state)
             {
-                pauseUI.SetActive(false);
+                gameObject.SetActive(false);
                 GameManager.inst.Resume();
                 state = !state;
             }
-            else
+
+            if(!state)
             {
-                pauseUI.SetActive(true);
+                gameObject.SetActive(true);
                 GameManager.inst.Stop();
                 state = !state;
             }
