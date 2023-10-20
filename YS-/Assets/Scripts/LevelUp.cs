@@ -13,8 +13,11 @@ namespace vanilla
         public int weaponcount; //무기 개수
         public int gearcount; //장신구 개수
 
+        public static bool state;
+
         private void Awake()
         {
+            state = false;
             rect = GetComponent<RectTransform>();
   
         }
@@ -24,12 +27,14 @@ namespace vanilla
         }
         public void Show()
         {
+            state = true;
             Next();
             rect.localScale = Vector3.one;
             GameManager.inst.Stop();
         }
         public void Hide()
         {
+            state = false;
             rect.localScale = Vector3.zero;
             GameManager.inst.Resume();
         }

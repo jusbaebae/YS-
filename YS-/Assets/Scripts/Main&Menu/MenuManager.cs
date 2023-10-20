@@ -13,7 +13,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject UnlockUI;
 
 
-    void Start()
+    void Awake()
     {
         StartUI.SetActive(true);
         CharUI.SetActive(false);

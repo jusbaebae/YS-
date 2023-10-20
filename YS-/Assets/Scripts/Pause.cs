@@ -5,32 +5,29 @@ using UnityEngine.SceneManagement;
 using vanilla;
 
 public class Pause : MonoBehaviour
-{    public bool state = false;
-
-    private void Start()
+{
+    public bool state;
+    public GameObject PauseUI;
+    private void Awake()
     {
-        
+        state = false;
+        PauseUI.SetActive(false);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !LevelUp.state)
         {
-            if (state)
-            {
-                gameObject.SetActive(false);
-                GameManager.inst.Resume();
-                state = !state;
-            }
-
-            if(!state)
-            {
-                gameObject.SetActive(true);
-                GameManager.inst.Stop();
-                state = !state;
-            }
-
+            PauseUI.SetActive(true);
+            GameManager.inst.Stop();
         }
+
+    }
+
+    public void GamePlay()
+    {
+        PauseUI.SetActive(false);
+        GameManager.inst.Resume();
     }
 
     public void GameExit()
