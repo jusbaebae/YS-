@@ -12,16 +12,19 @@ public class SelectChar : MonoBehaviour
 {
     private CharData charData;
     public GameObject info_anim;
-    public TextMeshProUGUI info_hp;
-    public TextMeshProUGUI info_attack;
-    public TextMeshProUGUI info_speed;
+
+    public TextMeshProUGUI[] info_state;
+    public GameObject[] info_stateImage;
+
     void Start()
     {
         charData = null;
 
-        info_hp.SetText("");
-        info_attack.SetText("");
-        info_speed.SetText("");
+        for(int i = 0; i < info_state.Length; i++)
+        {
+            info_state[i].SetText("");
+            info_stateImage[i].SetActive(false);
+        }
 
     }
     public void Seletion()
@@ -35,9 +38,15 @@ public class SelectChar : MonoBehaviour
     
     public void SetState(CharData chardata)
     {
-        info_hp.SetText("" + charData.hp);
-        info_attack.SetText("" + charData.attack);
-        info_speed.SetText("" + charData.speed);
+        string[] state = { 
+            chardata.hp.ToString(), 
+            chardata.attack.ToString(), 
+            chardata.speed.ToString() };
+        for(int index = 0; index < info_state.Length; index++)
+        {
+            info_state[index].SetText(state[index].ToString());
+            info_stateImage[index].SetActive(true);
+        }
     }
 
     public void GameStart()
