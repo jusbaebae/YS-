@@ -971,7 +971,7 @@ GameObject:
   - component: {fileID: 316170269}
   - component: {fileID: 316170268}
   m_Layer: 5
-  m_Name: Image
+  m_Name: DF_img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1255198480, guid: 10d73e7f32f1e3745b301c85b4adc6a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0ec2a56efd5208543bb7536d5dcc4e2b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1443,7 +1443,7 @@ MonoBehaviour:
   hp: 90
   attack: 1
   defense: 10
-  luck: 0
+  luck: 0.5
   speed: 1
 --- !u!1 &538248953
 GameObject:
@@ -1457,7 +1457,7 @@ GameObject:
   - component: {fileID: 538248956}
   - component: {fileID: 538248955}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Atk_img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1532,7 +1532,7 @@ GameObject:
   - component: {fileID: 554416455}
   - component: {fileID: 554416454}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Speed_img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2296,7 +2296,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 90
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c5449f082b27be4391af2b39fad628a, type: 2}
   m_sharedMaterial: {fileID: 3709062735895557913, guid: 3c5449f082b27be4391af2b39fad628a, type: 2}
@@ -2323,8 +2323,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2700,10 +2700,14 @@ MonoBehaviour:
   - {fileID: 1549525741}
   - {fileID: 2091002828}
   - {fileID: 866593781}
+  - {fileID: 1894621033}
+  - {fileID: 1912017339}
   info_stateImage:
   - {fileID: 1152437212}
   - {fileID: 538248953}
   - {fileID: 554416452}
+  - {fileID: 316170266}
+  - {fileID: 1485261324}
 --- !u!4 &1135043475
 Transform:
   m_ObjectHideFlags: 0
@@ -2744,7 +2748,7 @@ GameObject:
   - component: {fileID: 1152437215}
   - component: {fileID: 1152437214}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Hp_img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3652,7 +3656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3419319052353914236, guid: 1f125ea41c091624d95292450cf2b768, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3419319052353914236, guid: 1f125ea41c091624d95292450cf2b768, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3660,15 +3664,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3419319052353914236, guid: 1f125ea41c091624d95292450cf2b768, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3419319052353914236, guid: 1f125ea41c091624d95292450cf2b768, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3419319052353914236, guid: 1f125ea41c091624d95292450cf2b768, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3419319052353914236, guid: 1f125ea41c091624d95292450cf2b768, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3700,11 +3704,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3419319052353914236, guid: 1f125ea41c091624d95292450cf2b768, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 215
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3419319052353914236, guid: 1f125ea41c091624d95292450cf2b768, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3419319052353914236, guid: 1f125ea41c091624d95292450cf2b768, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3799,7 +3803,7 @@ GameObject:
   - component: {fileID: 1485261327}
   - component: {fileID: 1485261326}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Luck_img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3844,7 +3848,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1255198480, guid: 10d73e7f32f1e3745b301c85b4adc6a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7112f7c06cde4e54cb196900ad9bbe5d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3994,7 +3998,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 90
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c5449f082b27be4391af2b39fad628a, type: 2}
   m_sharedMaterial: {fileID: 3709062735895557913, guid: 3c5449f082b27be4391af2b39fad628a, type: 2}
@@ -4021,8 +4025,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4687,7 +4691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 117.2, y: 4.8552}
+  m_AnchoredPosition: {x: 117.20001, y: 4.855194}
   m_SizeDelta: {x: -245.07, y: -141}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1860292067
@@ -4816,7 +4820,7 @@ GameObject:
   - component: {fileID: 1894621034}
   - component: {fileID: 1894621033}
   m_Layer: 5
-  m_Name: HP
+  m_Name: DEFENSE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4861,7 +4865,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 90
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c5449f082b27be4391af2b39fad628a, type: 2}
   m_sharedMaterial: {fileID: 3709062735895557913, guid: 3c5449f082b27be4391af2b39fad628a, type: 2}
@@ -4888,8 +4892,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5087,7 +5091,7 @@ GameObject:
   - component: {fileID: 1912017340}
   - component: {fileID: 1912017339}
   m_Layer: 5
-  m_Name: HP
+  m_Name: LUCK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5132,7 +5136,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 90
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c5449f082b27be4391af2b39fad628a, type: 2}
   m_sharedMaterial: {fileID: 3709062735895557913, guid: 3c5449f082b27be4391af2b39fad628a, type: 2}
@@ -5159,8 +5163,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5883,8 +5887,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -13553,7 +13553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  PauseUI: {fileID: 571669261}
+  PauseUI: {fileID: 1137154603}
 --- !u!114 &1739925828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17109,7 +17109,7 @@ Animator:
   m_GameObject: {fileID: 1996113451}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2a1ba06a5989a8247b6786947b89c7ec, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

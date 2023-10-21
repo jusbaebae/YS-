@@ -41,7 +41,10 @@ public class SelectChar : MonoBehaviour
         string[] state = { 
             chardata.hp.ToString(), 
             chardata.attack.ToString(), 
-            chardata.speed.ToString() };
+            chardata.speed.ToString() ,
+            chardata.defense.ToString(),
+            chardata.luck.ToString()
+        };
         for(int index = 0; index < info_state.Length; index++)
         {
             info_state[index].SetText(state[index].ToString());
