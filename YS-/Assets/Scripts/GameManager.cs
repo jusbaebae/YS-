@@ -45,7 +45,7 @@ namespace vanilla
         {
             health = maxHealth;
             Resume();
-            uiLevelUp.Select(0);    // �ӽ� ��ũ��Ʈ(1��ĳ���Ϳ�)
+            uiLevelUp.Select(0);  
 
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
             AudioManager.instance.PlayBgm(true);
@@ -144,7 +144,7 @@ namespace vanilla
         }
         void LateUpdate()
         {
-            Observer.instance.kill = kill;
+            //Observer.instance.kill = kill;
         }
     }
 }

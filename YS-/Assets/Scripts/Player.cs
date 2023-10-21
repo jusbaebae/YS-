@@ -35,6 +35,7 @@ namespace vanilla
             scanner = GetComponent<Scanner>();
             hands = GetComponentInChildren<Hands>(true); 
             GameObject charData = GameObject.Find("DataManager");
+
             // 기본값으로 지정하지만 캐릭터 값 이동해올때 변경바람
             luck = 1;
             baseAttack = 1;
@@ -44,7 +45,7 @@ namespace vanilla
             critical = 0f;
             expBonus = 1f;
 
-            ani.runtimeAnimatorController = new AnimatorOverrideController(DataManager.instance.currentCharData.play_anim);
+            //ani.runtimeAnimatorController = new AnimatorOverrideController(DataManager.instance.currentCharData.play_anim);
         }
         private void FixedUpdate()
         {

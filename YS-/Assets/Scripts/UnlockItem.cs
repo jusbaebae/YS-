@@ -16,7 +16,7 @@ public class UnlockItem : MonoBehaviour
     void Awake()
     { 
         LevelUp = GameObject.Find("LevelUp").gameObject.GetComponent<LevelUp>();
-        unlockData = Observer.instance.data;
+        //unlockData = Observer.instance.data;
         SetUnlockItem();
     }
 

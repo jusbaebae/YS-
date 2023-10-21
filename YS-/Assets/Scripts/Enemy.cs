@@ -80,7 +80,18 @@ namespace vanilla
             if (!collision.CompareTag("Bullet") || !isLive || collision.GetComponent<Bullet>().bomb)
                 return;
 
-            health -= collision.GetComponent<Bullet>().damage;
+            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+            CritCheck();
+            if (CritCheck() && !GameManager.inst.noExp)
+            {
+                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage * 1.5f), true);
+                health -= collision.GetComponent<Bullet>().damage * 1.5f;
+            }
+            else
+            {
+                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage), false);
+                health -= collision.GetComponent<Bullet>().damage;
+            }
 
             if (health > 0)
             {
@@ -96,7 +107,6 @@ namespace vanilla
                 rigid.simulated = false;
                 spriter.sortingOrder = 1;
                 anim.SetBool("Dead", true);
-                //GameManager.inst.GetExp();
                 GameManager.inst.kill++;
                 if (GameManager.inst.isLive && !GameManager.inst.noExp)
                 {
@@ -112,9 +122,21 @@ namespace vanilla
             timer += Time.deltaTime;
             if (!(timer > hittime))
                 return;
-
             timer = 0f;
-            health -= collision.GetComponent<Bullet>().damage;
+
+            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+            CritCheck();
+            if (CritCheck() && !GameManager.inst.noExp)
+            {
+                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage * 1.5f), true);
+                health -= collision.GetComponent<Bullet>().damage * 1.5f;
+            }
+            else
+            {
+                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage), false);
+                health -= collision.GetComponent<Bullet>().damage;
+            }
+
             if (health > 0)
             {
                 anim.SetTrigger("Hit");
@@ -140,7 +162,6 @@ namespace vanilla
             speed *= 0.5f;
             yield return new WaitForSeconds(0.5f);
             speed *= 2.0f;
-
         }
         IEnumerator KnockBack(Transform bullet)
         {
@@ -152,13 +173,24 @@ namespace vanilla
         void Dead()
         {
             gameObject.SetActive(false);
-            //�������� ����ġ������
             if (GameManager.inst.noExp)
                 return;
             int i = GameManager.inst.pool.prefabs.Length;
             GameObject dropItem = GameManager.inst.pool.Get(i-1);
             dropItem.transform.position = transform.position;
             GameManager.inst.player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+        }
+        bool CritCheck()
+        {
+            int crit = UnityEngine.Random.Range(1, 101); ;
+            if (crit <= 20)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

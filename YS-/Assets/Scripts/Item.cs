@@ -101,6 +101,7 @@ namespace vanilla
                 case ItemData.ItemType.Melee:
                     if (level == 0)
                     {
+                        slot = FindAnyObjectByType<SlotArea>();
                         GameObject newWeapon = new GameObject();
                         weapon = newWeapon.AddComponent<Weapon>();
                         weapon.Init(data);
