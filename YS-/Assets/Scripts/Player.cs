@@ -36,12 +36,17 @@ namespace vanilla
             ani = GetComponent<Animator>();
             scanner = GetComponent<Scanner>();
             hands = GetComponentInChildren<Hands>(true);
-            charData = GameObject.Find("DataManager").gameObject.GetComponent<CharData>();
+            //charData = GameObject.Find("DataManager").gameObject.GetComponent<CharData>();
 
-            // �⺻������ ���������� ĳ���� �� �̵��ؿö� ����ٶ�
+            // 나중에 값변경
+            /*
             luck = charData.luck;
             baseAttack = charData.attack;
             baseDefend = charData.defense;
+            */
+            luck = 1;
+            baseAttack = 5;
+            baseDefend = 10;
             attack = baseAttack;
             defend = baseDefend;
             critical = 0f;

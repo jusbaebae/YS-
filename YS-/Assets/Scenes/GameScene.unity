@@ -711,7 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734246f4f7af45e4eb03ab0c8f9f6bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 5c7b3991db3eaba4eaa81ad3662e1c29, type: 2}
+  data: {fileID: 11400000, guid: f8a0044ac058601478f382a108745420, type: 2}
   level: 0
   weapon: {fileID: 0}
   gear: {fileID: 0}
@@ -15498,7 +15498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734246f4f7af45e4eb03ab0c8f9f6bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: cb05368950bca7345afcb2e43f533929, type: 2}
+  data: {fileID: 11400000, guid: cbd648019c978a9469dd1b994acd35df, type: 2}
   level: 0
   weapon: {fileID: 0}
   gear: {fileID: 0}
@@ -17052,7 +17052,7 @@ Animator:
   m_GameObject: {fileID: 1996113451}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a1ba06a5989a8247b6786947b89c7ec, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
