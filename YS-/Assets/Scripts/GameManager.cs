@@ -15,11 +15,14 @@ namespace vanilla
         public Player player;
         public bool isLive;
         public bool noExp;
+        public int weaponCount;
+        public int gearCount;
         public Map map;
 
         [Header("# Player Info")]
         public float health = 0;
         public float maxHealth = 100;
+        public float originHealth = 100;
         public int level;
         public int kill;
         public int exp = 0;
@@ -42,7 +45,7 @@ namespace vanilla
         {
             health = maxHealth;
             Resume();
-            uiLevelUp.Select(0);    // ÀÓ½Ã ½ºÅ©¸³Æ®(1¹øÄ³¸¯ÅÍ¿ë)
+            uiLevelUp.Select(0);    // ï¿½Ó½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®(1ï¿½ï¿½Ä³ï¿½ï¿½ï¿½Í¿ï¿½)
 
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
             AudioManager.instance.PlayBgm(true);
@@ -50,6 +53,18 @@ namespace vanilla
         public void GameOver()
         {
             StartCoroutine(GameOverRoutine());
+        }
+        public void ClearField()
+        {
+            StartCoroutine(FieldClear());
+        }
+        IEnumerator FieldClear()
+        {
+            noExp = true;
+            enemyCleaner.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            enemyCleaner.SetActive(false);
+            noExp = false;
         }
         IEnumerator GameOverRoutine()
         {
@@ -129,8 +144,7 @@ namespace vanilla
         }
         void LateUpdate()
         {
-            //Å×½ºÆ®¸¦ À§ÇØ¼­ Àá½Ã ÁÖ¼®Ã³¸®
-            //Observer.instance.kill = kill;
+            Observer.instance.kill = kill;
         }
     }
 }

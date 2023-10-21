@@ -1,6 +1,7 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using Unity.Collections.LowLevel.Unsafe;
 namespace vanilla
 {
     public class Bullet : MonoBehaviour
@@ -11,10 +12,13 @@ namespace vanilla
         public bool bomb;
         public bool boomerang;
         bool isRotate;
+        public bool onOff;
+        public bool setOn;
 
         Vector3 dir;
         Animator anim;
         Rigidbody2D rb;
+        Vector3 getScale;
 
         private void Awake()
         {
@@ -22,8 +26,9 @@ namespace vanilla
             {
                 anim = GetComponent<Animator>();
             }
-
             rb = GetComponent<Rigidbody2D>();
+            getScale = gameObject.transform.localScale;
+            setOn = true;
         }
         private void Update()
         {
@@ -33,8 +38,19 @@ namespace vanilla
                 float rotationSpeed = 360f;
                 transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
             }
+            else if (onOff)        // 크기가 작아졌다 커졌다하게끔 하는 코드
+            {
+                if (!setOn && !(gameObject.transform.localScale == Vector3.zero))
+                {
+                    gameObject.transform.localScale -= getScale * 0.005f;
+                }
+                else if (setOn && !(gameObject.transform.localScale == getScale))
+                {
+                    gameObject.transform.localScale += getScale * 0.005f;
+                }
+            }
         }
-        public void Init(float damage, int per, Vector3 dir, bool bounce, bool bomb, bool boomerang, bool isRotate)
+        public void Init(float damage, int per, Vector3 dir, bool bounce, bool bomb, bool boomerang, bool isRotate, bool onOff)
         {
             this.damage = damage;
             this.per = per;
@@ -43,24 +59,24 @@ namespace vanilla
             this.boomerang = boomerang;
             this.isRotate = isRotate;
             this.dir = dir;
-
+            this.onOff = onOff;
             if (per > -1)
-            {
                 rb.velocity = dir * 15f;
-            }
             if (bomb || bounce)
-            {
                 StartCoroutine(DisableBullet());
-            }
         }
         public void Throwing(int i)
         {
             rb.AddForce(Vector3.up * 7f, ForceMode2D.Impulse);
             rb.AddForce(Vector3.right * i, ForceMode2D.Impulse);
-            if(GameManager.inst.player.inputVec.x != 0)
+            if (GameManager.inst.player.inputVec.x != 0)
                 rb.AddForce(Vector3.right * 3f * GameManager.inst.player.inputVec.x, ForceMode2D.Impulse);
-            if(GameManager.inst.player.inputVec.y > 0)
+            if (GameManager.inst.player.inputVec.y > 0)
                 rb.AddForce(Vector3.up * 3f * GameManager.inst.player.inputVec.y, ForceMode2D.Impulse);
+        }
+        void SetDisable()
+        {
+            gameObject.SetActive(false);
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -95,9 +111,15 @@ namespace vanilla
                 }
             }
         }
+        private void OnTriggerExit2D(Collider2D col)
+        {
+            if (!col.CompareTag("Area"))
+                return;
+            this.gameObject.SetActive(false);
+        }
         IEnumerator BackToPlayer(Vector3 dir)
         {
-            for (int i = 0; i<15; i++)
+            for (int i = 0; i < 15; i++)
             {
                 yield return new WaitForSeconds(0.03f);
                 rb.velocity = dir * (15f - i);
@@ -107,7 +129,7 @@ namespace vanilla
             Vector3 dirs = targetPos - transform.position;
             dirs = dirs.normalized;
 
-            rb.velocity = dirs * 15f; 
+            rb.velocity = dirs * 15f;
         }
         IEnumerator DisableBullet()
         {
@@ -118,12 +140,6 @@ namespace vanilla
                 yield return new WaitForSeconds(0.6f);
             }
             gameObject.SetActive(false);
-        }
-        private void OnTriggerExit2D(Collider2D col)
-        {
-            if (!col.CompareTag("Area"))
-                return;
-            this.gameObject.SetActive(false);
         }
     }
 }

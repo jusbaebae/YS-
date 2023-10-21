@@ -4,75 +4,81 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using vanilla;
+using static Cinemachine.DocumentationSortingAttribute;
+using System.Net.NetworkInformation;
 
 public class SlotArea : MonoBehaviour
 {
-    public bool[] wfullcheck;
-    public bool[] gfullcheck;
-    public ItemData data; 
-    public GameObject[] wslots;
-    public GameObject[] gslots;
+    public Slot[] wslots;
+    public Slot[] gslots;
 
-    void Awake()
-    {   // wfullcheck 배열 초기화
-        wfullcheck = new bool[wslots.Length];
-        // gfullcheck 배열 초기화
-        gfullcheck = new bool[gslots.Length];
+    // 아이템추가
+    private void Awake()
+    {
+        Slot[] slots = GetComponentsInChildren<Slot>();
+        int i = 0, j = 0;
+        foreach(Slot slot in slots)
+        {
+            switch (slot.slotType)
+            {
+                case Slot.SlotType.Weapon:
+                    wslots[i++] = slot;
+                    break;
+                case Slot.SlotType.Gear:
+                    gslots[j++] = slot;
+                    break;
+            }
+        }
     }
-
-    // 아이템추가(무기)
     public bool AddItemToSlotWeapon(ItemData itemData)
     {
         // 무기 슬롯 검사
-        for (int i = 0; i < wslots.Length; i++)
+        foreach (Slot wslot in wslots)
         {
-            if (!wfullcheck[i])
+            if(wslot.data == null)
             {
                 // 무기 슬롯이 비어 있는 경우
-                wslots[i].GetComponent<Slot>().AddSlotWeapon(itemData);
-                wfullcheck[i] = true; // 슬롯을 차지함을 표시
+                wslot.AddSlot(itemData);
+                return true; // 아이템을 성공적으로 추가함
+            }
+        }
+        return false;// 아이템을 추가할 수 없음
+    }
+    public bool AddItemToSlotGear(ItemData itemData) 
+    {
+        // 장신구 슬롯 검사
+        foreach (Slot gslot in gslots)
+        {
+            if (gslot.data == null)
+            {
+                // 장신구 슬롯이 비어 있는 경우
+                gslot.AddSlot(itemData);
                 return true; // 아이템을 성공적으로 추가함
             }
         }
         // 모든 슬롯이 이미 차있음
         return false; // 아이템을 추가할 수 없음
     }
-    // 아이템추가(장신구 위코드랑 동일)
-    public bool AddItemToSlotGear(ItemData itemData) 
-    { 
-        for (int i = 0; i < gslots.Length; i++)
-        {
-            if (!gfullcheck[i])
-            {
-                gslots[i].GetComponent<Slot>().AddSlotGear(itemData);
-                gfullcheck[i] = true;
-                return true; 
-            }
-        }
-        return false;
-    }
-
-    //각 아이템의 레벨 할당
     public void levelToSlot(ItemData itemData, int level)
     {
         // 무기 슬롯 검사
-        for (int i = 0; i < wslots.Length; i++)
+        foreach (Slot slot in wslots)
         {
             //아이템이 일치하는경우 레벨 할당
-            if (itemData == wslots[i].GetComponent<Slot>().data)
+            if (itemData == slot.data)
             {
                 // 슬롯 아래에 텍스트를 생성하고 레벨 할당
-                Text levelText = wslots[i].GetComponentInChildren<Text>();
+                Text levelText = slot.GetComponentInChildren<Text>();
                 levelText.text = "Lv." + level.ToString();
             }
         }
 
         // 장신구 슬롯 검사
-        for (int i = 0; i < gslots.Length; i++)
+        foreach (Slot slot in gslots)
         {
-            if (itemData == gslots[i].GetComponent<Slot>().data)
+            if (itemData == slot.data)
             {
-                Text levelText = gslots[i].GetComponentInChildren<Text>();
+                Text levelText = slot.GetComponentInChildren<Text>();
                 levelText.text = "Lv." + level.ToString();
             }
         }

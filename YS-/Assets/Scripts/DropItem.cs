@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 namespace vanilla
 {
-    public class DropItem : MonoBehaviour   
+    public class DropItem : MonoBehaviour
     {
         public DropSets[] datas;
         SpriteRenderer sprite;
@@ -12,8 +12,8 @@ namespace vanilla
         string itemName;
 
         [SerializeField] public ItemType type;
-        public float moveSpeed; //¼Óµµ
-        public float magnetDistance; //¹üÀ§
+        public float moveSpeed; //ï¿½Óµï¿½
+        public float magnetDistance; //ï¿½ï¿½ï¿½ï¿½
         bool isFoundP;
 
         Transform player;
@@ -26,10 +26,10 @@ namespace vanilla
         private void OnEnable()
         {
             isFoundP = false;
-            foreach(DropSets data in datas)
+            foreach (DropSets data in datas)
             {
                 float randn = Random.value;
-                if(randn <= (data.ratio * 0.01) * GameManager.inst.player.luck)
+                if (randn <= (data.ratio * 0.01) * GameManager.inst.player.luck)
                 {
                     type = data.itemType;
                     itemId = data.itemId;
@@ -42,7 +42,7 @@ namespace vanilla
             {
                 case ItemType.Item:
                     moveSpeed = 8f;
-                    magnetDistance = 1f;    
+                    magnetDistance = 1f;
                     break;
                 case ItemType.Exp:
                     moveSpeed = 8f;
@@ -52,14 +52,14 @@ namespace vanilla
         }
         void Update()
         {
-            //ÇÃ·¹ÀÌ¾î »çÀÌÀÇ °Å¸®°è»ê
+            //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ï¿½
             float distance = Vector2.Distance(transform.position, player.position);
 
-            //ÀÏÁ¤ ¹üÀ§ ÀÌ³»ÀÏ°æ¿ì ²ø¾î´ç±â°Ô ¼³Á¤
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì³ï¿½ï¿½Ï°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (distance <= magnetDistance)
                 isFoundP = true;
 
-            if(isFoundP)
+            if (isFoundP)
                 transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
         }
         public void ApplyItem()
@@ -68,14 +68,14 @@ namespace vanilla
             {
                 case 0:
                     GameManager.inst.health += GameManager.inst.maxHealth * 0.2f;
-                    if(GameManager.inst.health > GameManager.inst.maxHealth)
+                    if (GameManager.inst.health > GameManager.inst.maxHealth)
                         GameManager.inst.health = GameManager.inst.maxHealth;
                     break;
                 case 1:
                     DropItem[] dropItems = GameManager.inst.pool.gameObject.GetComponentsInChildren<DropItem>();
                     foreach (DropItem dropitem in dropItems)
                     {
-                        if(dropitem.type == ItemType.Exp)
+                        if (dropitem.type == ItemType.Exp)
                         {
                             dropitem.moveSpeed = 15f;
                             dropitem.magnetDistance += dropitem.magnetDistance * 10000;
@@ -83,7 +83,7 @@ namespace vanilla
                     }
                     break;
                 case 2:
-                    StartCoroutine(FieldClear());
+                    GameManager.inst.ClearField();
                     break;
                 case 3:
                     GameManager.inst.player.luck += 0.1f;
@@ -98,15 +98,6 @@ namespace vanilla
                     GameManager.inst.GetExp(1);
                     break;
             }
-        }
-        IEnumerator FieldClear()
-        {
-            GameManager.inst.noExp = true;
-            GameManager.inst.enemyCleaner.SetActive(true);
-            yield return new WaitForSeconds(2f);
-            GameManager.inst.enemyCleaner.SetActive(false);
-            GameManager.inst.noExp = false;
-            gameObject.SetActive(false);
         }
         void OnTriggerEnter2D(Collider2D col)
         {
@@ -139,6 +130,4 @@ namespace vanilla
         Item
     }
 }
-
-
 
