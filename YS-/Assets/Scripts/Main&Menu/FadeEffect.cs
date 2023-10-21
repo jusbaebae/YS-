@@ -31,7 +31,6 @@ public class FadeEffect : MonoBehaviour
 
     public IEnumerator FadeOut()
     {
-        fade.SetActive(true);
         Color fadeColor = fade.transform.GetComponent<Image>().color;
         Color color = fadeColor;
         color.a = 1f;
@@ -41,7 +40,6 @@ public class FadeEffect : MonoBehaviour
             fade.transform.GetComponent<Image>().color = color;
             yield return new WaitForSeconds(0.001f);
         }
-        fade.SetActive(false);
     }
 
 
