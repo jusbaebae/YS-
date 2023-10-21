@@ -6,15 +6,17 @@ using vanilla;
 
 public class UnlockItem : MonoBehaviour
 {
+
     //해금된 아이템
     public List<ItemData> unlockData = new List<ItemData>();
     public GameObject unlockItemPrefab;
     LevelUp LevelUp;
 
+    // Start is called before the first frame update
     void Awake()
     { 
         LevelUp = GameObject.Find("LevelUp").gameObject.GetComponent<LevelUp>();
-        //unlockData = Observer.instance.data; 테스트를 위해서 잠시 주석처리
+        unlockData = Observer.instance.data;
         SetUnlockItem();
     }
 

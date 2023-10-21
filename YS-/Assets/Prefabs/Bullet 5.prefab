@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 836411858416082845}
   - component: {fileID: 8098270511140220749}
   - component: {fileID: 7002537016222063620}
-  - component: {fileID: -4412888080942338134}
   - component: {fileID: -4061248417501837140}
   - component: {fileID: 1133030452365464869}
   m_Layer: 8
@@ -132,21 +131,9 @@ MonoBehaviour:
   per: 0
   bounce: 0
   bomb: 0
---- !u!111 &-4412888080942338134
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836411858416082846}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  boomerang: 0
+  onOff: 0
+  setOn: 0
 --- !u!95 &-4061248417501837140
 Animator:
   serializedVersion: 5
