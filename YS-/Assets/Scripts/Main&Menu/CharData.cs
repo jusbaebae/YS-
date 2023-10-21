@@ -14,5 +14,8 @@ public class CharData : MonoBehaviour
     public Character character;
     public float hp;
     public float attack;
+    public float defense;
+    public float luck;
+
     public int speed;
 }

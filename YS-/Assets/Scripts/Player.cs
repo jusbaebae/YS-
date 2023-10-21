@@ -24,6 +24,8 @@ namespace vanilla
         public Scanner scanner;
         public CapsuleCollider2D col;
         public BoxCollider2D col2;
+
+        CharData charData;
         // Start is called before the first frame update
         void Awake()
         {
@@ -33,13 +35,13 @@ namespace vanilla
             spriter = GetComponent<SpriteRenderer>();
             ani = GetComponent<Animator>();
             scanner = GetComponent<Scanner>();
-            hands = GetComponentInChildren<Hands>(true); 
-            GameObject charData = GameObject.Find("DataManager");
+            hands = GetComponentInChildren<Hands>(true);
+            charData = GameObject.Find("DataManager").gameObject.GetComponent<CharData>();
 
-            // ±âº»°ªÀ¸·Î ÁöÁ¤ÇÏÁö¸¸ Ä³¸¯ÅÍ °ª ÀÌµ¿ÇØ¿Ã¶§ º¯°æ¹Ù¶÷
-            luck = 1;
-            baseAttack = 1;
-            baseDefend = 10;
+            // ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ø¿Ã¶ï¿½ ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+            luck = charData.luck;
+            baseAttack = charData.attack;
+            baseDefend = charData.defense;
             attack = baseAttack;
             defend = baseDefend;
             critical = 0f;
@@ -51,7 +53,7 @@ namespace vanilla
         {
             if (!GameManager.inst.isLive)
                 return;
-            // À§Ä¡ ÀÌµ¿
+            // ï¿½ï¿½Ä¡ ï¿½Ìµï¿½
             Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
             rigid.MovePosition(rigid.position + nextVec);
 
