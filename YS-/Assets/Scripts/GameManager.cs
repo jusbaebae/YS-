@@ -144,7 +144,7 @@ namespace vanilla
         }
         void LateUpdate()
         {
-            //Observer.instance.kill = kill;
+            Observer.instance.kill = kill;
         }
     }
 }
