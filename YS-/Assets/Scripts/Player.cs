@@ -12,6 +12,12 @@ namespace vanilla
         SpriteRenderer spriter;
         public float speed = 5;
         public float luck;
+        public float attack;
+        public float defend;
+        public float baseDefend;
+        public float baseAttack;
+        public float critical;
+        public float expBonus;
         Animator ani;
 
         public Hands hands;
@@ -27,11 +33,18 @@ namespace vanilla
             spriter = GetComponent<SpriteRenderer>();
             ani = GetComponent<Animator>();
             scanner = GetComponent<Scanner>();
-            hands = GetComponentInChildren<Hands>(true);
+            hands = GetComponentInChildren<Hands>(true); 
+            GameObject charData = GameObject.Find("DataManager");
+            // 기본값으로 지정하지만 캐릭터 값 이동해올때 변경바람
             luck = 1;
+            baseAttack = 1;
+            baseDefend = 10;
+            attack = baseAttack;
+            defend = baseDefend;
+            critical = 0f;
+            expBonus = 1f;
 
-            //테스트를 위해서 잠시 주석처리
-            //ani.runtimeAnimatorController = new AnimatorOverrideController(DataManager.instance.currentCharData.play_anim);
+            ani.runtimeAnimatorController = new AnimatorOverrideController(DataManager.instance.currentCharData.play_anim);
         }
         private void FixedUpdate()
         {

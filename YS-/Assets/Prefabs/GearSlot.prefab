@@ -90,3 +90,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotimage: {fileID: 1907753929070378473}
   data: {fileID: 0}
+  slotType: 1

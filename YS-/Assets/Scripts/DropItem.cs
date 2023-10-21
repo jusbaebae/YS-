@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 namespace vanilla
 {
-    public class DropItem : MonoBehaviour   
+    public class DropItem : MonoBehaviour
     {
         public DropSets[] datas;
         SpriteRenderer sprite;
@@ -26,10 +26,10 @@ namespace vanilla
         private void OnEnable()
         {
             isFoundP = false;
-            foreach(DropSets data in datas)
+            foreach (DropSets data in datas)
             {
                 float randn = Random.value;
-                if(randn <= (data.ratio * 0.01) * GameManager.inst.player.luck)
+                if (randn <= (data.ratio * 0.01) * GameManager.inst.player.luck)
                 {
                     type = data.itemType;
                     itemId = data.itemId;
@@ -42,7 +42,7 @@ namespace vanilla
             {
                 case ItemType.Item:
                     moveSpeed = 8f;
-                    magnetDistance = 1f;    
+                    magnetDistance = 1f;
                     break;
                 case ItemType.Exp:
                     moveSpeed = 8f;
@@ -59,7 +59,7 @@ namespace vanilla
             if (distance <= magnetDistance)
                 isFoundP = true;
 
-            if(isFoundP)
+            if (isFoundP)
                 transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
         }
         public void ApplyItem()
@@ -68,14 +68,14 @@ namespace vanilla
             {
                 case 0:
                     GameManager.inst.health += GameManager.inst.maxHealth * 0.2f;
-                    if(GameManager.inst.health > GameManager.inst.maxHealth)
+                    if (GameManager.inst.health > GameManager.inst.maxHealth)
                         GameManager.inst.health = GameManager.inst.maxHealth;
                     break;
                 case 1:
                     DropItem[] dropItems = GameManager.inst.pool.gameObject.GetComponentsInChildren<DropItem>();
                     foreach (DropItem dropitem in dropItems)
                     {
-                        if(dropitem.type == ItemType.Exp)
+                        if (dropitem.type == ItemType.Exp)
                         {
                             dropitem.moveSpeed = 15f;
                             dropitem.magnetDistance += dropitem.magnetDistance * 10000;
@@ -83,7 +83,7 @@ namespace vanilla
                     }
                     break;
                 case 2:
-                    StartCoroutine(FieldClear());
+                    GameManager.inst.ClearField();
                     break;
                 case 3:
                     GameManager.inst.player.luck += 0.1f;
@@ -99,22 +99,12 @@ namespace vanilla
                     break;
             }
         }
-        IEnumerator FieldClear()
-        {
-            GameManager.inst.noExp = true;
-            GameManager.inst.enemyCleaner.SetActive(true);
-            yield return new WaitForSeconds(2f);
-            GameManager.inst.enemyCleaner.SetActive(false);
-            GameManager.inst.noExp = false;
-            gameObject.SetActive(false);
-        }
         void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.tag.Equals("Player"))
             {
                 ApplyItem();
-                if(!(itemId == 2))  
-                    gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
     }
@@ -137,6 +127,4 @@ namespace vanilla
         Item
     }
 }
-
-
 

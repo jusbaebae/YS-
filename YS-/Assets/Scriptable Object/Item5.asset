@@ -12,20 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1468d2cc237792949afe7a4aa0fda98a, type: 3}
   m_Name: Item5
   m_EditorClassIdentifier: 
-  itemType: 2
+  itemType: 5
   itemId: 5
-  itemName: "\uC2A4\uB9C8\uD2B8\uD3F0"
-  itemDesc: "\uB370\uBBF8\uC9C0 {0}% \uC99D\uAC00\n\uD22C\uC0AC\uCCB4 {1}\uAC1C \uCD94\uAC00\n"
-  itemIcon: {fileID: 2033462050, guid: e6030531e334c714280a241f8d95bbd0, type: 3}
-  baseDamage: 10
+  itemName: "\uBD80\uBA54\uB791"
+  itemDesc: "\uB370\uBBF8\uC9C0\t{0}\t->\t{1}\n\uD22C\uC0AC\uCCB4\t{2}\t->\t{3}"
+  newitemDesc: "\uB370\uBBF8\uC9C0\t{0}\n\uD22C\uC0AC\uCCB4\t{1}\n\uC5F0\uC0AC\uB825\t{2}"
+  itemIcon: {fileID: 21300000, guid: 7fab266270c399b41b76985971258ccf, type: 3}
+  baseDamage: 15
   baseCount: 1
-  baseSpeed: 6
+  baseSpeed: 4
+  baseDurabiliy: 0
   damages:
-  - 0.5
   - 1
+  - 1.25
   - 1.5
+  - 1.75
   - 2
-  - 2.5
-  counts: 0100000001000000010000000100000001000000
-  projecttile: {fileID: 836411858416082846, guid: 1aa30b771672e044cae25ad195bb617d, type: 3}
+  counts: 0000000000000000010000000000000001000000
+  durabiliys:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  projecttile: {fileID: 836411858416082846, guid: 006a8833583a94b4a8c99d6a7251e58b, type: 3}
   hand: {fileID: 0}

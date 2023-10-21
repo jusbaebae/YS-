@@ -1,8 +1,9 @@
+using System.Xml.Linq;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace vanilla
@@ -15,6 +16,8 @@ namespace vanilla
         public int count;
         public float speed;
         public float baseSpeed;
+        public float dura;
+        bool isOn;
         Vector3[] dir;
 
         float timer;
@@ -50,7 +53,7 @@ namespace vanilla
                         Fire();
                     }
                     break;
-                case 5:
+                case 2:
                     timer += Time.deltaTime;
                     if (timer > speed)
                     {
@@ -63,7 +66,7 @@ namespace vanilla
                         }
                     }
                     break;
-                case 6:
+                case 3:
                     timer += Time.deltaTime;
                     if (timer > speed)
                     {
@@ -73,7 +76,7 @@ namespace vanilla
                         BFire();
                     }
                     break;
-                case 7:
+                case 4:
                     timer += Time.deltaTime;
                     if (timer > speed)
                     {
@@ -81,13 +84,28 @@ namespace vanilla
                         Bomb();
                     }
                     break;
-                case 8:
+                case 5:
                     timer += Time.deltaTime;
                     if (timer > speed)
                     {
                         timer = 0f;
                         Boomerang();
-                        
+                    }
+                    break;
+                case 6:
+                    timer += Time.deltaTime;
+                    if (timer > speed - (speed * dura))
+                    {
+                        timer = 0f;
+                        Rosary();
+                    }
+                    break;
+                case 7:
+                    timer += Time.deltaTime;
+                    if (timer > speed)
+                    {
+                        timer = 0f;
+                        Bash();
                     }
                     break;
                 default:
@@ -107,6 +125,7 @@ namespace vanilla
             count = data.baseCount;
             baseSpeed = data.baseSpeed;
             speed = baseSpeed;
+            dura = data.baseDurabiliy;
             for (int i = 0; i < GameManager.inst.pool.prefabs.Length; i++)
             {
                 if (data.projecttile == GameManager.inst.pool.prefabs[i])
@@ -120,6 +139,7 @@ namespace vanilla
             {
                 case 0:
                     Batch();
+                    StartCoroutine(SetOnOff());
                     break;
                 default:
                     break;
@@ -135,9 +155,9 @@ namespace vanilla
         void Targeting()
         {
             int i = 0;
-            foreach(Transform pos in player.scanner.nearestTarget)
+            foreach (Transform pos in player.scanner.nearestTarget)
             {
-                if(pos != null)
+                if (pos != null)
                 {
                     Vector3 targetPos = pos.position;
                     dir[i] = targetPos - transform.position;
@@ -163,44 +183,44 @@ namespace vanilla
                     Vector3 randdir = randvec - transform.position;
                     randdir = randdir.normalized;
                     bullet.rotation = Quaternion.FromToRotation(Vector3.up, randdir);
-                    bullet.GetComponent<Bullet>().Init(damage, cnt, randdir, bounce, bomb, boomerang, rotate);
+                    bullet.GetComponent<Bullet>().Init(damage, cnt, randdir, bounce, bomb, boomerang, rotate, false);
                 }
                 else
                 {
                     bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir[i]);
-                    bullet.GetComponent<Bullet>().Init(damage, cnt, dir[i], bounce, bomb, boomerang, rotate);
+                    bullet.GetComponent<Bullet>().Init(damage, cnt, dir[i], bounce, bomb, boomerang, rotate, false);
                     i++;
                 }
             }
         }
-        public void LevelUp(float damage, int count)
+        public void LevelUp(float damage, int count, float dura)
         {
-            this.damage += damage;
+            this.damage = damage;
             this.count += count;
+            this.dura += dura;
             if (id == 0)
                 Batch();
             player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
         }
         void Batch()
         {
+            Transform[] bullet = new Transform[5];
             for (int i = 0; i < count; i++)
             {
-                Transform bullet;
                 if (i < transform.childCount)
-                    bullet = transform.GetChild(i);
+                    bullet[i] = transform.GetChild(i);
                 else
                 {
-                    bullet = GameManager.inst.pool.Get(prefabId).transform;
-                    bullet.parent = transform;
+                    bullet[i] = GameManager.inst.pool.Get(prefabId).transform;
+                    bullet[i].parent = transform;
                 }
 
-                bullet.localPosition = Vector3.zero;
-                bullet.localRotation = Quaternion.identity;
-
+                bullet[i].localPosition = Vector3.zero;
+                bullet[i].localRotation = Quaternion.identity;
                 Vector3 rotVec = Vector3.forward * 360 * i / count;
-                bullet.Rotate(rotVec);
-                bullet.Translate(bullet.up * 1.5f, Space.World);
-                bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false, false, false, false); // -1 篮 公力茄
+                bullet[i].Rotate(rotVec);
+                bullet[i].Translate(bullet[i].up * 1.5f, Space.World);
+                bullet[i].GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false, false, false, false, true); // -1 篮 公力茄
             }
         }
 
@@ -211,7 +231,7 @@ namespace vanilla
 
             Transform bullet = GameManager.inst.pool.Get(prefabId).transform;
             bullet.position = transform.position;
-            bullet.GetComponent<Bullet>().Init(damage, -1, dir, false, false, false, true);
+            bullet.GetComponent<Bullet>().Init(damage, -1, dir, false, false, false, true, false);
             bullet.GetComponent<Bullet>().Throwing(i);
         }
         void Fire()
@@ -226,7 +246,7 @@ namespace vanilla
             Transform bullet = GameManager.inst.pool.Get(prefabId).transform;
             bullet.position = transform.position;
             bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-            bullet.GetComponent<Bullet>().Init(damage, count, dir, false, false, false, false);
+            bullet.GetComponent<Bullet>().Init(damage, count, dir, false, false, false, false, false);
         }
         void BFire()
         {
@@ -247,7 +267,7 @@ namespace vanilla
             Transform bullet = GameManager.inst.pool.Get(prefabId).transform;
             bullet.position = transform.position;
             bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-            bullet.GetComponent<Bullet>().Init(damage, count, Vector3.zero, false, true, false, true);
+            bullet.GetComponent<Bullet>().Init(damage, count, Vector3.zero, false, true, false, true, false);
             StartCoroutine(MoveToDestination(bullet, targetPos));
         }
         void Boomerang()
@@ -258,7 +278,27 @@ namespace vanilla
             Targeting();
             ShotEnemy(9999, false, false, true, true);
         }
+        void Rosary()
+        {
+            GameManager.inst.ClearField();
+            DropItem[] drops = GameManager.inst.pool.GetComponentsInChildren<DropItem>();
+            foreach (DropItem d in drops)
+            {
+                float randn = Random.value;
+                if (randn >= 0.8 * GameManager.inst.player.luck)
+                    d.gameObject.SetActive(false);
+            }
+        }
+        void Bash()
+        {
+            if (!player.scanner.nearestTarget[0])
+                return;
 
+            Transform bullet = GameManager.inst.pool.Get(prefabId).transform;
+            bullet.localScale = Vector3.one * dura;
+            bullet.position = player.scanner.nearestTarget[0].position;
+            bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero, false, false, false, false, false);
+        }
 
         IEnumerator MoveToDestination(Transform bullet, Vector3 targetPos)
         {
@@ -266,7 +306,6 @@ namespace vanilla
             float journeyLength = Vector3.Distance(bullet.transform.position, targetPos);
             float startTime = Time.time;
             float moveSpeed = 0.2f;
-            //float rotationSpeed = 90.0f;
 
             while (isMoving)
             {
@@ -279,11 +318,26 @@ namespace vanilla
                     Transform bomb = GameManager.inst.pool.Get(prefabId + 1).transform;
                     bomb.position = bullet.transform.position;
                     bomb.localScale = Vector3.one;
-                    bomb.GetComponent<Bullet>().Init(damage, count, Vector3.zero, false, true, false, false);
+                    bomb.GetComponent<Bullet>().Init(damage, count, Vector3.zero, false, true, false, false, false);
                     bullet.gameObject.SetActive(false);
                 }
-
                 yield return null;
+            }
+        }
+        IEnumerator SetOnOff()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(dura + 0.5f);
+                Bullet[] bullets = gameObject.GetComponentsInChildren<Bullet>();
+                foreach (Bullet bullet in bullets)
+                    if (bullet.onOff == true)
+                        bullet.setOn = false;
+                yield return new WaitForSeconds(3f);
+                bullets = gameObject.GetComponentsInChildren<Bullet>();
+                foreach (Bullet bullet in bullets)
+                    if (bullet.onOff == true)
+                        bullet.setOn = true;
             }
         }
     }

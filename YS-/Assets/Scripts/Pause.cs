@@ -16,7 +16,7 @@ public class Pause : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !LevelUp.state)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseUI.SetActive(true);
             GameManager.inst.Stop();
