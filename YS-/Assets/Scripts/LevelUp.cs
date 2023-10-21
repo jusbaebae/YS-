@@ -40,7 +40,7 @@ namespace vanilla
             // 1. 모든 아이템 비활성화 및 힐팩 위치 확인
             foreach (Item item in items)
             {
-
+                Debug.Log(item);
                 item.gameObject.SetActive(false);
                 if (item.data.itemType == ItemData.ItemType.Heal)
                     health = i;

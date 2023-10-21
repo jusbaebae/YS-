@@ -711,7 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734246f4f7af45e4eb03ab0c8f9f6bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 46387765dd8fb5d4e9be630c975ada9f, type: 2}
+  data: {fileID: 11400000, guid: 3c2fe90a6087193469965f95c15f472e, type: 2}
   level: 0
   weapon: {fileID: 0}
   gear: {fileID: 0}
@@ -1387,7 +1387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734246f4f7af45e4eb03ab0c8f9f6bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: cb05368950bca7345afcb2e43f533929, type: 2}
+  data: {fileID: 11400000, guid: 7ed78ddd1ed6e2840930db1b63c42a6c, type: 2}
   level: 0
   weapon: {fileID: 0}
   gear: {fileID: 0}
@@ -10086,7 +10086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734246f4f7af45e4eb03ab0c8f9f6bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 5c7b3991db3eaba4eaa81ad3662e1c29, type: 2}
+  data: {fileID: 11400000, guid: 497bbfcf097beeb468088cbb759a71a5, type: 2}
   level: 0
   weapon: {fileID: 0}
   gear: {fileID: 0}
@@ -13394,7 +13394,6 @@ MonoBehaviour:
   weaponCount: 0
   gearCount: 0
   map: {fileID: 2026293659}
-  slotArea: {fileID: 953819712}
   health: 0
   maxHealth: 100
   originHealth: 100
@@ -15422,7 +15421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734246f4f7af45e4eb03ab0c8f9f6bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: fd3e87a5b4827db43b2cc3ef4cbc87c5, type: 2}
+  data: {fileID: 11400000, guid: f7f2f95e4c9da2c4092dd20519bd5a1a, type: 2}
   level: 0
   weapon: {fileID: 0}
   gear: {fileID: 0}
@@ -18308,7 +18307,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 40, y: -0.77777773}
+  m_AnchoredPosition: {x: 40, y: -0.7777786}
   m_SizeDelta: {x: 80, y: 1.5555555}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2127315173
