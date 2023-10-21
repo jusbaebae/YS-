@@ -82,7 +82,7 @@ namespace vanilla
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
 
             CritCheck();
-            if (CritCheck())
+            if (CritCheck() && !GameManager.inst.noExp)
             {
                 DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage * 1.5f), true);
                 health -= collision.GetComponent<Bullet>().damage * 1.5f;
@@ -96,6 +96,7 @@ namespace vanilla
             if (health > 0)
             {
                 anim.SetTrigger("Hit");
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
                 if (!collision.GetComponent<Bullet>().bomb)
                     StartCoroutine(KnockBack(collision.transform));
             }
@@ -107,6 +108,10 @@ namespace vanilla
                 spriter.sortingOrder = 1;
                 anim.SetBool("Dead", true);
                 GameManager.inst.kill++;
+                if (GameManager.inst.isLive && !GameManager.inst.noExp)
+                {
+                    AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+                }
             }
         }
 
@@ -121,7 +126,7 @@ namespace vanilla
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             timer = 0f;
             CritCheck();
-            if (CritCheck())
+            if (CritCheck() && !GameManager.inst.noExp)
             {
                 DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage * 1.5f), true);
                 health -= collision.GetComponent<Bullet>().damage * 1.5f;
@@ -135,6 +140,7 @@ namespace vanilla
             {
                 anim.SetTrigger("Hit");
                 StartCoroutine(Slow());
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
             }
             else
             {
@@ -144,6 +150,10 @@ namespace vanilla
                 spriter.sortingOrder = 1;
                 anim.SetBool("Dead", true);
                 GameManager.inst.kill++;
+                if(GameManager.inst.isLive && !GameManager.inst.noExp)
+                {
+                    AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+                }
             }
         }
         IEnumerator Slow()

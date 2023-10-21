@@ -31,12 +31,17 @@ namespace vanilla
             Next();
             rect.localScale = Vector3.one;
             GameManager.inst.Stop();
+            ClearAllDamageTexts(); 
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
+            AudioManager.instance.EffectBgm(true);
         }
         public void Hide()
         {
             state = false;
             rect.localScale = Vector3.zero;
             GameManager.inst.Resume();
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+            AudioManager.instance.EffectBgm(false);
         }
 
         //기본무기 지급
@@ -191,6 +196,14 @@ namespace vanilla
                     ran[j] = 4;
 
             return ran;
+        }
+        void ClearAllDamageTexts() // 렙업시 데미지표기삭제
+        {
+            Damage[] damageTexts = FindObjectsOfType<Damage>();
+            foreach (Damage damageText in damageTexts)
+            {
+                Destroy(damageText.gameObject);
+            }
         }
     }
 }

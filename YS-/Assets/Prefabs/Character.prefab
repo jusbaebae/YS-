@@ -374,7 +374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1462bedce4c2beb4696b8e7432c2dae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  info_img: {fileID: 0}
+  info_anim: {fileID: 0}
+  play_anim: {fileID: 0}
   character: 0
   hp: 0
   attack: 0

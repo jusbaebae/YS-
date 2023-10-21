@@ -43,6 +43,9 @@ namespace vanilla
             health = maxHealth;
             Resume();
             uiLevelUp.Select(0);    // 임시 스크립트(1번캐릭터용)
+
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+            AudioManager.instance.PlayBgm(true);
         }
         public void GameOver()
         {
@@ -55,6 +58,9 @@ namespace vanilla
             uiResult.gameObject.SetActive(true);
             uiResult.Lose();
             Stop();
+
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
+            AudioManager.instance.PlayBgm(false);
         }
         public void GameVictory()
         {
@@ -68,6 +74,9 @@ namespace vanilla
             uiResult.gameObject.SetActive(true);
             uiResult.Win();
             Stop();
+
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
+            AudioManager.instance.PlayBgm(false); ;
         }
         public void GameRetry()
         {

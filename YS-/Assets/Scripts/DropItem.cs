@@ -113,7 +113,9 @@ namespace vanilla
             if (col.gameObject.tag.Equals("Player"))
             {
                 ApplyItem();
-                if(!(itemId == 2))  
+                if(itemId == 4 || itemId == 5 || itemId == 6)
+                    AudioManager.instance.PlaySfx(AudioManager.Sfx.Drop);
+                if (!(itemId == 2))  
                     gameObject.SetActive(false);
             }
         }
