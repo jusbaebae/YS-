@@ -15,11 +15,15 @@ namespace vanilla
         public Player player;
         public bool isLive;
         public bool noExp;
+        public int weaponCount;
+        public int gearCount;
         public Map map;
+        public SlotArea slotAreas;
 
         [Header("# Player Info")]
         public float health = 0;
         public float maxHealth = 100;
+        public float originHealth = 100;
         public int level;
         public int kill;
         public int exp = 0;
@@ -42,11 +46,22 @@ namespace vanilla
         {
             health = maxHealth;
             Resume();
-            uiLevelUp.Select(0);    // 임시 스크립트(1번캐릭터용)
         }
         public void GameOver()
         {
             StartCoroutine(GameOverRoutine());
+        }
+        public void ClearField()
+        {
+            StartCoroutine(FieldClear());
+        }
+        IEnumerator FieldClear()
+        {
+            noExp = true;
+            enemyCleaner.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            enemyCleaner.SetActive(false);
+            noExp = false;
         }
         IEnumerator GameOverRoutine()
         {

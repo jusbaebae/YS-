@@ -29,8 +29,11 @@ namespace vanilla
                 if (curDiff < diff && target.transform != null)
                 {
                     diff = curDiff;
-                    result[i] = target.transform;
-                    i++;
+                    if (i < 10)
+                    {
+                        result[i] = target.transform;
+                        i++;
+                    }
                 }
             }
 
