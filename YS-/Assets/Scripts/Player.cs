@@ -35,7 +35,7 @@ namespace vanilla
             scanner = GetComponent<Scanner>();
             hands = GetComponentInChildren<Hands>(true);
 
-            luck = DataManager.instance.currentCharData.luck;
+            luck =  DataManager.instance.currentCharData.luck;
             baseAttack = DataManager.instance.currentCharData.attack;
             baseDefend = DataManager.instance.currentCharData.defense;
             attack = baseAttack;

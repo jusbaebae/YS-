@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum Character
 {
-    Default
+    Old_man,Old_woman,Man, Woman
 }
 
 [System.Serializable]

@@ -107,7 +107,7 @@ namespace vanilla
         }
         void HealthUp()
         {
-            GameManager.inst.maxHealth = GameManager.inst.originHealth * rate;
+            GameManager.inst.SetMaxHP( GameManager.inst.originHealth * rate);
         }
         void ArmorUp()
         {

@@ -208,7 +208,7 @@ namespace vanilla
                     level++;
                     break;
                 case ItemData.ItemType.Heal:
-                    GameManager.inst.health = GameManager.inst.maxHealth;
+                    GameManager.inst.health = GameManager.inst.GetMaxHP();
                     break;
                 default:
                     break;
