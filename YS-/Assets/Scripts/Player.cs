@@ -3,7 +3,6 @@ using UnityEngine;
 namespace vanilla
 {
     using UnityEngine.InputSystem;
-    using UnityEngine.InputSystem.Processors;
 
     public class Player : MonoBehaviour
     {
