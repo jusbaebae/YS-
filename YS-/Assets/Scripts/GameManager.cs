@@ -54,9 +54,17 @@ namespace vanilla
         {
             StartCoroutine(GameOverRoutine());
         }
-        public void ClearField()
+        public void ClearField(bool luck)
         {
-            StartCoroutine(FieldClear());
+            StartCoroutine(FieldClear(luck));
+        }
+        IEnumerator FieldClear(bool luck)
+        {
+            noExp = luck;
+            enemyCleaner.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            enemyCleaner.SetActive(false);
+            noExp = false;
         }
         IEnumerator FieldClear()
         {

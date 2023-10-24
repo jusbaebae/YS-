@@ -44,7 +44,7 @@ namespace vanilla
             baseAttack = charData.attack;
             baseDefend = charData.defense;
             */
-            luck = 1;
+            luck = 5;
             baseAttack = 5;
             baseDefend = 10;
             attack = baseAttack;
@@ -58,7 +58,6 @@ namespace vanilla
         {
             if (!GameManager.inst.isLive)
                 return;
-            // ��ġ �̵�
             Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
             rigid.MovePosition(rigid.position + nextVec);
 

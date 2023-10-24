@@ -21,6 +21,7 @@ namespace vanilla
         WaitForFixedUpdate wait;
         CapsuleCollider2D coll;
         BoxCollider2D bcol;
+        Player player;
 
         public RuntimeAnimatorController[] animCon;
 
@@ -33,6 +34,7 @@ namespace vanilla
             spriter = GetComponent<SpriteRenderer>();
             wait = new WaitForFixedUpdate();
             hittime = 0.5f;
+            player = FindAnyObjectByType<Player>();
         }
 
         // Update is called once per frame
@@ -81,8 +83,8 @@ namespace vanilla
                 return;
 
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-            CritCheck();
-            if (CritCheck() && !GameManager.inst.noExp)
+            CritCheck(player.critical);
+            if (CritCheck(player.critical) && !GameManager.inst.noExp)
             {
                 DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage * 1.5f), true);
                 health -= collision.GetComponent<Bullet>().damage * 1.5f;
@@ -125,8 +127,8 @@ namespace vanilla
             timer = 0f;
 
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-            CritCheck();
-            if (CritCheck() && !GameManager.inst.noExp)
+            CritCheck(player.critical);
+            if (CritCheck(player.critical) && !GameManager.inst.noExp)
             {
                 DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage * 1.5f), true);
                 health -= collision.GetComponent<Bullet>().damage * 1.5f;
@@ -180,10 +182,10 @@ namespace vanilla
             dropItem.transform.position = transform.position;
             GameManager.inst.player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
         }
-        bool CritCheck()
+        bool CritCheck(float critical)
         {
             int crit = UnityEngine.Random.Range(1, 101); ;
-            if (crit <= 20)
+            if (crit <= 10 + critical)
             {
                 return true;
             }

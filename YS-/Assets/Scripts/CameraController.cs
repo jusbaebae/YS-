@@ -19,6 +19,9 @@ namespace vanilla
         float cameraMoveSpeed;
         float height;
         float width;
+        //카메라 흔들기
+        public float ShakeAmount;
+        float ShakeTime;
 
         Vector2 mapSize;
 
@@ -29,6 +32,19 @@ namespace vanilla
             width = height * Screen.width / Screen.height;
             mapSize = GameManager.inst.map.mapSize;
             center = GameManager.inst.map.center;
+        }
+
+        void Update()
+        {
+            if (ShakeTime > 0 && GameManager.inst.isLive)
+            {
+                transform.position = Random.insideUnitSphere * ShakeAmount + transform.position;
+                ShakeTime -= Time.deltaTime;
+            }
+            else
+            {
+                ShakeTime = 0.0f;
+            }
         }
 
         void FixedUpdate()
@@ -54,6 +70,11 @@ namespace vanilla
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(center, mapSize * 2);
+        }
+
+        public void VibrateForTime(float time)
+        {
+            ShakeTime = time;
         }
     }
 }

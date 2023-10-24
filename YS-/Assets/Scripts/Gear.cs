@@ -19,8 +19,15 @@ namespace vanilla
                 sec += Time.deltaTime;
                 if (sec >= 1f)
                 {
-                    GameManager.inst.health += rate;
-                    sec = 0;
+                    if(GameManager.inst.health < GameManager.inst.maxHealth)
+                    {
+                        GameManager.inst.health += rate;
+                        sec = 0;
+                    }
+                    else
+                    {
+                        sec = 0;
+                    }
                 }
             }
         }
@@ -107,7 +114,7 @@ namespace vanilla
         }
         void HealthUp()
         {
-            GameManager.inst.maxHealth = GameManager.inst.originHealth * rate;
+            GameManager.inst.maxHealth += GameManager.inst.originHealth * rate;
         }
         void ArmorUp()
         {

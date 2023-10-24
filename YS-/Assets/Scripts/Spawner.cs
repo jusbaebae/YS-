@@ -18,7 +18,7 @@ namespace vanilla
             if (!GameManager.inst.isLive || GameManager.inst.noExp)
                 return;
             timer += Time.deltaTime;
-            level = Mathf.Min(Mathf.FloorToInt(GameManager.inst.gameTime / 10f), spawnData.Length -1);
+            level = Mathf.Min(Mathf.FloorToInt(GameManager.inst.gameTime / 90f), spawnData.Length -1);
 
             if (timer > spawnData[level].spawnTime)
             {

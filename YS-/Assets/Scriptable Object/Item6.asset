@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1468d2cc237792949afe7a4aa0fda98a, type: 3}
   m_Name: Item6
   m_EditorClassIdentifier: 
+  itemCategory: 0
   itemType: 6
   itemId: 6
-  itemName: "\uBB35\uC8FC"
+  itemName: "\uBE14\uB8E8\uC2A4\uD06C\uB9B0"
   itemDesc: "\uCFE8\uD0C0\uC784 {0} -> {1}\n"
   newitemDesc: "\uCFE8\uD0C0\uC784 {0}"
-  itemIcon: {fileID: 21300000, guid: b87919e6a222dd74599c2ff2c0f5d4d1, type: 3}
+  itemIcon: {fileID: 411172943, guid: e6030531e334c714280a241f8d95bbd0, type: 3}
   baseDamage: 15
   baseCount: 1
   baseSpeed: 60

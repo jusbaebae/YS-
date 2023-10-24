@@ -18,10 +18,10 @@ MonoBehaviour:
   itemName: "\uC790\uC11D"
   itemDesc: "\uACBD\uD5D8\uCE58 \uD68D\uB4DD \uBC94\uC704 {0}% \uC99D\uAC00\n"
   newitemDesc: 
-  itemIcon: {fileID: 1997828774, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-  baseDamage: 15
-  baseCount: 2
-  baseSpeed: 4
+  itemIcon: {fileID: -1995628781, guid: e6030531e334c714280a241f8d95bbd0, type: 3}
+  baseDamage: 0
+  baseCount: 0
+  baseSpeed: 0
   baseDurabiliy: 0
   damages:
   - 0.1

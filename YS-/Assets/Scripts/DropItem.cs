@@ -12,8 +12,8 @@ namespace vanilla
         string itemName;
 
         [SerializeField] public ItemType type;
-        public float moveSpeed; //�ӵ�
-        public float magnetDistance; //����
+        public float moveSpeed; //속도
+        public float magnetDistance; //범위
         bool isFoundP;
 
         Transform player;
@@ -52,10 +52,10 @@ namespace vanilla
         }
         void Update()
         {
-            //�÷��̾� ������ �Ÿ����
+            //거리계산
             float distance = Vector2.Distance(transform.position, player.position);
 
-            //���� ���� �̳��ϰ�� ������� ����
+            //거리가 자석범위 보다 낮으면 끌리게
             if (distance <= magnetDistance)
                 isFoundP = true;
 
@@ -67,7 +67,7 @@ namespace vanilla
             switch (itemId)
             {
                 case 0:
-                    GameManager.inst.health += GameManager.inst.maxHealth * 0.2f;
+                    GameManager.inst.health += GameManager.inst.maxHealth * 0.1f;
                     if (GameManager.inst.health > GameManager.inst.maxHealth)
                         GameManager.inst.health = GameManager.inst.maxHealth;
                     break;
@@ -77,13 +77,13 @@ namespace vanilla
                     {
                         if (dropitem.type == ItemType.Exp)
                         {
-                            dropitem.moveSpeed = 15f;
+                            dropitem.moveSpeed = 20f;
                             dropitem.magnetDistance += dropitem.magnetDistance * 10000;
                         }
                     }
                     break;
                 case 2:
-                    GameManager.inst.ClearField();
+                    GameManager.inst.ClearField(true);
                     break;
                 case 3:
                     GameManager.inst.player.luck += 0.1f;
@@ -104,10 +104,9 @@ namespace vanilla
             if (col.gameObject.tag.Equals("Player"))
             {
                 ApplyItem();
-                if(itemId == 4 || itemId == 5 || itemId == 6)
+                gameObject.SetActive(false);
+                if (itemId == 4 || itemId == 5 || itemId == 6)
                     AudioManager.instance.PlaySfx(AudioManager.Sfx.Drop);
-                if (!(itemId == 2))  
-                    gameObject.SetActive(false);
             }
         }
     }

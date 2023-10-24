@@ -15,10 +15,10 @@ MonoBehaviour:
   itemCategory: 1
   itemType: 13
   itemId: 105
-  itemName: "\uAC11\uC637"
+  itemName: "\uBC29\uD654\uBCBD"
   itemDesc: "\uBC29\uC5B4\uB825 {0}% \uC99D\uAC00\n"
   newitemDesc: 
-  itemIcon: {fileID: 21300000, guid: 0ec2a56efd5208543bb7536d5dcc4e2b, type: 3}
+  itemIcon: {fileID: -1261085824, guid: e6030531e334c714280a241f8d95bbd0, type: 3}
   baseDamage: 0.1
   baseCount: 2
   baseSpeed: 4

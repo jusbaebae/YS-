@@ -19,6 +19,8 @@ namespace vanilla
         public float dura;
         bool isOn;
         Vector3[] dir;
+        Fade fade;
+        new CameraController camera;
 
         float timer;
         int[,] thr = new int[5, 5]
@@ -35,6 +37,7 @@ namespace vanilla
         {
             player = GameManager.inst.player;
             dir = new Vector3[10];
+            camera = GameObject.FindWithTag("MainCamera").GetComponent<CameraController>();
         }
         void Update()
         {
@@ -280,14 +283,28 @@ namespace vanilla
         }
         void Rosary()
         {
-            GameManager.inst.ClearField();
-            DropItem[] drops = GameManager.inst.pool.GetComponentsInChildren<DropItem>();
-            foreach (DropItem d in drops)
+            float randn = Random.value;
+            if (randn >= GameManager.inst.player.luck * 0.01111111112)
             {
-                float randn = Random.value;
-                if (randn >= 0.8 * GameManager.inst.player.luck)
+                fade = FindAnyObjectByType<Fade>();
+                StartCoroutine(fade.FadeImage(fade.redImage, 0.0f));
+                camera.VibrateForTime(0.3f);
+                DropItem[] drops = GameManager.inst.pool.GetComponentsInChildren<DropItem>();
+                foreach (DropItem d in drops)
+                {
                     d.gameObject.SetActive(false);
+                }
+                GameManager.inst.ClearField(true);
+                return;
             }
+            else
+            {
+                fade = FindAnyObjectByType<Fade>();
+                StartCoroutine(fade.FadeImage(fade.blueImage, 0.0f));
+                camera.VibrateForTime(0.3f);
+                GameManager.inst.ClearField(false);
+            }
+            
         }
         void Bash()
         {
