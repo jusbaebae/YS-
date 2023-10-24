@@ -19,7 +19,7 @@ namespace vanilla
                 sec += Time.deltaTime;
                 if (sec >= 1f)
                 {
-                    if(GameManager.inst.health < GameManager.inst.maxHealth)
+                    if(GameManager.inst.health < GameManager.inst.GetMaxHP())
                     {
                         GameManager.inst.health += rate;
                         sec = 0;

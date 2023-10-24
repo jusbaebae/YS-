@@ -137,7 +137,6 @@ namespace vanilla
             {
                 gameObject.transform.localScale += getScale * 0.02f;
             }
-
         }
     }
 }

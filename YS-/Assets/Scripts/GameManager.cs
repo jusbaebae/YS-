@@ -55,8 +55,7 @@ namespace vanilla
         {
             health = maxHealth;
             Resume();
-            uiLevelUp.Select(0);  
-
+            uiLevelUp.Select(0);
             AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
             AudioManager.instance.PlayBgm(true);
         }

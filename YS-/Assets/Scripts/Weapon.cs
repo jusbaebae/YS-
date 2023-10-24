@@ -214,7 +214,7 @@ namespace vanilla
                 hands.gameObject.SetActive(true);
                 hands.sprites[(int)data.itemType].sprite = data.hand;
             }
-            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   //���� ���⿡ �尩�ӵ� ����
+            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);  
         }
         public void Upgrade(ItemData data)
         {
@@ -238,7 +238,7 @@ namespace vanilla
                     break;
                 }
             }
-            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   //���� ���⿡ �尩�ӵ� ����
+            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
         }
         void Targeting()
         {
