@@ -45,7 +45,7 @@ namespace vanilla
             baseDefend = charData.defense;
             */
             luck = 1;
-            baseAttack = 5;
+            baseAttack = 1;
             baseDefend = 10;
             attack = baseAttack;
             defend = baseDefend;

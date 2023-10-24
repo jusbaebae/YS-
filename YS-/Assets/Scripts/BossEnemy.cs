@@ -79,7 +79,7 @@ namespace vanilla
 
         void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.CompareTag("Bullet") || !isLive || collision.GetComponent<Bullet>().bomb)
+            if (!collision.CompareTag("Bullet") || !isLive || (collision.GetComponent<Bullet>().id == 4))
                 return;
 
             health -= collision.GetComponent<Bullet>().damage;
@@ -87,7 +87,7 @@ namespace vanilla
             if (health > 0)
             {
                 anim.SetTrigger("Hit");
-                if (!collision.GetComponent<Bullet>().bomb)
+                if (!(collision.GetComponent<Bullet>().id == 4))
                     StartCoroutine(KnockBack(collision.transform));
             }
             else
@@ -104,7 +104,7 @@ namespace vanilla
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (!collision.CompareTag("Bullet") || !isLive || !collision.GetComponent<Bullet>().bomb)
+            if (!collision.CompareTag("Bullet") || !isLive || !(collision.GetComponent<Bullet>().id == 4))
                 return;
             timer += Time.deltaTime;
             if (!(timer > hittime))

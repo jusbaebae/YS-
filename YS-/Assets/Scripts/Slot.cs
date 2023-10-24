@@ -17,9 +17,9 @@ public class Slot : MonoBehaviour
         color.a = _alpha;
         slotimage.color = color;
     } //투명도 조절
-    public void AddSlot(ItemData wdata)
+    public void AddSlot(ItemData data)
     {
-        data = wdata;
+        this.data = data;
         slotimage.sprite = data.itemIcon;
         SetColor(0.5f);
     } //무기추가
