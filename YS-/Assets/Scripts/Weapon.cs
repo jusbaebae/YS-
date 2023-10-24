@@ -19,8 +19,6 @@ namespace vanilla
         public float dura;
         bool isOn;
         Vector3[] dir;
-        Fade fade;
-        new CameraController camera;
         Vector3[] targetDir;
         RandTarget randTarget;
 
@@ -41,7 +39,6 @@ namespace vanilla
         {
             player = GameManager.inst.player;
             dir = new Vector3[10];
-            camera = GameObject.FindWithTag("MainCamera").GetComponent<CameraController>();
             targetDir = new Vector3[10];
             randTarget = GameManager.inst.player.GetComponentInChildren<RandTarget>();
         }
@@ -53,7 +50,7 @@ namespace vanilla
             {
                 case 0:
                     timer += Time.deltaTime;
-                    if(timer > 6)
+                    if (timer > 6)
                     {
                         timer = 0f;
                         Batch();
@@ -72,7 +69,7 @@ namespace vanilla
                     if (timer > speed)
                     {
                         shottimer += Time.deltaTime;
-                        if(shottimer >= 0.1f)
+                        if (shottimer >= 0.1f)
                         {
                             Throw(thr[Mathf.Abs(count) - 1, shotindex]);
                             shotindex++;
@@ -214,7 +211,7 @@ namespace vanilla
                 hands.gameObject.SetActive(true);
                 hands.sprites[(int)data.itemType].sprite = data.hand;
             }
-            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);  
+            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   //만든 무기에 장갑속도 적용
         }
         public void Upgrade(ItemData data)
         {
@@ -238,7 +235,7 @@ namespace vanilla
                     break;
                 }
             }
-            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+            player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   //만든 무기에 장갑속도 적용
         }
         void Targeting()
         {
@@ -268,11 +265,15 @@ namespace vanilla
                 randdir = randdir.normalized;
                 bullet.rotation = Quaternion.FromToRotation(Vector3.up, randdir);
                 bullet.GetComponent<Bullet>().Init(damage, cnt, randdir, id);
+                Debug.Log(id);
+                Debug.Log(cnt);
             }
             else
             {
                 bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir[i]);
                 bullet.GetComponent<Bullet>().Init(damage, cnt, dir[i], id);
+                Debug.Log(id);
+                Debug.Log(cnt);
             }
         }
         void DestShot(float cnt, float moveSpeed)
@@ -305,7 +306,7 @@ namespace vanilla
                 }
             }
         }
-        
+
         public void LevelUp(float damage, int count, float dura)
         {
             this.damage = damage;
@@ -324,8 +325,8 @@ namespace vanilla
                 bullet[i].localRotation = Quaternion.identity;
                 bullet[i].localScale = Vector3.zero;
                 Bullet bul = bullet[i].GetComponent<Bullet>();
-                bul.Init(damage, -1, Vector3.zero, id); // -1 �� ������
-                if(id == 0)
+                bul.Init(damage, -1, Vector3.zero, id); // -1 은 무제한
+                if (id == 0)
                     bul.RotateSet(count, i, true, speed, 2.5f);
                 else
                     bul.RotateSet(count, i, true, speed, 3.5f);
@@ -386,9 +387,6 @@ namespace vanilla
             float randn = Random.value;
             if (randn >= GameManager.inst.player.luck * 0.01111111112)
             {
-                fade = FindAnyObjectByType<Fade>();
-                StartCoroutine(fade.FadeImage(fade.redImage, 0.0f));
-                camera.VibrateForTime(0.3f);
                 DropItem[] drops = GameManager.inst.pool.GetComponentsInChildren<DropItem>();
                 foreach (DropItem d in drops)
                 {
@@ -397,14 +395,7 @@ namespace vanilla
                 GameManager.inst.ClearField(true);
                 return;
             }
-            else
-            {
-                fade = FindAnyObjectByType<Fade>();
-                StartCoroutine(fade.FadeImage(fade.blueImage, 0.0f));
-                camera.VibrateForTime(0.3f);
-                GameManager.inst.ClearField(false);
-            }
-            
+            GameManager.inst.ClearField(false);
         }
         void Bash()
         {
@@ -443,7 +434,7 @@ namespace vanilla
                     bullet.GetComponent<Bullet>().Init(damage, 9999, dir, id);
                     break;
                 }
-                else if (journeyFraction >= 0.04f &&  id == 205)
+                else if (journeyFraction >= 0.04f && id == 205)
                 {
                     Vector3 dir = transform.position - bullet.position;
                     dir = dir.normalized;
@@ -452,7 +443,7 @@ namespace vanilla
                     float elapsedTime = 0f;
                     while (elapsedTime < 0.5f)
                     {
-                        elapsedTime += Time.deltaTime * 1.5f; // ȸ�� �ӵ� ����
+                        elapsedTime += Time.deltaTime * 1.5f; // 회전 속도 적용
                         bullet.rotation = Quaternion.Slerp(bullet.rotation, targetRotation, elapsedTime * 2);
                         yield return null;
                     }

@@ -22,7 +22,7 @@ MonoBehaviour:
   baseDamage: 10
   baseCount: 1
   baseSpeed: 3
-  baseDurabiliy: 0
+  baseDurabiliy: 3
   damages:
   - 1
   - 1.25
@@ -31,10 +31,10 @@ MonoBehaviour:
   - 2
   counts: 0000000000000000010000000000000001000000
   durabiliys:
+  - 3
   - 0
+  - 1
   - 0
-  - 0
-  - 0
-  - 0
+  - 1
   projecttile: {fileID: 836411858416082846, guid: efb8c28f9c2e82b42950b84f9775fd78, type: 3}
   hand: {fileID: 0}

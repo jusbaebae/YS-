@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,7 +20,7 @@ namespace vanilla
 
         [Header("# Player Info")]
         public float health = 0;
-        float maxHealth = DataManager.instance.currentCharData.hp;
+        public float maxHealth;
         public float originHealth = 100;
         public int level;
         public int kill;
@@ -40,6 +39,7 @@ namespace vanilla
             inst = this;
             for (int i = 0; i < 50; i++)
                 nextExp[i] = 10 + (30 * i);
+            maxHealth = DataManager.instance.currentCharData.hp;
         }
 
         public float GetMaxHP()

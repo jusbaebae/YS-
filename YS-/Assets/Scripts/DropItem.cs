@@ -8,7 +8,7 @@ namespace vanilla
     {
         public DropSets[] datas;
         SpriteRenderer sprite;
-        int itemId;
+        public int itemId;
         string itemName;
 
         [SerializeField] public ItemType type;
@@ -67,9 +67,9 @@ namespace vanilla
             switch (itemId)
             {
                 case 0:
-                    GameManager.inst.health += GameManager.inst.GetMaxHP() * 0.2f;
-                    if (GameManager.inst.health > GameManager.inst.GetMaxHP())
-                        GameManager.inst.health = GameManager.inst.GetMaxHP();
+                    GameManager.inst.health += GameManager.inst.maxHealth * 0.2f;
+                    if (GameManager.inst.health > GameManager.inst.maxHealth)
+                        GameManager.inst.health = GameManager.inst.maxHealth;
                     break;
                 case 1:
                     DropItem[] dropItems = GameManager.inst.pool.gameObject.GetComponentsInChildren<DropItem>();

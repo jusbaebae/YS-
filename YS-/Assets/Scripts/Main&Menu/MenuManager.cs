@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Device;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
@@ -55,11 +53,7 @@ public class MenuManager : MonoBehaviour
 
     public void Finish()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quiot();
-#endif
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 
 

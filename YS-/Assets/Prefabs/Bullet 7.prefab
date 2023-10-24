@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8098270511140220749}
   - component: {fileID: 7002537016222063620}
   - component: {fileID: 3516999989346512607}
-  - component: {fileID: -7870379135794674360}
   - component: {fileID: 8734198729291827391}
   m_Layer: 8
   m_Name: Bullet 7
@@ -130,11 +129,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   per: 0
-  bounce: 0
-  bomb: 0
-  boomerang: 0
-  onOff: 0
   setOn: 0
+  index: 0
+  count: 0
+  id: 0
+  speed: 0
+  distance: 0
 --- !u!95 &3516999989346512607
 Animator:
   serializedVersion: 5
@@ -156,27 +156,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-7870379135794674360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836411858416082846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71af948e245138443b127c77e88def57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Active: 1
-  SlideEA: 10
-  SlideTime: 0.1
-  RedMin: 0
-  RedMax: 255
-  GreenMin: 0
-  GreenMax: 255
-  BlueMin: 0
-  BlueMax: 255
 --- !u!61 &8734198729291827391
 BoxCollider2D:
   m_ObjectHideFlags: 0
