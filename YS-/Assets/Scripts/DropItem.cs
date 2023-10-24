@@ -105,7 +105,7 @@ namespace vanilla
             {
                 ApplyItem();
                 gameObject.SetActive(false);
-                if (itemId == 4 || itemId == 5 || itemId == 6)
+                if (itemId == 0 || itemId == 3 || itemId == 4 || itemId == 5 || itemId == 6)
                     AudioManager.instance.PlaySfx(AudioManager.Sfx.Drop);
             }
         }

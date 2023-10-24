@@ -23,6 +23,7 @@ namespace vanilla
         WaitForFixedUpdate wait;
         PolygonCollider2D coll;
         BoxCollider2D bcol;
+        Player player;
 
         public RuntimeAnimatorController[] animCon;
 
@@ -35,6 +36,7 @@ namespace vanilla
             spriter = GetComponent<SpriteRenderer>();
             wait = new WaitForFixedUpdate();
             hittime = 0.5f;
+            player = FindAnyObjectByType<Player>();
         }
 
         // Update is called once per frame
@@ -79,16 +81,28 @@ namespace vanilla
 
         void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.CompareTag("Bullet") || !isLive || (collision.GetComponent<Bullet>().id == 4))
+            if (!collision.CompareTag("Bullet") || !isLive || (collision.GetComponent<Bullet>().id == 4) || (collision.GetComponent<Bullet>().id == -9999))
                 return;
 
-            health -= collision.GetComponent<Bullet>().damage;
+            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+            CritCheck(player.critical);
+            if (CritCheck(player.critical) && !GameManager.inst.noExp)
+            {
+                float attack = collision.GetComponent<Bullet>().damage * 1.5f * GameManager.inst.player.attack;
+                DamageController.instance.CreateBossDamageText(pos);
+                health -= attack;
+            }
+            else
+            {
+                float attack = collision.GetComponent<Bullet>().damage * GameManager.inst.player.attack;
+                DamageController.instance.CreateBossDamageText(pos);
+                health -= attack;
+            }
 
             if (health > 0)
             {
                 anim.SetTrigger("Hit");
-                if (!(collision.GetComponent<Bullet>().id == 4))
-                    StartCoroutine(KnockBack(collision.transform));
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
             }
             else
             {
@@ -97,25 +111,38 @@ namespace vanilla
                 rigid.simulated = false;
                 spriter.sortingOrder = 1;
                 anim.SetBool("Dead", true);
-                //GameManager.inst.GetExp();
                 GameManager.inst.kill++;
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
             }
         }
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (!collision.CompareTag("Bullet") || !isLive || !(collision.GetComponent<Bullet>().id == 4))
+            if (!collision.CompareTag("Bullet") || !isLive || !(collision.GetComponent<Bullet>().id == 4) || (collision.GetComponent<Bullet>().id == -9999))
                 return;
             timer += Time.deltaTime;
             if (!(timer > hittime))
                 return;
 
             timer = 0f;
-            health -= collision.GetComponent<Bullet>().damage;
+            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+            CritCheck(player.critical);
+            if (CritCheck(player.critical) && !GameManager.inst.noExp)
+            {
+                float attack = collision.GetComponent<Bullet>().damage * 1.5f * GameManager.inst.player.attack;
+                DamageController.instance.CreateBossDamageText(pos);
+                health -= attack;
+            }
+            else
+            {
+                float attack = collision.GetComponent<Bullet>().damage * GameManager.inst.player.attack;
+                DamageController.instance.CreateBossDamageText(pos);
+                health -= attack;
+            }
             if (health > 0)
             {
                 anim.SetTrigger("Hit");
-                StartCoroutine(Slow());
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
             }
             else
             {
@@ -125,6 +152,7 @@ namespace vanilla
                 spriter.sortingOrder = 1;
                 anim.SetBool("Dead", true);
                 GameManager.inst.kill++;
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
             }
         }
         IEnumerator Slow()
@@ -132,7 +160,6 @@ namespace vanilla
             speed *= 0.5f;
             yield return new WaitForSeconds(0.5f);
             speed *= 2.0f;
-
         }
         IEnumerator KnockBack(Transform bullet)
         {
@@ -148,6 +175,18 @@ namespace vanilla
             GameManager.inst.level++;
             GameManager.inst.exp = 0;
             GameManager.inst.uiLevelUp.Show();
+        }
+        bool CritCheck(float critical)
+        {
+            int crit = UnityEngine.Random.Range(1, 101); ;
+            if (crit <= 20 + (GameManager.inst.player.critical * 100))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

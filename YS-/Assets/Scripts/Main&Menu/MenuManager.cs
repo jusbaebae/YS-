@@ -53,7 +53,7 @@ public class MenuManager : MonoBehaviour
 
     public void Finish()
     {
-        //UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 
 

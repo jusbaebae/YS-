@@ -136,43 +136,43 @@ MonoBehaviour:
   datas:
   - itemType: 1
     itemId: 0
-    itemSprite: {fileID: 934571490, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+    itemSprite: {fileID: 21300000, guid: e9824dc5a39f6a34db4854c9ece06a3b, type: 3}
     itemName: Heal pack
     itemDesc: "20% \uD68C\uBCF5"
     ratio: 5
   - itemType: 1
     itemId: 1
-    itemSprite: {fileID: 21300000, guid: a4e8785dcadf31847ad904ccac87d4c4, type: 3}
+    itemSprite: {fileID: -985535220, guid: 75f3fa8b0c0fd844081ee6127e7d9c61, type: 3}
     itemName: Magnet
     itemDesc: "\uC8FC\uBCC0\uC758 \uBAA8\uB4E0 \uC544\uC774\uD15C \uB04C\uC5B4\uB2F9\uAE30\uAE30"
     ratio: 5
   - itemType: 1
     itemId: 2
-    itemSprite: {fileID: 21300000, guid: b87919e6a222dd74599c2ff2c0f5d4d1, type: 3}
+    itemSprite: {fileID: -429426983, guid: 75f3fa8b0c0fd844081ee6127e7d9c61, type: 3}
     itemName: "\uBAA9\uC8FC"
     itemDesc: "\uC8FC\uBCC0\uC758 \uBAA8\uB4E0 \uC801 \uCC98\uCE58"
     ratio: 0.5
   - itemType: 1
     itemId: 3
-    itemSprite: {fileID: 21300000, guid: bc17d7bf273e0bf45b566c9110849c6b, type: 3}
+    itemSprite: {fileID: -279351089, guid: 75f3fa8b0c0fd844081ee6127e7d9c61, type: 3}
     itemName: "\uD074\uB85C\uBC84"
     itemDesc: "\uD589\uC6B4 10% \uC99D\uAC00"
     ratio: 2
   - itemType: 0
     itemId: 4
-    itemSprite: {fileID: -1997803578, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+    itemSprite: {fileID: 21300000, guid: 310f8be8886372a49a41336c3e6db21d, type: 3}
     itemName: "\uD070\uACBD\uD5D8\uCE58"
     itemDesc: "exp 5\uB97C \uD68D\uB4DD\uD569\uB2C8\uB2E4."
     ratio: 5
   - itemType: 0
     itemId: 5
-    itemSprite: {fileID: 1807624531, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+    itemSprite: {fileID: 21300000, guid: 145e8eb2f9a483246b7ed591653b3430, type: 3}
     itemName: "\uC911\uAC04\uACBD\uD5D8\uCE58"
     itemDesc: "exp 3\uC744 \uD68D\uB4DD\uD569\uB2C8\uB2E4."
     ratio: 15
   - itemType: 0
     itemId: 6
-    itemSprite: {fileID: 362616440, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+    itemSprite: {fileID: -1974753297, guid: 75f3fa8b0c0fd844081ee6127e7d9c61, type: 3}
     itemName: "\uC791\uC740\uACBD\uD5D8\uCE58"
     itemDesc: "exp 1\uC744 \uD68D\uB4DD\uD569\uB2C8\uB2E4."
     ratio: 10000

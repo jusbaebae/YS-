@@ -15,10 +15,10 @@ MonoBehaviour:
   itemCategory: 0
   itemType: 5
   itemId: 205
-  itemName: "\uC7C1\uAE30"
+  itemName: "\uD504\uB85C\uD30C\uC77C\uB9C1\uD234"
   itemDesc: 
   newitemDesc: 
-  itemIcon: {fileID: 21300000, guid: 7fab266270c399b41b76985971258ccf, type: 3}
+  itemIcon: {fileID: 1084220709, guid: e6030531e334c714280a241f8d95bbd0, type: 3}
   baseDamage: 77
   baseCount: 2
   baseSpeed: 4
@@ -36,5 +36,5 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  projecttile: {fileID: 836411858416082846, guid: 1aab4bc1d429621459e3cf85a4d27ac8, type: 3}
+  projecttile: {fileID: 836411858416082846, guid: 6beb491ca77771b409624c6d4169dffa, type: 3}
   hand: {fileID: 0}

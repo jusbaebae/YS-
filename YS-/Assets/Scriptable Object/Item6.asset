@@ -18,7 +18,7 @@ MonoBehaviour:
   itemName: "\uBE14\uB8E8\uC2A4\uD06C\uB9B0"
   itemDesc: "\uCFE8\uD0C0\uC784 {0} -> {1}\n"
   newitemDesc: "\uCFE8\uD0C0\uC784 {0}"
-  itemIcon: {fileID: 411172943, guid: e6030531e334c714280a241f8d95bbd0, type: 3}
+  itemIcon: {fileID: -1669457088, guid: e6030531e334c714280a241f8d95bbd0, type: 3}
   baseDamage: 15
   baseCount: 1
   baseSpeed: 60

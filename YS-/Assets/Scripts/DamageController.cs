@@ -37,6 +37,10 @@ public class DamageController : MonoBehaviour
             GameObject damageTxt = Instantiate(dmgTxt, hitPoint, Quaternion.identity, canvas.transform);
             damageTxt.GetComponent<Damage>().damage = Damage.ToString();
         }
-        
+    }
+    public void CreateBossDamageText(Vector3 hitPoint)
+    {
+            GameObject damageTxt = Instantiate(dmgTxt, hitPoint, Quaternion.identity, canvas.transform);
+            damageTxt.GetComponent<Damage>().damage = "???";
     }
 }

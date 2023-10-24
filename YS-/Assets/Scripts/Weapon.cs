@@ -265,8 +265,6 @@ namespace vanilla
                 randdir = randdir.normalized;
                 bullet.rotation = Quaternion.FromToRotation(Vector3.up, randdir);
                 bullet.GetComponent<Bullet>().Init(damage, cnt, randdir, id);
-                Debug.Log(id);
-                Debug.Log(cnt);
             }
             else
             {
