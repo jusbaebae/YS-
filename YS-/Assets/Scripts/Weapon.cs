@@ -21,6 +21,8 @@ namespace vanilla
         Vector3[] dir;
         Vector3[] targetDir;
         RandTarget randTarget;
+        Fade fade;
+        new CameraController camera;
 
         float timer;
         float shottimer;
@@ -41,6 +43,7 @@ namespace vanilla
             dir = new Vector3[10];
             targetDir = new Vector3[10];
             randTarget = GameManager.inst.player.GetComponentInChildren<RandTarget>();
+            camera = GameObject.FindWithTag("MainCamera").GetComponent<CameraController>();
         }
         void Update()
         {
@@ -385,6 +388,9 @@ namespace vanilla
             float randn = Random.value;
             if (randn >= GameManager.inst.player.luck * 0.01111111112)
             {
+                fade = FindAnyObjectByType<Fade>();
+                StartCoroutine(fade.FadeImage(fade.redImage, 0.0f));
+                camera.VibrateForTime(0.3f);
                 DropItem[] drops = GameManager.inst.pool.GetComponentsInChildren<DropItem>();
                 foreach (DropItem d in drops)
                 {
@@ -393,7 +399,13 @@ namespace vanilla
                 GameManager.inst.ClearField(true);
                 return;
             }
-            GameManager.inst.ClearField(false);
+            else
+            {
+                fade = FindAnyObjectByType<Fade>();
+                StartCoroutine(fade.FadeImage(fade.blueImage, 0.0f));
+                camera.VibrateForTime(0.3f);
+                GameManager.inst.ClearField(false);
+            }
         }
         void Bash()
         {
