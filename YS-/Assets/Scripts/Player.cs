@@ -35,6 +35,15 @@ namespace vanilla
             scanner = GetComponent<Scanner>();
             hands = GetComponentInChildren<Hands>(true);
 
+            // 나중에 값변경
+            /*
+            luck = charData.luck;
+            baseAttack = charData.attack;
+            baseDefend = charData.defense;
+            */
+            luck = 1;
+            baseAttack = 1;
+            baseDefend = 10;
             luck =  DataManager.instance.currentCharData.luck;
             baseAttack = DataManager.instance.currentCharData.attack;
             baseDefend = DataManager.instance.currentCharData.defense;

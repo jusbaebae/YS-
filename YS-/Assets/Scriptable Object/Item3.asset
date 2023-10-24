@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1468d2cc237792949afe7a4aa0fda98a, type: 3}
   m_Name: Item3
   m_EditorClassIdentifier: 
+  itemCategory: 0
   itemType: 3
   itemId: 3
   itemName: "\uBD88\uB9BF"
-  itemDesc: "\uB370\uBBF8\uC9C0\t{0}\t->\t{1}\n\uD22C\uC0AC\uCCB4\t{2}\t->\t{3}"
-  newitemDesc: "\uB370\uBBF8\uC9C0\t{0}\n\uD22C\uC0AC\uCCB4\t{1}\n\uC5F0\uC0AC\uB825\t{2}"
+  itemDesc: "\uB370\uBBF8\uC9C0\t{0}\t->\t{1}\n\uD22C\uC0AC\uCCB4\t{2}\t->\t{3}\n\uC9C0\uC18D\uC2DC\uAC04\t{4}\t->\t{5}"
+  newitemDesc: "\uB370\uBBF8\uC9C0 \t{0}\t\t\uC5F0\uC0AC\uB825\t{3}\n\uD22C\uC0AC\uCCB4
+    \t{1} \n\uC9C0\uC18D\uC2DC\uAC04 \t{2}"
   itemIcon: {fileID: 563336626, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   baseDamage: 10
   baseCount: 1
-  baseSpeed: 3
-  baseDurabiliy: 0
+  baseSpeed: 6
+  baseDurabiliy: 3
   damages:
   - 1
   - 1.25
@@ -30,10 +32,10 @@ MonoBehaviour:
   - 2
   counts: 0000000000000000010000000000000001000000
   durabiliys:
+  - 3
   - 0
+  - 1
   - 0
-  - 0
-  - 0
-  - 0
+  - 1
   projecttile: {fileID: 836411858416082846, guid: efb8c28f9c2e82b42950b84f9775fd78, type: 3}
   hand: {fileID: 0}

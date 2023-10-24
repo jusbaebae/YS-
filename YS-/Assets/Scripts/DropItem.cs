@@ -83,7 +83,7 @@ namespace vanilla
                     }
                     break;
                 case 2:
-                    GameManager.inst.ClearField();
+                    GameManager.inst.ClearField(true);
                     break;
                 case 3:
                     GameManager.inst.player.luck += 0.1f;
@@ -106,8 +106,7 @@ namespace vanilla
                 ApplyItem();
                 if(itemId == 4 || itemId == 5 || itemId == 6)
                     AudioManager.instance.PlaySfx(AudioManager.Sfx.Drop);
-                if (!(itemId == 2))  
-                    gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
     }

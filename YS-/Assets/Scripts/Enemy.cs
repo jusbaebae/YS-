@@ -77,27 +77,29 @@ namespace vanilla
 
         void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.CompareTag("Bullet") || !isLive || collision.GetComponent<Bullet>().bomb)
+            if (!collision.CompareTag("Bullet") || !isLive || (collision.GetComponent<Bullet>().id == -1))
                 return;
 
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             CritCheck();
             if (CritCheck() && !GameManager.inst.noExp)
             {
-                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage * 1.5f), true);
-                health -= collision.GetComponent<Bullet>().damage * 1.5f;
+                float attack = collision.GetComponent<Bullet>().damage * 1.5f * GameManager.inst.player.attack;
+                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(attack), true);
+                health -= attack;
             }
             else
             {
-                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage), false);
-                health -= collision.GetComponent<Bullet>().damage;
+                float attack = collision.GetComponent<Bullet>().damage * GameManager.inst.player.attack;
+                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(attack), false);
+                health -= attack;
             }
 
             if (health > 0)
             {
                 anim.SetTrigger("Hit");
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
-                if (!collision.GetComponent<Bullet>().bomb)
+                if (!(collision.GetComponent<Bullet>().id == -1))
                     StartCoroutine(KnockBack(collision.transform));
             }
             else
@@ -117,7 +119,7 @@ namespace vanilla
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (!collision.CompareTag("Bullet") || !isLive || !collision.GetComponent<Bullet>().bomb)
+            if (!collision.CompareTag("Bullet") || !isLive || !(collision.GetComponent<Bullet>().id == -1))
                 return;
             timer += Time.deltaTime;
             if (!(timer > hittime))
@@ -128,13 +130,15 @@ namespace vanilla
             CritCheck();
             if (CritCheck() && !GameManager.inst.noExp)
             {
-                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage * 1.5f), true);
-                health -= collision.GetComponent<Bullet>().damage * 1.5f;
+                float attack = collision.GetComponent<Bullet>().damage * 1.5f * GameManager.inst.player.attack;
+                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(attack), true);
+                health -= attack;
             }
             else
             {
-                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(collision.GetComponent<Bullet>().damage), false);
-                health -= collision.GetComponent<Bullet>().damage;
+                float attack = collision.GetComponent<Bullet>().damage * GameManager.inst.player.attack;
+                DamageController.instance.CreateDamageText(pos, Mathf.FloorToInt(attack), false);
+                health -= attack;
             }
 
             if (health > 0)
@@ -183,7 +187,7 @@ namespace vanilla
         bool CritCheck()
         {
             int crit = UnityEngine.Random.Range(1, 101); ;
-            if (crit <= 20)
+            if (crit <= 20 + (GameManager.inst.player.critical * 100))
             {
                 return true;
             }
