@@ -24,8 +24,6 @@ namespace vanilla
         public Scanner scanner;
         public CapsuleCollider2D col;
         public BoxCollider2D col2;
-
-        CharData charData;
         // Start is called before the first frame update
         void Awake()
         {
@@ -36,7 +34,6 @@ namespace vanilla
             ani = GetComponent<Animator>();
             scanner = GetComponent<Scanner>();
             hands = GetComponentInChildren<Hands>(true);
-            //charData = GameObject.Find("DataManager").gameObject.GetComponent<CharData>();
 
             // 나중에 값변경
             /*
@@ -47,12 +44,15 @@ namespace vanilla
             luck = 1;
             baseAttack = 1;
             baseDefend = 10;
+            luck =  DataManager.instance.currentCharData.luck;
+            baseAttack = DataManager.instance.currentCharData.attack;
+            baseDefend = DataManager.instance.currentCharData.defense;
             attack = baseAttack;
             defend = baseDefend;
             critical = 0f;
             expBonus = 1f;
 
-            //ani.runtimeAnimatorController = new AnimatorOverrideController(DataManager.instance.currentCharData.play_anim);
+            ani.runtimeAnimatorController = new AnimatorOverrideController(DataManager.instance.currentCharData.play_anim);
         }
         private void FixedUpdate()
         {

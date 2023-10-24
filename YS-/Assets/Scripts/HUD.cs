@@ -40,7 +40,7 @@ namespace vanilla
                     break;
                 case InfoType.Health:
                     float curHealth = GameManager.inst.health;
-                    float maxHealth = GameManager.inst.maxHealth;
+                    float maxHealth = GameManager.inst.GetMaxHP();
                     mySlider.value = curHealth / maxHealth;
                     break;
                 default:

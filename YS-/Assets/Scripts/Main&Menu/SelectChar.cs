@@ -33,6 +33,7 @@ public class SelectChar : MonoBehaviour
         DataManager.instance.currentCharData = charData;
         
         info_anim.GetComponent<Animator>().runtimeAnimatorController = new AnimatorOverrideController(charData.info_anim);
+        print(DataManager.instance.currentCharData.play_anim);
         SetState(charData);
     }
     

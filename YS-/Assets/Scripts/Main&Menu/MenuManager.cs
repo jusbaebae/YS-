@@ -18,8 +18,6 @@ public class MenuManager : MonoBehaviour
         StartUI.SetActive(true);
         CharUI.SetActive(false);
         UnlockUI.SetActive(false);
-
-        StartCoroutine(FadeEffect.instance.FadeOut());
     }
 
     // Update is called once per frame

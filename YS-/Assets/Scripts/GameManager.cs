@@ -21,7 +21,7 @@ namespace vanilla
 
         [Header("# Player Info")]
         public float health = 0;
-        public float maxHealth = 100;
+        float maxHealth = DataManager.instance.currentCharData.hp;
         public float originHealth = 100;
         public int level;
         public int kill;
@@ -40,6 +40,16 @@ namespace vanilla
             inst = this;
             for (int i = 0; i < 50; i++)
                 nextExp[i] = 10 + (30 * i);
+        }
+
+        public float GetMaxHP()
+        {
+            return maxHealth;
+        }
+
+        public void SetMaxHP(float HP)
+        {
+            maxHealth = HP;
         }
         public void GameStart()
         {
@@ -144,7 +154,7 @@ namespace vanilla
         }
         void LateUpdate()
         {
-            //Observer.instance.kill = kill;
+            Observer.instance.kill = kill;
         }
     }
 }
