@@ -18,6 +18,7 @@ namespace vanilla
         Text textlevel;
         Text textName, textDesc;
         SlotArea slot;
+        CombineWeapon combineWeapon;
         private void Awake()
         {
             icon = GetComponentsInChildren<Image>()[1];
@@ -38,6 +39,8 @@ namespace vanilla
             switch (data.itemType)
             {
                 case ItemData.ItemType.Melee:
+                case ItemData.ItemType.Bounce:
+                case ItemData.ItemType.Bomb:
                     for (int i = 0; i < level + 1; i++)
                     {
                         counts += data.counts[i];
@@ -49,9 +52,7 @@ namespace vanilla
                         textDesc.text = string.Format(data.itemDesc, data.baseDamage * data.damages[level - 1], data.baseDamage * data.damages[level], counts - data.counts[level], counts, dura - data.durabiliys[level], dura);
                     break;
                 case ItemData.ItemType.Range:
-                case ItemData.ItemType.Bounce:
                 case ItemData.ItemType.Throw:
-                case ItemData.ItemType.Bomb:
                 case ItemData.ItemType.Boomerang:
                     for (int i = 0; i < level + 1; i++)
                         counts += data.counts[i];
@@ -93,12 +94,18 @@ namespace vanilla
                     break;
             }
         }
-
+        public void UpgradeWeapon(ItemData data)
+        {
+            weapon.Upgrade(data);
+        }
         public void onClick()
         {
+            combineWeapon = GameManager.inst.player.GetComponentInChildren<CombineWeapon>();
             switch (data.itemType)
             {
                 case ItemData.ItemType.Melee:
+                case ItemData.ItemType.Bounce:
+                case ItemData.ItemType.Bomb:
                     if (level == 0)
                     {
                         slot = FindAnyObjectByType<SlotArea>();
@@ -107,7 +114,7 @@ namespace vanilla
                         weapon.Init(data);
                         if (GameManager.inst.weaponCount < 6)
                         {
-                            slot.AddItemToSlotWeapon(data);
+                            slot.AddItemToSlot(data);
                             slot.levelToSlot(data, level + 1);
                             GameManager.inst.weaponCount++;
                         }
@@ -127,8 +134,6 @@ namespace vanilla
                     break;
                 case ItemData.ItemType.Range:
                 case ItemData.ItemType.Throw:
-                case ItemData.ItemType.Bounce:
-                case ItemData.ItemType.Bomb:
                 case ItemData.ItemType.Boomerang:
                     if (level == 0)
                     {
@@ -137,7 +142,7 @@ namespace vanilla
                         weapon.Init(data);
                         if (GameManager.inst.weaponCount < 6)
                         {
-                            slot.AddItemToSlotWeapon(data);
+                            slot.AddItemToSlot(data);
                             slot.levelToSlot(data, level + 1);
                             GameManager.inst.weaponCount++;
                         }
@@ -162,7 +167,7 @@ namespace vanilla
                         weapon.Init(data);
                         if (GameManager.inst.weaponCount < 6)
                         {
-                            slot.AddItemToSlotWeapon(data);
+                            slot.AddItemToSlot(data);
                             slot.levelToSlot(data, level + 1);
                             GameManager.inst.weaponCount++;
                         }
@@ -194,7 +199,7 @@ namespace vanilla
                         gear.Init(data);
                         if (GameManager.inst.gearCount < 6)
                         {
-                            slot.AddItemToSlotGear(data);
+                            slot.AddItemToSlot(data);
                             slot.levelToSlot(data, level + 1);
                             GameManager.inst.gearCount++;
                         }
@@ -208,13 +213,14 @@ namespace vanilla
                     level++;
                     break;
                 case ItemData.ItemType.Heal:
-                    GameManager.inst.health = GameManager.inst.maxHealth;
+                    GameManager.inst.health = GameManager.inst.GetMaxHP();
                     break;
                 default:
                     break;
             }
             if (level == data.damages.Length)
                 GetComponent<Button>().interactable = false;
+            combineWeapon.IsAbleToCombine(data);
         }
     }
 }

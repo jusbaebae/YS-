@@ -40,7 +40,6 @@ public class Intro : MonoBehaviour
         string content = "대충 연성대가 바이러스에게 점령당했다는 스토리.";
         for (int i = 0; i < content.Length; i++)
         {
-            
             story.SetText(story.text + content[i]);
             yield return new WaitForSeconds(0.1f);
         }

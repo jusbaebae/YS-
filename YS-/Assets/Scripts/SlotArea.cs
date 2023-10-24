@@ -30,59 +30,80 @@ public class SlotArea : MonoBehaviour
             }
         }
     }
-    public bool AddItemToSlotWeapon(ItemData itemData)
+    public bool AddItemToSlot(ItemData itemData)
     {
-        // 무기 슬롯 검사
-        foreach (Slot wslot in wslots)
+        if (itemData.itemCategory == ItemData.ItemCategory.Weapon)
         {
-            if(wslot.data == null)
+            // 무기 슬롯 검사
+            foreach (Slot wslot in wslots)
             {
-                // 무기 슬롯이 비어 있는 경우
-                wslot.AddSlot(itemData);
-                return true; // 아이템을 성공적으로 추가함
+                if (wslot.data == null)
+                {
+                    // 무기 슬롯이 비어 있는 경우
+                    wslot.AddSlot(itemData);
+                    return true; // 아이템을 성공적으로 추가함
+                }
+            }
+        }
+        else if (itemData.itemCategory == ItemData.ItemCategory.Brooch)
+        {
+            // 장신구 슬롯 검사
+            foreach (Slot gslot in gslots)
+            {
+                if (gslot.data == null)
+                {
+                    // 장신구 슬롯이 비어 있는 경우
+                    gslot.AddSlot(itemData);
+                    return true; // 아이템을 성공적으로 추가함
+                }
             }
         }
         return false;// 아이템을 추가할 수 없음
     }
-    public bool AddItemToSlotGear(ItemData itemData) 
-    {
-        // 장신구 슬롯 검사
-        foreach (Slot gslot in gslots)
-        {
-            if (gslot.data == null)
-            {
-                // 장신구 슬롯이 비어 있는 경우
-                gslot.AddSlot(itemData);
-                return true; // 아이템을 성공적으로 추가함
-            }
-        }
-        // 모든 슬롯이 이미 차있음
-        return false; // 아이템을 추가할 수 없음
-    }
     public void levelToSlot(ItemData itemData, int level)
     {
-        // 무기 슬롯 검사
+        if (itemData.itemCategory == ItemData.ItemCategory.Weapon)
+        {
+            // 무기 슬롯 검사
+            foreach (Slot slot in wslots)
+            {
+                //아이템이 일치하는경우 레벨 할당
+                if (itemData == slot.data)
+                {
+                    // 슬롯 아래에 텍스트를 컴포넌트를 찾고 레벨 할당
+                    Text levelText = slot.GetComponentInChildren<Text>();
+                    levelText.text = "Lv." + level.ToString();
+                }
+            }
+        }
+        else if (itemData.itemCategory == ItemData.ItemCategory.Brooch)
+        {
+            // 장신구 슬롯 검사
+            foreach (Slot slot in gslots)
+            {
+                if (itemData == slot.data)
+                {
+                    // 슬롯 아래에 텍스트를 컴포넌트를 찾고 레벨 할당
+                    Text levelText = slot.GetComponentInChildren<Text>();
+                    levelText.text = "Lv." + level.ToString();
+                }
+            }
+        }
+    }
+    public void UpgradeWeapon(ItemData itemData, ItemData upgradeData)
+    {
         foreach (Slot slot in wslots)
         {
             //아이템이 일치하는경우 레벨 할당
             if (itemData == slot.data)
             {
-                // 슬롯 아래에 텍스트를 생성하고 레벨 할당
+                // 아이템 추가
+                slot.AddSlot(upgradeData);
+                // 슬롯 아래에 텍스트를 컴포넌트를 찾고 레벨 제거
                 Text levelText = slot.GetComponentInChildren<Text>();
-                levelText.text = "Lv." + level.ToString();
+                levelText.text = "";
             }
         }
-
-        // 장신구 슬롯 검사
-        foreach (Slot slot in gslots)
-        {
-            if (itemData == slot.data)
-            {
-                Text levelText = slot.GetComponentInChildren<Text>();
-                levelText.text = "Lv." + level.ToString();
-            }
-        }
-
     }
 }
 

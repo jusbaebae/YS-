@@ -114,7 +114,7 @@ namespace vanilla
         }
         void HealthUp()
         {
-            GameManager.inst.maxHealth += GameManager.inst.originHealth * rate;
+            GameManager.inst.SetMaxHP( GameManager.inst.originHealth * rate);
         }
         void ArmorUp()
         {
@@ -132,6 +132,7 @@ namespace vanilla
                 switch (weapon.id)
                 {
                     case 0:
+                    case 200:
                         weapon.speed = weapon.baseSpeed + (weapon.baseSpeed * rate);
                         break;
                     case 1:
@@ -143,7 +144,7 @@ namespace vanilla
                     case 6:
                         break;
                     default:
-                        weapon.speed = weapon.baseSpeed - (weapon.baseSpeed * rate);
+                        weapon.speed = weapon.baseSpeed - (weapon.baseSpeed * rate)/2;
                         break;
                 }
             }

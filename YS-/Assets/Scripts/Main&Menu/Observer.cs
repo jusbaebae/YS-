@@ -9,6 +9,7 @@ public class Observer : MonoBehaviour
     public List<ItemData> data;
     public static Observer instance;
 
+
     private void Awake()
     {
         data = new List<ItemData>();
