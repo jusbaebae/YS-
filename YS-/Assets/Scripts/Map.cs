@@ -19,7 +19,11 @@ namespace vanilla
             foreach (SpriteRenderer sprite in sprites)
             {
                 if (sprites.Length == 1) // 0인경우 제외
+                {
+                    size += sprite.bounds.size.x;
+                    offset += sprite.bounds.size.x / 2f;
                     break;
+                }
                 if (i == 1) // 1인경우 -2 못해서 따로
                 {
                     float scale = sprites[0].bounds.size.y / sprite.bounds.size.y;
