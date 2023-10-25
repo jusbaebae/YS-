@@ -67,7 +67,7 @@ namespace vanilla
             switch (itemId)
             {
                 case 0:
-                    GameManager.inst.health += GameManager.inst.maxHealth * 0.2f;
+                    GameManager.inst.health += GameManager.inst.maxHealth * 0.1f;
                     if (GameManager.inst.health > GameManager.inst.maxHealth)
                         GameManager.inst.health = GameManager.inst.maxHealth;
                     break;

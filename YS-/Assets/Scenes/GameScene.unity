@@ -5337,8 +5337,8 @@ MonoBehaviour:
   spawnPoint: []
   bossSpawnData:
   - spriteType: 0
-    spawnTime: 300
-    health: 1000
+    spawnTime: 180
+    health: 1500
     speed: 3
 --- !u!1001 &527621398
 PrefabInstance:
@@ -9371,24 +9371,24 @@ MonoBehaviour:
   spawnData:
   - spriteType: 0
     spawnTime: 0.3
-    health: 15
+    health: 20
     speed: 1.5
   - spriteType: 1
     spawnTime: 0.2
-    health: 20
-    speed: 1.7
-  - spriteType: 2
-    spawnTime: 0.15
     health: 30
     speed: 2
+  - spriteType: 2
+    spawnTime: 0.15
+    health: 35
+    speed: 2.5
   - spriteType: 3
     spawnTime: 0.1
-    health: 40
-    speed: 2
+    health: 45
+    speed: 3
   - spriteType: 4
     spawnTime: 0.05
     health: 50
-    speed: 2.5
+    speed: 4
 --- !u!1 &971964807
 GameObject:
   m_ObjectHideFlags: 0

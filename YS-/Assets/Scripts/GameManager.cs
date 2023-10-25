@@ -21,7 +21,7 @@ namespace vanilla
         [Header("# Player Info")]
         public float health = 0;
         public float maxHealth;
-        public float originHealth = 100;
+        public float originHealth;
         public int level;
         public int kill;
         public int exp = 0;
@@ -40,6 +40,7 @@ namespace vanilla
             for (int i = 0; i < 50; i++)
                 nextExp[i] = 10 + (30 * i);
             maxHealth = DataManager.instance.currentCharData.hp;
+            originHealth = DataManager.instance.currentCharData.hp;
         }
 
         public float GetMaxHP()
@@ -89,6 +90,8 @@ namespace vanilla
         public void GameVictory()
         {
             StartCoroutine(GameVictoryRoutine());
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
+            AudioManager.instance.PlayBgm(false);
         }
         IEnumerator GameVictoryRoutine()
         {
@@ -98,9 +101,6 @@ namespace vanilla
             uiResult.gameObject.SetActive(true);
             uiResult.Win();
             Stop();
-
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
-            AudioManager.instance.PlayBgm(false); ;
         }
         public void GameRetry()
         {
@@ -128,11 +128,6 @@ namespace vanilla
             {
                 gameTime = maxGameTime;
                 GameVictory();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                uiLevelUp.Show();
             }
 
             if (Input.GetKeyDown(KeyCode.Return))
