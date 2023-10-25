@@ -273,8 +273,6 @@ namespace vanilla
             {
                 bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir[i]);
                 bullet.GetComponent<Bullet>().Init(damage, cnt, dir[i], id);
-                Debug.Log(id);
-                Debug.Log(cnt);
             }
         }
         void DestShot(float cnt, float moveSpeed)
