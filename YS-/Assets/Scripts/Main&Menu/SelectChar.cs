@@ -14,6 +14,7 @@ public class SelectChar : MonoBehaviour
     public TextMeshProUGUI[] info_state;
     public GameObject[] info_stateImage;
 
+
     void Start()
     {
         charData = null;
@@ -29,8 +30,10 @@ public class SelectChar : MonoBehaviour
     {
         charData = EventSystem.current.currentSelectedGameObject.GetComponent<CharData>();
         DataManager.instance.currentCharData = charData;
+
+        info_anim.GetComponent<SpriteRenderer>().sprite = charData.info_sprite;
         
-        info_anim.GetComponent<Animator>().runtimeAnimatorController = new AnimatorOverrideController(charData.info_anim);
+
         print(DataManager.instance.currentCharData.play_anim);
         SetState(charData);
     }

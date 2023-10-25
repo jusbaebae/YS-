@@ -8,7 +8,7 @@ public enum Character
 [System.Serializable]
 public class CharData : MonoBehaviour
 {
-    public RuntimeAnimatorController info_anim;
+    public Sprite info_sprite;
     public RuntimeAnimatorController play_anim;
 
     public Character character;
