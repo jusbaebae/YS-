@@ -19,9 +19,9 @@ namespace vanilla
         public Map map;
 
         [Header("# Player Info")]
-        public float health = 0;
+        public float health;
         public float maxHealth;
-        public float originHealth = 100;
+        public float originHealth;
         public int level;
         public int kill;
         public int exp = 0;
@@ -40,6 +40,7 @@ namespace vanilla
             for (int i = 0; i < 50; i++)
                 nextExp[i] = 10 + (30 * i);
             maxHealth = DataManager.instance.currentCharData.hp;
+            originHealth = DataManager.instance.currentCharData.hp;
         }
 
         public float GetMaxHP()
@@ -128,16 +129,6 @@ namespace vanilla
             {
                 gameTime = maxGameTime;
                 GameVictory();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                uiLevelUp.Show();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                GameRetry();
             }
         }
 

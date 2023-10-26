@@ -40,11 +40,13 @@ namespace vanilla
             baseAttack = charData.attack;
             baseDefend = charData.defense;
             */
-            luck =  DataManager.instance.currentCharData.luck;
-            baseAttack = DataManager.instance.currentCharData.attack;
-            baseDefend = DataManager.instance.currentCharData.defense;
+            CharData data = DataManager.instance.currentCharData;
+            luck = data.luck;
+            baseAttack = data.attack;
+            baseDefend = data.defense;
             attack = baseAttack;
             defend = baseDefend;
+            speed = 5 * data.speed;
             critical = 0f;
             expBonus = 1f;
 

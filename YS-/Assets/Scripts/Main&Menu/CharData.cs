@@ -17,5 +17,5 @@ public class CharData : MonoBehaviour
     public float defense;
     public float luck;
 
-    public int speed;
+    public float speed;
 }

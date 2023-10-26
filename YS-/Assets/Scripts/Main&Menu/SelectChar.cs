@@ -42,10 +42,10 @@ public class SelectChar : MonoBehaviour
     {
         string[] state = { 
             chardata.hp.ToString(), 
-            chardata.attack.ToString(), 
-            chardata.speed.ToString() ,
-            chardata.defense.ToString(),
-            chardata.luck.ToString()
+            (10 * chardata.attack).ToString(), 
+            (5 * chardata.speed).ToString() ,
+            (20 - chardata.defense).ToString(),
+            (2 * chardata.luck).ToString()
         };
         for(int index = 0; index < info_state.Length; index++)
         {
