@@ -1312,11 +1312,11 @@ MonoBehaviour:
   info_sprite: {fileID: -62146333, guid: 7f3808de703e9b64cad3f4387e1ff1b5, type: 3}
   play_anim: {fileID: 9100000, guid: 911b918a39cf6294b9ab82df7779d01d, type: 2}
   character: 1
-  hp: 60
+  hp: 40
   attack: 2
-  defense: 12.5
-  luck: 1
-  speed: 0.9
+  defense: 10
+  luck: 1.5
+  speed: 1
 --- !u!1 &424997945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,10 +1702,10 @@ MonoBehaviour:
   play_anim: {fileID: 9100000, guid: 3a8eadb849449e54883abaa9cb3c3d65, type: 2}
   character: 0
   hp: 50
-  attack: 0.8
-  defense: 19
+  attack: 5
+  defense: 8
   luck: 0.5
-  speed: 0.85
+  speed: 1
 --- !u!1 &538248953
 GameObject:
   m_ObjectHideFlags: 0
@@ -2437,7 +2437,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2496,8 +2496,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 31, y: 0}
-  m_SizeDelta: {x: 120, y: 60}
+  m_AnchoredPosition: {x: -0.000015259, y: 0}
+  m_SizeDelta: {x: 90, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &970859034
 GameObject:
@@ -3111,9 +3111,9 @@ MonoBehaviour:
   play_anim: {fileID: 9100000, guid: 75de948b605ea7a44af080e6a1732409, type: 2}
   character: 2
   hp: 150
-  attack: 1.25
-  defense: 8
-  luck: 0.5
+  attack: 1
+  defense: 3
+  luck: 0.3
   speed: 1
 --- !u!95 &1160105840
 Animator:
@@ -3972,8 +3972,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 31, y: 0}
-  m_SizeDelta: {x: 120, y: 60}
+  m_AnchoredPosition: {x: -0.000015259, y: 0}
+  m_SizeDelta: {x: 90, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1549525741
 MonoBehaviour:
@@ -4029,7 +4029,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4414,10 +4414,10 @@ MonoBehaviour:
   play_anim: {fileID: 9100000, guid: c1d472f9efdc70b44b69f06d7a338baf, type: 2}
   character: 3
   hp: 90
-  attack: 1
-  defense: 11
+  attack: 3
+  defense: 12
   luck: 0.5
-  speed: 1.25
+  speed: 1
 --- !u!1 &1748468707
 GameObject:
   m_ObjectHideFlags: 0
@@ -4851,8 +4851,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 31, y: 0}
-  m_SizeDelta: {x: 120, y: 60}
+  m_AnchoredPosition: {x: -0.000015258789, y: 0}
+  m_SizeDelta: {x: 90, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1894621033
 MonoBehaviour:
@@ -4908,7 +4908,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5122,8 +5122,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 31, y: 0}
-  m_SizeDelta: {x: 120, y: 60}
+  m_AnchoredPosition: {x: -0.000015258789, y: 0}
+  m_SizeDelta: {x: 90, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1912017339
 MonoBehaviour:
@@ -5172,14 +5172,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5728,8 +5728,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 31, y: 0}
-  m_SizeDelta: {x: 120, y: 60}
+  m_AnchoredPosition: {x: -0.000015259, y: 0}
+  m_SizeDelta: {x: 90, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2091002827
 CanvasRenderer:
@@ -5793,7 +5793,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

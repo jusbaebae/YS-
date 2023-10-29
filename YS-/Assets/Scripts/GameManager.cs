@@ -19,7 +19,7 @@ namespace vanilla
         public Map map;
 
         [Header("# Player Info")]
-        public float health;
+        public float health = 0;
         public float maxHealth;
         public float originHealth;
         public int level;
@@ -90,6 +90,8 @@ namespace vanilla
         public void GameVictory()
         {
             StartCoroutine(GameVictoryRoutine());
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
+            AudioManager.instance.PlayBgm(false);
         }
         IEnumerator GameVictoryRoutine()
         {
@@ -99,9 +101,6 @@ namespace vanilla
             uiResult.gameObject.SetActive(true);
             uiResult.Win();
             Stop();
-
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
-            AudioManager.instance.PlayBgm(false); ;
         }
         public void GameRetry()
         {
@@ -129,6 +128,11 @@ namespace vanilla
             {
                 gameTime = maxGameTime;
                 GameVictory();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                GameRetry();
             }
         }
 

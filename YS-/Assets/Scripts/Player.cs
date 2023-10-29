@@ -23,7 +23,7 @@ namespace vanilla
         public Scanner scanner;
         public CapsuleCollider2D col;
         public BoxCollider2D col2;
-        // Start is called before the first frame update
+
         void Awake()
         {
             col = GetComponent<CapsuleCollider2D>();  
@@ -34,19 +34,11 @@ namespace vanilla
             scanner = GetComponent<Scanner>();
             hands = GetComponentInChildren<Hands>(true);
 
-            // 나중에 값변경
-            /*
-            luck = charData.luck;
-            baseAttack = charData.attack;
-            baseDefend = charData.defense;
-            */
-            CharData data = DataManager.instance.currentCharData;
-            luck = data.luck;
-            baseAttack = data.attack;
-            baseDefend = data.defense;
+            luck =  DataManager.instance.currentCharData.luck;
+            baseAttack = DataManager.instance.currentCharData.attack;
+            baseDefend = DataManager.instance.currentCharData.defense;
             attack = baseAttack;
             defend = baseDefend;
-            speed = 5 * data.speed;
             critical = 0f;
             expBonus = 1f;
 
@@ -81,7 +73,7 @@ namespace vanilla
             if (!GameManager.inst.isLive)
                 return;
 
-            GameManager.inst.health -= Time.deltaTime * 10f;
+            GameManager.inst.health -= Time.deltaTime * defend;
             if(GameManager.inst.health < 0)
             {
                 for (int i=2; i < transform.childCount; i++)

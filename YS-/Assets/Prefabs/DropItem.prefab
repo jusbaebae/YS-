@@ -138,7 +138,7 @@ MonoBehaviour:
     itemId: 0
     itemSprite: {fileID: 21300000, guid: e9824dc5a39f6a34db4854c9ece06a3b, type: 3}
     itemName: Heal pack
-    itemDesc: "20% \uD68C\uBCF5"
+    itemDesc: "10% \uD68C\uBCF5"
     ratio: 0.19
   - itemType: 1
     itemId: 1
@@ -163,13 +163,13 @@ MonoBehaviour:
     itemSprite: {fileID: 21300000, guid: 310f8be8886372a49a41336c3e6db21d, type: 3}
     itemName: "\uD070\uACBD\uD5D8\uCE58"
     itemDesc: "exp 5\uB97C \uD68D\uB4DD\uD569\uB2C8\uB2E4."
-    ratio: 3
+    ratio: 5
   - itemType: 0
     itemId: 5
     itemSprite: {fileID: 21300000, guid: 145e8eb2f9a483246b7ed591653b3430, type: 3}
     itemName: "\uC911\uAC04\uACBD\uD5D8\uCE58"
     itemDesc: "exp 3\uC744 \uD68D\uB4DD\uD569\uB2C8\uB2E4."
-    ratio: 5
+    ratio: 15
   - itemType: 0
     itemId: 6
     itemSprite: {fileID: -1974753297, guid: 75f3fa8b0c0fd844081ee6127e7d9c61, type: 3}

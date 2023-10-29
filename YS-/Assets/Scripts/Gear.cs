@@ -21,7 +21,7 @@ namespace vanilla
                 {
                     if(GameManager.inst.health < GameManager.inst.GetMaxHP())
                     {
-                        GameManager.inst.health += GameManager.inst.maxHealth * rate * 0.01f;
+                        GameManager.inst.health += rate;
                         sec = 0;
                     }
                     else
@@ -114,7 +114,7 @@ namespace vanilla
         }
         void HealthUp()
         {
-            GameManager.inst.SetMaxHP(GameManager.inst.maxHealth + (GameManager.inst.originHealth * rate));
+            GameManager.inst.SetMaxHP( GameManager.inst.originHealth + (GameManager.inst.originHealth * rate));
         }
         void ArmorUp()
         {
