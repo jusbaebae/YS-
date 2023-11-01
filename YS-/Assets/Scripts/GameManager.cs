@@ -104,7 +104,7 @@ namespace vanilla
         }
         public void GameRetry()
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
         }
         public void GetExp(int n)
         {
@@ -128,11 +128,6 @@ namespace vanilla
             {
                 gameTime = maxGameTime;
                 GameVictory();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                GameRetry();
             }
         }
 

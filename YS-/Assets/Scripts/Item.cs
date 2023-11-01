@@ -77,16 +77,18 @@ namespace vanilla
                         textDesc.text = string.Format(data.itemDesc, data.baseDamage * data.damages[level - 1], data.baseDamage * data.damages[level],
                             data.baseDurabiliy + (data.baseDurabiliy * (dura - data.durabiliys[level])), data.baseDurabiliy + (data.baseDurabiliy * dura));
                     break;
+                case ItemData.ItemType.Pummarola:
+                    textDesc.text = string.Format(data.itemDesc, data.damages[level]);
+                    break;
                 case ItemData.ItemType.Glove:
                 case ItemData.ItemType.Shoe:
                 case ItemData.ItemType.Magnet:
                 case ItemData.ItemType.Armor:
                 case ItemData.ItemType.Spinach:
-                case ItemData.ItemType.Pummarola:
                 case ItemData.ItemType.HollowHeart:
                 case ItemData.ItemType.Clover:
                 case ItemData.ItemType.Clown:
-                    textDesc.text = string.Format(data.itemDesc, data.damages[level]);
+                    textDesc.text = string.Format(data.itemDesc, data.damages[level] * 100);
                     break;
                 default:
                     textDesc.text = string.Format(data.itemDesc);

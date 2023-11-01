@@ -42,7 +42,7 @@ namespace vanilla
                 float rotationSpeed = 360f;
                 transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
             }
-            if (id == 0 || id == 200)        // 크기가 작아졌다 커졌다하게끔 하는 코드
+            if (id == 0 || id == 200)  // 크기가 작아졌다 커졌다하게끔 하는 코드
             {
                 Rotate();
             }

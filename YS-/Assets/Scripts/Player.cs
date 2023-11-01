@@ -50,7 +50,6 @@ namespace vanilla
                 return;
             Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
             rigid.MovePosition(rigid.position + nextVec);
-
         }
         void OnMove(InputValue value)
         {
